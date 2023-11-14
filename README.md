@@ -15,7 +15,7 @@ docker-compose build
 ```
 
 ```
-docker-compose run --rm api pnpm 
+docker-compose run --rm api pnpm i
 docker-compose run --rm nuxt pnpm i
 ```
 
