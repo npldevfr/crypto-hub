@@ -29,12 +29,14 @@ services:
     ports:
       - "3333:3333"
 
-#  nuxt:
-#    build:
-#      context: ./front
-#      dockerfile: Dockerfile
-#    restart: always
-#    volumes:
-#      - ./front:/app
-#    ports:
-#      - 3000:3000
+  nuxt:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    restart: always
+    command: pnpm dev
+    working_dir: /app
+    volumes:
+      - ./front:/app
+    ports:
+      - "3000:3000"
