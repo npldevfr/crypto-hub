@@ -1,6 +1,10 @@
 # crypto-hub
 
 ```
+cd ./api && cp .env.example .env
+```
+
+```
 docker-compose build
 ```
 
