@@ -49,9 +49,6 @@ devDependencies:
   adonis-preset-ts:
     specifier: ^2.1.0
     version: 2.1.0
-  adonis-sail:
-    specifier: ^0.0.7
-    version: 0.0.7
   eslint:
     specifier: ^8.53.0
     version: 8.53.0
@@ -1102,10 +1099,6 @@ packages:
 
   /adonis-preset-ts@2.1.0:
     resolution: {integrity: sha512-cQH/NP250gOF9k3TTDhVsTOPSAvyH4MhKVZ4ryYiihA+vnP27sut1gVIrRas3Evl5d2wEgWVGI5DgdP/ZFSk0w==}
-    dev: true
-
-  /adonis-sail@0.0.7:
-    resolution: {integrity: sha512-M3T5fVo3v0WijFVVkEUkMhPe3TXn/CQFG34ZO59zsMCof9daXiKKBCbmIcxfpgQ27MxpkU2y8yYagh+wtz9hXA==}
     dev: true
 
   /aggregate-error@3.1.0:

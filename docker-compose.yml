@@ -1,29 +1,28 @@
-version: '3'
+version: "3.1"
 
 services:
-  pgsql:
-    image: 'postgres:13'
-    container_name: pgsql
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=crypto
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer
     restart: always
     ports:
-      - '5432:5432'
-    environment:
-      PGPASSWORD: '${PG_PASSWORD:-secret}'
-      POSTGRES_DB: '${PG_DB_NAME:-default}'
-      POSTGRES_USER: '${PG_USER?:err}'
-      POSTGRES_PASSWORD: '${PG_PASSWORD:-secret}'
+      - 8080:8080
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    restart: always
     volumes:
-      - 'sailpgsql:/var/lib/postgresql/data'
-    networks:
-      - sail
-    healthcheck:
-      test: ["CMD", "pg_isready", "-q", "-d", "${PG_DB_NAME:-default}", "-U", "${PG_USER}"]
-      retries: 3
-      timeout: 5s
-
-networks:
-  sail:
-    driver: bridge
-
-volumes:
-  sailpgsql:
+      - ./api:/app
+    ports:
+      - 3333:3333
