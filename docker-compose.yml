@@ -9,13 +9,13 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_DB=crypto
     ports:
-      - 5432:5432
+      - "5432:5432"
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - 8000:8000
+      - "8080:8080"
 
   api:
     build:
@@ -27,7 +27,7 @@ services:
     volumes:
       - ./api:/app
     ports:
-      - 3333:3333
+      - "3333:3333"
 
 #  nuxt:
 #    build:
