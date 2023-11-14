@@ -1,0 +1,13 @@
+{
+  "name": "crypto-hub",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Manage and track your crypto portfolio",
+  "main": "index.js",
+  "scripts": {
+    "release": "bumpp ./package.json"
+  },
+  "devDependencies": {
+    "bumpp": "^9.2.0"
+  }
+}
