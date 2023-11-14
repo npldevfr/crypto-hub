@@ -1,7 +1,7 @@
 # crypto-hub
 
 ```
-docker build
+docker-compose build
 ```
 
 ```
