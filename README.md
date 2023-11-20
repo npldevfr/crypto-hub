@@ -5,20 +5,55 @@
 git clone git@github.com:npldevfr/crypto-hub.git
 ```
 
-### Docker 2/2
+## Installation 2/2
 ```
 cd ./api && cp .env.example .env && cd ..
+
+pnpm install
 ```
 
+## Run
 ```
-docker-compose build
+// API
+cd ./api && node ace serve --watch
+
+// Nuxt
+cd ./front && pnpm dev
 ```
 
-```
-docker-compose run --rm api pnpm i
-docker-compose run --rm nuxt pnpm i
-```
-
+## Docker (Database)
 ```
 docker-compose up -d
 ```
+
+
+[//]: # (### Docker 2/2)
+
+[//]: # (```)
+
+[//]: # (cd ./api && cp .env.example .env && cd ..)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (```)
+
+[//]: # (docker-compose build)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (```)
+
+[//]: # (docker-compose run --rm api pnpm i)
+
+[//]: # (docker-compose run --rm nuxt pnpm i)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (```)
+
+[//]: # (docker-compose up -d)
+
+[//]: # (```)

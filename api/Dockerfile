@@ -1,11 +1,13 @@
-FROM node:slim
+FROM node:18.14.2-slim as base
 
-SHELL ["/bin/bash", "-c"]
+RUN npm install --global pnpm@latest
 
-RUN npm install --global pnpm@latest \
-    && SHELL=bash pnpm setup \
-    && source /root/.bashrc \
-    && pnpm config set store-dir /root/.local/share/pnpm/store
+WORKDIR /app
+COPY package.json pnpm-lock.yaml ./
 
+RUN pnpm install --frozen-lockfile --prefer-frozen-lockfile
+
+COPY . .
+
+CMD ["pnpm", "dev"]
 EXPOSE 3333
-
