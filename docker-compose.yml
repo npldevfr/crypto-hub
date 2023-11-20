@@ -17,6 +17,16 @@ services:
     ports:
       - "8080:8080"
 
+  front:
+    build:
+      context: ./front
+      dockerfile: ./Dockerfile
+    command: pnpm dev
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./front:/app
 #  api:
 #    build:
 #      context: ./api
