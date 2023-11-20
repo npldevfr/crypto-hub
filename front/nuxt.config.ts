@@ -9,5 +9,5 @@ export default defineNuxtConfig({
     // @ts-expect-error
    css: [
         '@unocss/reset/tailwind.css'
-   ]
+   ],
 })
