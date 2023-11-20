@@ -1,13 +1,13 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: ''
+title: "[Feature] Your feature name"
 labels: ''
 assignees: ''
 
 ---
 
-** Describe your feature **
+## Describe your feature
 
 
-** Links to provide **
+## Links & Additional Content
