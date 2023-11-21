@@ -5,9 +5,11 @@
   "description": "Manage and track your crypto portfolio",
   "main": "index.js",
   "scripts": {
-    "release": "bumpp ./package.json"
+    "release": "bumpp ./package.json",
+    "clean:node": "rimraf 'api/node_modules' 'front/node_modules' 'node_modules'"
   },
   "devDependencies": {
-    "bumpp": "^9.2.0"
+    "bumpp": "^9.2.0",
+    "rimraf": "^5.0.5"
   }
 }
