@@ -6,10 +6,14 @@
   "main": "index.js",
   "scripts": {
     "release": "bumpp ./package.json",
-    "clean:node": "rimraf 'api/node_modules' 'front/node_modules' 'node_modules'"
+    "clean:node": "rimraf 'api/node_modules' 'front/node_modules' 'node_modules'",
+    "start:all": "concurrently \"cd ./api && node ace serve --watch\" \"cd front && pnpm run dev\""
   },
   "devDependencies": {
     "bumpp": "^9.2.0",
     "rimraf": "^5.0.5"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
   }
 }
