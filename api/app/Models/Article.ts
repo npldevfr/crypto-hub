@@ -5,6 +5,18 @@ export default class Article extends BaseModel {
   @column({ isPrimary: true })
   public id: string
 
+  @column()
+  public slug: string
+
+  @column()
+  public name: string
+
+  @column()
+  public content: string
+
+  @column()
+  public rss_Source: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

@@ -5,6 +5,9 @@ export default class Tag extends BaseModel {
   @column({ isPrimary: true })
   public id: string
 
+  @column()
+  public name: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

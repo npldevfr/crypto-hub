@@ -10,4 +10,7 @@ export default class CryptocurrencyProvider extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @column()
+  public name: string
 }

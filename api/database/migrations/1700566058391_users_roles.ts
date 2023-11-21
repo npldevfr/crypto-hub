@@ -5,7 +5,13 @@ export default class extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.uuid('id', {primaryKey:true})
+      table
+        .uuid('id')
+        .primary()
+        .defaultTo(this.db.rawQuery('uuid_generate_v4()').knexQuery)
+
+      table.uuid("user_id").references("id").inTable("users").onDelete("CASCADE")
+      table.uuid("role_id").references("id").inTable("roles").onDelete("CASCADE")
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

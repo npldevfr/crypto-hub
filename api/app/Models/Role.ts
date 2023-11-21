@@ -5,6 +5,12 @@ export default class Role extends BaseModel {
   @column({ isPrimary: true })
   public id: string
 
+  @column()
+  public name: string
+
+  @column()
+  public power: number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

@@ -1,21 +1,27 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class Cryptocurrency extends BaseModel {
+export default class CryptocurrencyData extends BaseModel {
   @column({ isPrimary: true })
   public id: string
 
   @column()
-  public slug: string
+  public price: number
 
   @column()
-  public symbol: string
+  public marketCap: string
 
   @column()
-  public name: string
+  public volume24h: number
 
   @column()
-  public logo: string
+  public change24h: number
+
+  @column()
+  public cryptocurrencyId: string
+
+  @column()
+  public cryptocurrency_providerId: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

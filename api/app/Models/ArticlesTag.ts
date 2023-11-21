@@ -1,9 +1,15 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class CryptocurrencyDatum extends BaseModel {
+export default class ArticlesTag extends BaseModel {
   @column({ isPrimary: true })
-  public id: string
+  public id: number
+
+  @column()
+  public articleId: string
+
+  @column()
+  public tagId: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

@@ -10,7 +10,7 @@ export default class extends BaseSchema {
         .primary()
         .defaultTo(this.db.rawQuery('uuid_generate_v4()').knexQuery)
 
-      table.string('name').notNullable()
+      table.string('username').notNullable()
       table.string('email').notNullable().unique()
       table.string('password').notNullable()
       table.string('avatar')
