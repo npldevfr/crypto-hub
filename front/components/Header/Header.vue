@@ -40,6 +40,9 @@ const isLogged = ref(false);
         v-else
         class="flex flex-row justify-end items-center space-x-10 w-full"
       >
+        <Button size="sm" type="primary">
+          Me connecter
+        </Button>
         <NuxtLink
           to="/login"
           class="text-gray-300 flex flex-shrink-0 hover:bg-gray-700 hover:text-white rounded-md px-6 py-2 text-sm font-medium"
