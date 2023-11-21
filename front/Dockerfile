@@ -1,22 +1,10 @@
-# syntax = docker/dockerfile:1
+FROM node:slim
 
-ARG NODE_VERSION=18.14.2
+SHELL ["/bin/bash", "-c"]
 
-FROM node:${NODE_VERSION}-slim as base
+RUN npm install --global pnpm@latest \
+    && SHELL=bash pnpm setup \
+    && source /root/.bashrc \
+    && pnpm config set store-dir /root/.local/share/pnpm/store
 
-ENV NODE_ENV=development
-
-WORKDIR /src
-
-# Build
-FROM base as build
-
-COPY --link package.json package-lock.json .
-RUN npm install
-
-# Run
-FROM base
-
-COPY --from=build /src/node_modules /src/node_modules
-
-CMD [ "npm", "run", "dev" ]
+EXPOSE 3000
