@@ -1,7 +1,8 @@
 <script setup lang="ts">
-const dd = useRouter()
+const dd = useRouter();
 </script>
 
 <template>
+  <Header />
   <div class="bg-red-200">hello !</div>
 </template>
