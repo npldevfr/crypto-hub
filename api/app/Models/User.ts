@@ -31,4 +31,10 @@ export default class User extends BaseModel {
 
   @manyToMany(() => Role, { pivotTable: 'users_roles' })
   public roles: ManyToMany<typeof Role>
+
+  public hasPowerMoreThan(power: number): boolean {
+    return this.roles.reduce((hasPower: boolean, role: Role) => {
+      return hasPower || role.power > power
+    }, false)
+  }
 }
