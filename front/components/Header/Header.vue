@@ -2,11 +2,11 @@
 const isLogged = ref(false);
 </script>
 <template>
-  <div class="flex flex-row px-20 w-full items-center">
+  <div class="flex flex-row px-10 w-full p-5 items-center">
     <div class="flex lg-w-75">
       <Logo size="sm" />
     </div>
-    <div class="flex">
+    <div class="flex px-2">
       <input
         type="text"
         id="input-group-1"
@@ -15,20 +15,20 @@ const isLogged = ref(false);
         style="text-align: center"
       />
     </div>
-    <div class="flex p-5 space-x-10 w-full">
+    <div class="flex px-30 flex-end space-x-10 w-full">
       <NuxtLink
         to="/"
-        class="text-white bg-gray-900 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+        class="text-white bg-#0D1F2D hover:text-white rounded-md px-3 py-2 text-sm font-medium"
         >Accueil</NuxtLink
       >
       <NuxtLink
         to="/"
-        class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+        class="text-gray-300 hover:bg-#0D1F2D hover:text-white rounded-md px-3 py-2 text-sm font-medium"
         >Actualités</NuxtLink
       >
       <NuxtLink
         to="/"
-        class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+        class="text-gray-300 hover:bg-#0D1F2D hover:text-white rounded-md px-3 py-2 text-sm font-medium"
         >Crypto</NuxtLink
       >
     </div>
@@ -40,18 +40,16 @@ const isLogged = ref(false);
         v-else
         class="flex flex-row justify-end items-center space-x-10 w-full"
       >
-        <Button size="sm" type="primary">
-          Me connecter
-        </Button>
+        <!-- <Button size="sm" type="primary"> Me connecter </Button> -->
         <NuxtLink
           to="/login"
-          class="text-gray-300 flex flex-shrink-0 hover:bg-gray-700 hover:text-white rounded-md px-6 py-2 text-sm font-medium"
+          class="text-gray-300 bg-#237CA3 text-white rounded-md px-6 py-2 text-sm font-medium"
           >Se connecter</NuxtLink
         >
 
         <NuxtLink
           to="/register"
-          class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+          class="text-gray-300 bg-#237CA3 text-white rounded-md px-6 py-2 text-sm font-medium"
           >S'inscrire</NuxtLink
         >
       </div>
