@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineProps, withDefaults } from "vue";
-
 const props = withDefaults(
   defineProps<{
     verticalLayout: boolean;
@@ -49,10 +47,9 @@ const props = withDefaults(
       </span>
     </div>
   </div>
-
   <div v-else class="max-w-sm w-full lg:max-w-full lg:flex">
     <div
-      class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+      class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-l text-center overflow-hidden"
       :style="`background-image: url('${imageUrl}')`"
       :title="additionalInfo"
     ></div>
@@ -61,6 +58,7 @@ const props = withDefaults(
     >
       <div class="mb-8">
         <p class="text-sm text-gray-600 flex items-center">
+          <!-- Ici, vous pouvez ajouter une icône ou une image comme dans l'exemple de référence, si nécessaire -->
           {{ additionalInfo }}
         </p>
         <div class="text-gray-900 font-bold text-xl mb-2">{{ title }}</div>

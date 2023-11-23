@@ -20,24 +20,26 @@ const dd = useRouter();
 
   <div class="flex flex-row space-x-10 px-20 py-10">
     <CardNews
-      :verticalLayout="true"
+      verticalLayout
+      cardHeight="medium"
       imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQARfTOMEBVV1_3fc3Ga_9E_UZ1pBnSGRHCG-qkB-3czg&s"
-      title="The Coldest Sunset"
-      date="Date de publication"
-      authorName="Nom de l'auteur"
-      additionalInfo="Information supplémentaire"
-      description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil."
-      :tags="['#photography', '#travel', '#winter']"
+      title="Titre de la Carte"
+      description="Description ici..."
+      authorName="Nom de l'Auteur"
+      date="12 Mars 2023"
+      additionalInfo="Informations supplémentaires"
+      :tags="['Tag1', 'Tag2']"
     />
     <CardNews
-      :verticalLayout="true"
+      verticalLayout
+      cardHeight="medium"
       imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQARfTOMEBVV1_3fc3Ga_9E_UZ1pBnSGRHCG-qkB-3czg&s"
-      title="The Coldest Sunset"
-      date="Date de publication"
-      authorName="Nom de l'auteur"
-      additionalInfo="Information supplémentaire"
-      description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil."
-      :tags="['#photography', '#travel', '#winter']"
+      title="Titre de la Carte"
+      description="Description ici..."
+      authorName="Nom de l'Auteur"
+      date="12 Mars 2023"
+      additionalInfo="Informations supplémentaires"
+      :tags="['Tag1', 'Tag2']"
     />
   </div>
 </template>
