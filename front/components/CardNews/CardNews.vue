@@ -9,7 +9,7 @@ const props = withDefaults(
     additionalInfo?: string;
     avatarUrl?: string;
     authorName?: string;
-    date?: string;
+    date?: Date | string;
   }>(),
   {
     verticalLayout: true,
@@ -17,13 +17,24 @@ const props = withDefaults(
     additionalInfo: "",
     avatarUrl: "",
     authorName: "",
-    date: "",
+    date: new Date(),
   }
 );
+
+const formatDate = (date: Date | string) => {
+  if (date instanceof Date) {
+    return date.toLocaleDateString("fr-FR", {});
+  } else {
+    return date;
+  }
+};
 </script>
 
 <template>
-  <div v-if="verticalLayout" class="max-w-sm rounded overflow-hidden shadow-lg">
+  <div
+    v-if="verticalLayout"
+    class="max-w-xs rounded overflow-hidden w-full shadow-lg"
+  >
     <img class="w-full" :src="imageUrl" alt="Image de la carte" />
     <div class="px-6 py-4">
       <div class="font-bold text-xl mb-2">{{ title }}</div>
@@ -31,7 +42,7 @@ const props = withDefaults(
       <p class="text-gray-900 mt-3 leading-none" v-if="authorName">
         {{ authorName }}
       </p>
-      <p class="text-gray-600" v-if="date">{{ date }}</p>
+      <p class="text-gray-600 text-sm" v-if="date">{{ date }}</p>
 
       <p class="text-sm text-gray-600 px-3 py-3 flex items-center">
         {{ additionalInfo }}

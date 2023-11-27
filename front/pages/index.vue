@@ -13,7 +13,6 @@ const dd = useRouter();
       additionalInfo="Information supplémentaire"
       avatarUrl="https://exemple.com/avatar.jpg"
       authorName="Nom de l'auteur"
-      date="Date de publication"
       :tags="['#photography', '#travel', '#winter']"
     />
   </div>
@@ -26,18 +25,16 @@ const dd = useRouter();
       title="Titre de la Carte"
       description="Description ici..."
       authorName="Nom de l'Auteur"
-      date="12 Mars 2023"
       additionalInfo="Informations supplémentaires"
       :tags="['Tag1', 'Tag2']"
     />
     <CardNews
       verticalLayout
-      cardHeight="medium"
+      cardHeight="s"
       imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQARfTOMEBVV1_3fc3Ga_9E_UZ1pBnSGRHCG-qkB-3czg&s"
       title="Titre de la Carte"
       description="Description ici..."
       authorName="Nom de l'Auteur"
-      date="12 Mars 2023"
       additionalInfo="Informations supplémentaires"
       :tags="['Tag1', 'Tag2']"
     />
