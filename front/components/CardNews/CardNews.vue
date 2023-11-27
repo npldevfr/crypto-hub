@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { format } from "date-fns";
 const props = withDefaults(
   defineProps<{
     verticalLayout: boolean;
@@ -17,17 +18,9 @@ const props = withDefaults(
     additionalInfo: "",
     avatarUrl: "",
     authorName: "",
-    date: new Date(),
+    date: format(new Date(), "yyy-MM-dd"),
   }
 );
-
-const formatDate = (date: Date | string) => {
-  if (date instanceof Date) {
-    return date.toLocaleDateString("fr-FR", {});
-  } else {
-    return date;
-  }
-};
 </script>
 
 <template>
