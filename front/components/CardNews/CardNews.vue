@@ -38,13 +38,7 @@ const props = withDefaults(
       </p>
     </div>
     <div class="px-6 pt-4 pb-2">
-      <span
-        v-for="tag in tags"
-        :key="tag"
-        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-      >
-        {{ tag }}
-      </span>
+      <Tag v-for="tag in tags" :key="tag" :text="tag" />
     </div>
   </div>
   <div v-else class="max-w-sm w-full lg:max-w-full lg:flex">
@@ -58,7 +52,6 @@ const props = withDefaults(
     >
       <div class="mb-8">
         <p class="text-sm text-gray-600 flex items-center">
-          <!-- Ici, vous pouvez ajouter une icône ou une image comme dans l'exemple de référence, si nécessaire -->
           {{ additionalInfo }}
         </p>
         <div class="text-gray-900 font-bold text-xl mb-2">{{ title }}</div>
@@ -71,13 +64,7 @@ const props = withDefaults(
           </p>
           <p class="text-gray-600" v-if="date">{{ date }}</p>
           <div class="px-6 pt-4 pb-2">
-            <span
-              v-for="tag in tags"
-              :key="tag"
-              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-            >
-              {{ tag }}
-            </span>
+            <Tag v-for="tag in tags" :key="tag" :text="tag" />
           </div>
         </div>
       </div>
