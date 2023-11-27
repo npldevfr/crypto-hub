@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+const router = useRouter();
 const isLogged = ref(false);
 </script>
 <template>
@@ -40,18 +41,12 @@ const isLogged = ref(false);
         v-else
         class="flex flex-row justify-end items-center space-x-10 w-full"
       >
-        <!-- <Button size="sm" type="primary"> Me connecter </Button> -->
-        <NuxtLink
-          to="/login"
-          class="text-gray-300 bg-#237CA3 text-white rounded-md px-6 py-2 text-sm font-medium"
-          >Se connecter</NuxtLink
-        >
-
-        <NuxtLink
-          to="/register"
-          class="text-gray-300 bg-#237CA3 text-white rounded-md px-6 py-2 text-sm font-medium"
-          >S'inscrire</NuxtLink
-        >
+        <Button size="sm" type="secondary" @click="router.push('/login')">
+          Me connecter
+        </Button>
+        <Button size="sm" type="secondary" @click="router.push('/register')">
+          S'inscrire
+        </Button>
       </div>
     </div>
   </div>
