@@ -1,5 +1,5 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import Cryptocurrency from "../../app/Models/Cryptocurrency";
+import Cryptocurrency from '../../app/Models/Cryptocurrency'
 
 export default class extends BaseSeeder {
   public async run () {

@@ -49,7 +49,7 @@ const databaseConfig: DatabaseConfig = {
       debug: false,
     },
 
-  }
+  },
 }
 
 export default databaseConfig

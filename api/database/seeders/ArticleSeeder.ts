@@ -1,5 +1,5 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import Tag from "../../app/Models/Tag";
+import Tag from '../../app/Models/Tag'
 
 export default class extends BaseSeeder {
   public async run () {
@@ -18,7 +18,7 @@ export default class extends BaseSeeder {
       {name: 'Finance' },
       {name: 'Binance' },
       {name: 'Coinbase' },
-      {name: 'Kraken' }
-      ]);
+      {name: 'Kraken' },
+    ])
   }
 }

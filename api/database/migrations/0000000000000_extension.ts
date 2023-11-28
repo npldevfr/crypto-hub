@@ -1,4 +1,4 @@
-import BaseSchema from "@ioc:Adonis/Lucid/Schema";
+import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class Extensions extends BaseSchema {
   public async up () {
