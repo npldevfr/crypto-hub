@@ -1,7 +1,7 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'cryptocurrency_data'
+  protected tableName = 'article_sources'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
@@ -10,13 +10,9 @@ export default class extends BaseSchema {
         .primary()
         .defaultTo(this.db.rawQuery('uuid_generate_v4()').knexQuery)
 
-      table.float('price').defaultTo(0)
-      table.string('market_cap').notNullable()
-      table.float('volume_24h').defaultTo(0)
-      table.float('change_24h').defaultTo(0)
-
-      table.uuid('cryptocurrency_id').references('id').inTable('cryptocurrencies').onDelete('CASCADE')
-      table.uuid('cryptocurrency_provider_id').references('id').inTable('cryptocurrency_providers').onDelete('CASCADE')
+      table.string('name').notNullable()
+      table.string('url').notNullable()
+      table.boolean('is_active').notNullable().defaultTo(true)
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

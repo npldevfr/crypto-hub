@@ -1,18 +1,18 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class Article extends BaseModel {
+export default class ArticleSource extends BaseModel {
   @column({ isPrimary: true })
-  public id: string
-
-  @column()
-  public slug: string
+  public id: number
 
   @column()
   public name: string
 
   @column()
-  public content: string
+  public url: string
+
+  @column()
+  public is_active: boolean
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

@@ -13,7 +13,7 @@ export default class extends BaseSchema {
       table.string('slug').notNullable()
       table.string('name').notNullable()
       table.string('content').notNullable()
-      table.string('rss_source').notNullable()
+      table.uuid('article_source_id').references('article_sources.id').onDelete('CASCADE')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

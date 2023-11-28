@@ -10,8 +10,8 @@ export default class extends BaseSchema {
         .primary()
         .defaultTo(this.db.rawQuery('uuid_generate_v4()').knexQuery)
 
-      table.uuid("user_id").references("id").inTable("users").onDelete("CASCADE")
-      table.uuid("role_id").references("id").inTable("roles").onDelete("CASCADE")
+      table.uuid('user_id').references('id').inTable('users').onDelete('CASCADE')
+      table.uuid('role_id').references('id').inTable('roles').onDelete('CASCADE')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
