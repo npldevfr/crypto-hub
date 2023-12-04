@@ -31,6 +31,8 @@ jobs:
         with:
           node-version: 16.x
 
+      - run: npm install -g pnpm
+
       - run: pnpm install --frozen-lockfile
 
       - run: pnpm lint
