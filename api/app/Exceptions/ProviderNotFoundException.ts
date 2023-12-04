@@ -13,7 +13,6 @@ import { Exception } from '@adonisjs/core/build/standalone'
 |
 */
 export default class ProviderNotFoundException extends Exception {
-
   constructor (message: string) {
     super(message, 404, 'E_PROVIDER_NOT_FOUND')
   }

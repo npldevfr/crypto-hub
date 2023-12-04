@@ -2,9 +2,9 @@ interface CryptoProviderInterface {
 
   /**
    * Time to wait before each new provider call (in ms)
-   * @type {number}
+   * private readonly callsPerMinute: number
    **/
-  readonly callsPerMinute: number;
+  readonly callsPerMinute: number
 
   /**
    * Returns data from provider
@@ -21,7 +21,7 @@ interface CryptoProviderInterface {
 }
 
 export class CryptoProvider implements CryptoProviderInterface {
-  private readonly callsPerMinute: number
+  public readonly callsPerMinute: number
 
   constructor (callsPerMinute: number = 10) {
     this.callsPerMinute = callsPerMinute

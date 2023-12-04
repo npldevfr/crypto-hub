@@ -1,4 +1,6 @@
 import { BaseCommand } from '@adonisjs/core/build/standalone'
+import {DataSynchronizer} from '../app/Synchronization/Generic/DataSynchronizer'
+import {CoinGeckoProvider} from '../app/Synchronization/CoinGeckoProvider'
 
 export default class Synchronize extends BaseCommand {
   /**
@@ -28,6 +30,10 @@ export default class Synchronize extends BaseCommand {
   }
 
   public async run () {
-    this.logger.info('Hello world!')
+    const synchronizer: DataSynchronizer = new DataSynchronizer([
+      new CoinGeckoProvider(),
+    ])
+
+    await synchronizer.synchronize()
   }
 }

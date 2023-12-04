@@ -1,6 +1,6 @@
 import {CryptoProvider} from './Generic/CryptoProvider'
 
-class CoinGeckoProvider extends CryptoProvider {
+export class CoinGeckoProvider extends CryptoProvider {
   constructor () {
     super(30)
   }
