@@ -1,5 +1,17 @@
 {
   "commands": {
+    "synchronize": {
+      "settings": {
+        "loadApp": false,
+        "stayAlive": false
+      },
+      "commandPath": "./commands/Synchronize",
+      "commandName": "synchronize",
+      "description": "Synchronize datas from crypto providers",
+      "args": [],
+      "aliases": [],
+      "flags": []
+    },
     "dump:rcfile": {
       "settings": {},
       "commandPath": "@adonisjs/core/build/commands/DumpRc",

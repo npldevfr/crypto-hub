@@ -6,7 +6,6 @@ export class CoinGeckoProvider extends CryptoProvider {
   }
 
   public async getData (): Promise<any> {
-    this.getCallsPerMinute()
     return Promise.resolve('data')
   }
 }
