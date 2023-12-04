@@ -32,8 +32,11 @@ jobs:
           node-version: 16.x
 
       - run: npm install -g pnpm
+        working-directory: ./api
 
       - run: pnpm install --frozen-lockfile
+        working-directory: ./api
 
       - run: pnpm lint
+        working-directory: ./api
 
