@@ -1,4 +1,4 @@
-import {CryptoProvider} from './Generic/CryptoProvider'
+import {CryptoProvider} from './CryptoProvider'
 
 export class DataSynchronizer {
   private providers: CryptoProvider[]
