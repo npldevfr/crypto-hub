@@ -2,12 +2,12 @@
   "commands": {
     "rss:feed": {
       "settings": {
-        "loadApp": false,
+        "loadApp": true,
         "stayAlive": false
       },
       "commandPath": "./commands/RssFeed",
       "commandName": "rss:feed",
-      "description": "",
+      "description": "Update RSS feed",
       "args": [],
       "aliases": [],
       "flags": []

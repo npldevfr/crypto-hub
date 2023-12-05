@@ -1,5 +1,5 @@
 import { BaseCommand } from '@adonisjs/core/build/standalone'
-import Parser from 'rss-parser'
+import RssFeedUpdater from '../rss/rssFeedUpdater'
 export default class RssFeed extends BaseCommand {
   /**
    * Command name is used to run the command
@@ -9,7 +9,7 @@ export default class RssFeed extends BaseCommand {
   /**
    * Command description is displayed in the "help" output
    */
-  public static description = ''
+  public static description = 'Update RSS feed'
 
   public static settings = {
     /**
@@ -17,7 +17,7 @@ export default class RssFeed extends BaseCommand {
      * before running the command. Don't forget to call `node ace generate:manifest`
      * afterwards.
      */
-    loadApp: false,
+    loadApp: true,
 
     /**
      * Set the following value to true, if you want this command to keep running until
@@ -29,12 +29,6 @@ export default class RssFeed extends BaseCommand {
 
   public async run () {
     console.log('Updating RSS feed')
-    let parser = new Parser()
-    const url = 'https://coinjournal.net/fr/actualites/feed/'
-    let feed = await parser.parseURL(url)
-    console.log(feed.title)
-    feed.items.forEach(item => {
-      console.log(item.title + ':' + item.link)
-    })
+    await RssFeedUpdater.run()
   }
 }
