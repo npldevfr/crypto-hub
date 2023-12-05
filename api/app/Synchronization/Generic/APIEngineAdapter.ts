@@ -1,6 +1,6 @@
 import {CryptoProvider} from './CryptoProvider'
 
-export class DataSynchronizer {
+export class APIEngineAdapter {
   private providers: CryptoProvider[]
 
   constructor (providers: CryptoProvider[]) {
@@ -13,5 +13,17 @@ export class DataSynchronizer {
       acc.push(...curr)
       return acc
     }, [])
+  }
+
+  public async synchronizeWithRetry (retryCount: number = 3): Promise<void> {
+    let retry = 0
+    while (retry < retryCount) {
+      try {
+        await this.synchronize()
+        return
+      } catch (e) {
+        retry++
+      }
+    }
   }
 }

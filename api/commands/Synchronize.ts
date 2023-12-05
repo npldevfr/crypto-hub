@@ -1,6 +1,6 @@
 import { BaseCommand } from '@adonisjs/core/build/standalone'
-import {DataSynchronizer} from '../app/Synchronization/Generic/DataSynchronizer'
 import {CoinGeckoProvider} from '../app/Synchronization/CoinGeckoProvider'
+import {APIEngineAdapter} from '../app/Synchronization/Generic/APIEngineAdapter'
 
 export default class Synchronize extends BaseCommand {
   /**
@@ -19,7 +19,7 @@ export default class Synchronize extends BaseCommand {
      * before running the command. Don't forget to call `node ace generate:manifest`
      * afterwards.
      */
-    loadApp: false,
+    loadApp: true,
 
     /**
      * Set the following value to true, if you want this command to keep running until
@@ -30,10 +30,10 @@ export default class Synchronize extends BaseCommand {
   }
 
   public async run () {
-    const synchronizer: DataSynchronizer = new DataSynchronizer([
+    const apiEngineAdapter: APIEngineAdapter = new APIEngineAdapter([
       new CoinGeckoProvider(),
     ])
 
-    await synchronizer.synchronize()
+    await apiEngineAdapter.synchronize()
   }
 }

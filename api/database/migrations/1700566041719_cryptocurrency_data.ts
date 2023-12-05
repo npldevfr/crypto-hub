@@ -16,7 +16,6 @@ export default class extends BaseSchema {
       table.float('change_24h').defaultTo(0)
 
       table.uuid('cryptocurrency_id').references('id').inTable('cryptocurrencies').onDelete('CASCADE')
-      table.uuid('cryptocurrency_provider_id').references('id').inTable('cryptocurrency_providers').onDelete('CASCADE')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
