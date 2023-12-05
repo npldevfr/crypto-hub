@@ -19,7 +19,19 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import UsersController from '../app/Controllers/Http/UsersController'
 
 Route.get('/', async () => {
   return { hi: 'coucou from API !' }
 })
+
+Route.get('/api/', async () => {
+  return { hi: 'the Server is running !' }
+})
+
+Route.get('/api/users/profile', async (ctx) => {
+  return new UsersController().profile(ctx)
+})
+// Route.post('/api/users/register', async (ctx) => {
+//   return new UsersController().register(ctx)
+// })
