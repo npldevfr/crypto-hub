@@ -32,11 +32,15 @@ interface CoinGeckoProviderInterface {
   last_updated: string;
 }
 
+/**
+ * https://www.coingecko.com/api/documentation
+ * Has rate limit of 30 calls/minute (every 2 seconds)
+ */
 export class CoinGeckoProvider extends CryptoProvider {
   constructor () {
     super({
       name: 'CoinGecko',
-      frequency: 30,
+      frequency: 3000, // Every 3 seconds (We want to be safe)
       providerURL: 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur',
     })
   }
@@ -67,6 +71,7 @@ export class CoinGeckoProvider extends CryptoProvider {
           volume24h: crypto.total_volume,
         })))
 
+      // Update logo if not set yet
       for (const crypto of cryptocurrencies) {
         if (crypto.logo === null) {
           const image: string | undefined = filteredResult

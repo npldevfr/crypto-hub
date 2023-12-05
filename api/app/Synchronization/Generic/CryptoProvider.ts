@@ -6,7 +6,6 @@ interface CryptoProviderInterface {
 
   /**
    * Time to wait before each new provider call (in ms)
-   * private readonly frequency: number (calls per minute)
    **/
   readonly frequency: number
   readonly name: string
@@ -64,7 +63,7 @@ export class CryptoProvider implements CryptoProviderInterface {
   }
 
   public async getData (): Promise<any> {
-    return Promise.resolve('data')
+    return Promise.resolve()
   }
 
   public getCallsPerMinute (): number {
@@ -79,6 +78,10 @@ export class CryptoProvider implements CryptoProviderInterface {
     return this.name
   }
 
+  /**
+   * Returns API key
+   * Please name your API key as CRYPTO_PROVIDER_{PROVIDER_NAME}_API_KEY
+   */
   public getApiKey (): string {
     const apiKey = Env.get(`CRYPTO_PROVIDER_${this.name.toUpperCase()}_API_KEY`)
 
@@ -90,7 +93,11 @@ export class CryptoProvider implements CryptoProviderInterface {
     return apiKey
   }
 
-  public async isSynchronizationNeeded (): Promise<boolean> {
+  /**
+   * Checks if synchronization is needed
+   * @returns {Promise<boolean>}
+   */
+  private async isSynchronizationNeeded (): Promise<boolean> {
     const lastSynchronization: Synchronization | null = await Synchronization.query()
       .where('providerURL', this.getProviderURL())
       .where('providerName', this.getName())
@@ -103,19 +110,28 @@ export class CryptoProvider implements CryptoProviderInterface {
 
     const now: Date = new Date()
     const lastSynchronizationDate: Date = lastSynchronization.createdAt.toJSDate()
-    const diff: number = (now.getTime() - lastSynchronizationDate.getTime()) / 1000
-    const minutes: number = diff / 60
+    const can: boolean = now.getTime() > lastSynchronizationDate.getTime() + this.getCallsPerMinute()
 
-    return minutes > 1 / this.getCallsPerMinute()
+    console.log(`Synchronization ${can ? 'needed' : 'not needed'} for ${this.getName()}`)
+    return can
   }
 
-  public async shouldSynchronize (): Promise<void> {
-    if (await this.isSynchronizationNeeded()) {
+  /**
+   * Synchronizes data from provider with checks
+   * @param {boolean} ignoreChecks
+   * @returns {Promise<void>}
+   */
+  public async shouldSynchronize (ignoreChecks: boolean = false): Promise<void> {
+    if (ignoreChecks || await this.isSynchronizationNeeded()) {
       await this.getData()
       await this.saveSynchronizationHistory()
     }
   }
 
+  /**
+   * Saves synchronization history to database
+   * @returns {Promise<void>}
+   */
   public async saveSynchronizationHistory (): Promise<void> {
     await Synchronization.create({
       providerURL: this.getProviderURL(),

@@ -1,4 +1,4 @@
-import { BaseCommand } from '@adonisjs/core/build/standalone'
+import { BaseCommand, flags } from '@adonisjs/core/build/standalone'
 import {CoinGeckoProvider} from '../app/Synchronization/CoinGeckoProvider'
 import {CryptoEngineAdapter} from '../app/Synchronization/Generic/CryptoEngineAdapter'
 
@@ -12,6 +12,9 @@ export default class Synchronize extends BaseCommand {
    * Command description is displayed in the "help" output
    */
   public static description = 'Synchronize datas from crypto providers'
+
+  @flags.boolean({description: 'Force synchronization'})
+  public skipChecks: boolean = false
 
   public static settings = {
     /**
@@ -29,10 +32,10 @@ export default class Synchronize extends BaseCommand {
     stayAlive: false,
   }
 
-  public async run () {
+  public async run (): Promise<void> {
     const apiEngineAdapter: CryptoEngineAdapter = new CryptoEngineAdapter([
       new CoinGeckoProvider(),
-    ])
+    ], this.skipChecks)
 
     await apiEngineAdapter.synchronize()
   }
