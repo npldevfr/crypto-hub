@@ -13,7 +13,7 @@ export default class extends BaseSchema {
       table.string('slug').notNullable().unique()
       table.string('symbol').notNullable()
       table.string('name').notNullable()
-      table.string('logo')
+      table.string('logo').nullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

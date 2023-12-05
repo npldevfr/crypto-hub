@@ -11,9 +11,9 @@ export default class extends BaseSchema {
         .defaultTo(this.db.rawQuery('uuid_generate_v4()').knexQuery)
 
       table.float('price').defaultTo(0)
-      table.string('market_cap').notNullable()
-      table.float('volume_24h').defaultTo(0)
-      table.float('change_24h').defaultTo(0)
+      table.float('market_cap').notNullable()
+      table.float('volume24h').defaultTo(0)
+      table.float('change24h').defaultTo(0)
 
       table.uuid('cryptocurrency_id').references('id').inTable('cryptocurrencies').onDelete('CASCADE')
 

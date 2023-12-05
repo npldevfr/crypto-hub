@@ -23,3 +23,5 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.get('/', async () => {
   return { hi: 'coucou from API !' }
 })
+
+Route.get('/cryptocurrency-data', 'CryptocurrencyDataController.index')
