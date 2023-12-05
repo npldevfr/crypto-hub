@@ -1,6 +1,7 @@
 import { BaseCommand, flags } from '@adonisjs/core/build/standalone'
-import {CoinGeckoProvider} from '../app/Synchronization/CoinGeckoProvider'
 import {CryptoEngineAdapter} from '../app/Synchronization/Generic/CryptoEngineAdapter'
+import {CoinMarketCapProvider} from '../app/Synchronization/CoinMarketCapProvider'
+import {CoinGeckoProvider} from '../app/Synchronization/CoinGeckoProvider'
 
 export default class Synchronize extends BaseCommand {
   /**
@@ -35,6 +36,7 @@ export default class Synchronize extends BaseCommand {
   public async run (): Promise<void> {
     const apiEngineAdapter: CryptoEngineAdapter = new CryptoEngineAdapter([
       new CoinGeckoProvider(),
+      new CoinMarketCapProvider(),
     ], this.skipChecks)
 
     await apiEngineAdapter.synchronize()

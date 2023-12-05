@@ -18,6 +18,9 @@ export default class CryptocurrencyData extends BaseModel {
   @column()
   public change24h: number
 
+  @column()
+  public lastOriginUpdate: DateTime
+
   @column({ serializeAs: null})
   public cryptocurrencyId: string
 

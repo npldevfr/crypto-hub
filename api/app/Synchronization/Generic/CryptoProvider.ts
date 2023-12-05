@@ -1,6 +1,9 @@
 import Env from '@ioc:Adonis/Core/Env'
 import ProviderKeyNotFoundException from '../../Exceptions/ProviderKeyNotFoundException'
 import Synchronization from '../../Models/Synchronization'
+import Cryptocurrency from '../../Models/Cryptocurrency'
+import CryptocurrencyData from '../../Models/CryptocurrencyData'
+import {DateTime} from 'luxon'
 
 interface CryptoProviderInterface {
 
@@ -41,6 +44,15 @@ interface CryptoProviderInterface {
    **/
   getApiKey(): string;
 
+}
+
+interface CryptoDataCreationInterface {
+  change24h: number
+  price: number
+  volume24h: number
+  marketCap: number
+  symbol: string
+  lastOriginUpdate: string
 }
 
 interface CryptoProviderConstructorInterface {
@@ -137,6 +149,41 @@ export class CryptoProvider implements CryptoProviderInterface {
       providerURL: this.getProviderURL(),
       providerName: this.getName(),
     })
+  }
+
+  /**
+   * Collection of utilities for providers
+   * @param {T[]} datas
+   */
+  public static async getUtils<T extends { symbol: string }>(datas: T[] = []) {
+    // Get all cryptocurrencies from database
+    const cryptocurrencies: Cryptocurrency[] = await Cryptocurrency.all()
+
+    // Filter results to get only the available cryptocurrencies in database
+    const filteredResults: T[] = datas
+      .filter((crypto: T) => cryptocurrencies
+        .map((crypto: Cryptocurrency) => crypto.symbol)
+        .includes(crypto.symbol.toUpperCase()))
+
+    return {
+      cryptocurrencies,
+      filteredResults,
+    }
+  }
+
+  public async createMany (data: CryptoDataCreationInterface[]): Promise<any> {
+    const {cryptocurrencies} = await CryptoProvider.getUtils()
+
+    await CryptocurrencyData.createMany(data
+      .map((crypto: CryptoDataCreationInterface) => ({
+        change24h: crypto.change24h,
+        price: crypto.price,
+        lastOriginUpdate: DateTime.fromJSDate(new Date(crypto.lastOriginUpdate)),
+        cryptocurrencyId: cryptocurrencies
+          .find((currency: Cryptocurrency): boolean => currency.symbol === crypto.symbol.toUpperCase())?.id,
+        marketCap: crypto.marketCap,
+        volume24h: crypto.volume24h,
+      })))
   }
 }
 

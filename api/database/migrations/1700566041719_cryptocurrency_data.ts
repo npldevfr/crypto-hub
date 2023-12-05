@@ -14,7 +14,7 @@ export default class extends BaseSchema {
       table.float('market_cap').notNullable()
       table.float('volume24h').defaultTo(0)
       table.float('change24h').defaultTo(0)
-
+      table.dateTime('last_origin_update').notNullable()
       table.uuid('cryptocurrency_id').references('id').inTable('cryptocurrencies').onDelete('CASCADE')
 
       /**

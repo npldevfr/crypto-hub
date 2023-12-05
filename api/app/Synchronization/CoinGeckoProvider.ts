@@ -2,6 +2,7 @@ import {CryptoProvider} from './Generic/CryptoProvider'
 import Cryptocurrency from '../Models/Cryptocurrency'
 import ProviderFetchException from '../Exceptions/ProviderFetchException'
 import CryptocurrencyData from '../Models/CryptocurrencyData'
+import {DateTime} from 'luxon'
 
 interface CoinGeckoProviderInterface {
   id: string;
@@ -51,20 +52,15 @@ export class CoinGeckoProvider extends CryptoProvider {
       const data: Response = await fetch(this.getProviderURL())
       const result: CoinGeckoProviderInterface[] = await data.json() as CoinGeckoProviderInterface[]
 
-      // Get all cryptocurrencies that are allowed to be synchronized
-      const cryptocurrencies: Cryptocurrency[] = await Cryptocurrency.all()
-
-      // Filter result to only include allowed cryptocurrencies
-      const filteredResult: CoinGeckoProviderInterface[] = result
-        .filter((crypto: CoinGeckoProviderInterface) => cryptocurrencies
-          .map((crypto: Cryptocurrency) => crypto.symbol)
-          .includes(crypto.symbol.toUpperCase()))
+      const { cryptocurrencies, filteredResults } =
+        await CryptoProvider.getUtils<CoinGeckoProviderInterface>(result)
 
       // Save data to database
-      await CryptocurrencyData.createMany(filteredResult
+      await CryptocurrencyData.createMany(filteredResults
         .map((crypto: CoinGeckoProviderInterface) => ({
           change24h: crypto.price_change_percentage_24h,
           price: crypto.current_price,
+          lastOriginUpdate: DateTime.fromJSDate(new Date(crypto.last_updated)),
           cryptocurrencyId: cryptocurrencies
             .find((currency: Cryptocurrency): boolean => currency.symbol === crypto.symbol.toUpperCase())?.id,
           marketCap: crypto.market_cap,
@@ -74,7 +70,7 @@ export class CoinGeckoProvider extends CryptoProvider {
       // Update logo if not set yet
       for (const crypto of cryptocurrencies) {
         if (crypto.logo === null) {
-          const image: string | undefined = filteredResult
+          const image: string | undefined = filteredResults
             .find((currency: CoinGeckoProviderInterface): boolean => currency.symbol.toUpperCase() === crypto.symbol)
             ?.image
 

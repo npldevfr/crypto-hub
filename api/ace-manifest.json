@@ -10,7 +10,14 @@
       "description": "Synchronize datas from crypto providers",
       "args": [],
       "aliases": [],
-      "flags": []
+      "flags": [
+        {
+          "name": "skip-checks",
+          "propertyName": "skipChecks",
+          "type": "boolean",
+          "description": "Force synchronization"
+        }
+      ]
     },
     "dump:rcfile": {
       "settings": {},
