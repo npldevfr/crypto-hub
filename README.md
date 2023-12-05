@@ -15,6 +15,11 @@ pnpm install
 
 ## Run
 ```
+// API & Nuxt
+pnpm start:all
+
+ou :
+
 // API
 cd ./api && node ace serve --watch
 

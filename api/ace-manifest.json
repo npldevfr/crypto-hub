@@ -1,5 +1,17 @@
 {
   "commands": {
+    "rss:feed": {
+      "settings": {
+        "loadApp": false,
+        "stayAlive": false
+      },
+      "commandPath": "./commands/RssFeed",
+      "commandName": "rss:feed",
+      "description": "",
+      "args": [],
+      "aliases": [],
+      "flags": []
+    },
     "dump:rcfile": {
       "settings": {},
       "commandPath": "@adonisjs/core/build/commands/DumpRc",
