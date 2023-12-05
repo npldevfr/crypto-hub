@@ -1,5 +1,6 @@
 import Env from '@ioc:Adonis/Core/Env'
 import ProviderKeyNotFoundException from '../../Exceptions/ProviderKeyNotFoundException'
+import Synchronization from '../../Models/Synchronization'
 
 interface CryptoProviderInterface {
 
@@ -87,6 +88,39 @@ export class CryptoProvider implements CryptoProviderInterface {
     }
 
     return apiKey
+  }
+
+  public async isSynchronizationNeeded (): Promise<boolean> {
+    const lastSynchronization: Synchronization | null = await Synchronization.query()
+      .where('providerURL', this.getProviderURL())
+      .where('providerName', this.getName())
+      .orderBy('createdAt', 'desc')
+      .first()
+
+    if (!lastSynchronization) {
+      return true
+    }
+
+    const now: Date = new Date()
+    const lastSynchronizationDate: Date = lastSynchronization.createdAt.toJSDate()
+    const diff: number = (now.getTime() - lastSynchronizationDate.getTime()) / 1000
+    const minutes: number = diff / 60
+
+    return minutes > 1 / this.getCallsPerMinute()
+  }
+
+  public async shouldSynchronize (): Promise<void> {
+    if (await this.isSynchronizationNeeded()) {
+      await this.getData()
+      await this.saveSynchronizationHistory()
+    }
+  }
+
+  public async saveSynchronizationHistory (): Promise<void> {
+    await Synchronization.create({
+      providerURL: this.getProviderURL(),
+      providerName: this.getName(),
+    })
   }
 }
 
