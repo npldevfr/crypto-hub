@@ -12,7 +12,7 @@ export default class extends BaseSchema {
 
       table.string('slug').notNullable()
       table.string('name').notNullable()
-      table.string('content').notNullable()
+      table.string('content', 1024).notNullable()
       table.uuid('article_source_id').references('article_sources.id').onDelete('CASCADE')
 
       /**
