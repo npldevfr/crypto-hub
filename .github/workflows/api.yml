@@ -40,3 +40,6 @@ jobs:
       - run: pnpm lint
         working-directory: ./api
 
+      - run: pnpm test
+        working-directory: ./api
+
