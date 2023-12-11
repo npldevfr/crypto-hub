@@ -3,7 +3,6 @@ const dd = useRouter();
 </script>
 
 <template>
-  <Header />
   <div class="px-20 py-15">
     <CardNews
       :vertical-layout="false"
