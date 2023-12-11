@@ -53,6 +53,11 @@ jobs:
         run: cp .env.example .env
         working-directory: ./api
 
+      - name: Serve API
+        run: |
+          node ace serve --watch
+        working-directory: ./api
+
       - name: Run tests
         run: |
           pnpm test
