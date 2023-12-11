@@ -1,16 +1,14 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'cryptocurrency_providers'
+  protected tableName = 'synchronizations'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table
-        .uuid('id')
-        .primary()
-        .defaultTo(this.db.rawQuery('uuid_generate_v4()').knexQuery)
+      table.increments('id')
 
-      table.string('name').notNullable()
+      table.string('provider_name').notNullable()
+      table.string('provider_url').notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

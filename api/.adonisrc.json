@@ -34,6 +34,13 @@
           "tests/functional/**/*.spec(.ts|.js)"
         ],
         "timeout": 60000
+      },
+      {
+        "name": "Synchronization",
+        "files": [
+          "tests/synchronization/**/*.spec(.ts|.js)"
+        ],
+        "timeout": 60000
       }
     ]
   },

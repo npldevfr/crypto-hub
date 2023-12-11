@@ -46,8 +46,4 @@ Route.get('/', async () => {
   return { hi: 'coucou from API !' }
 })
 
-Route.get('/api', async () => {
-  return { hi: 'the Server is running !' }
-})
-
-
+Route.get('/cryptocurrency-data', 'CryptocurrencyDataController.index')
