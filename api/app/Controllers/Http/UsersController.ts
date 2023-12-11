@@ -1,20 +1,22 @@
-import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Database from '@ioc:Adonis/Lucid/Database'
-
 
 export default class UsersController {
-    public async profile(ctx: HttpContextContract) {
-        return Database
-            .from('users')
-            .select('id', 'username', 'email')
+
+    public async profile({ auth }) {
+        await auth.use('api').authenticate()
+        return auth.user!
     }
 
-    // public async register(ctx: HttpContextContract) {
-    //     return Database
-    //         .insertQuery() // 👈 gives an instance of insert query builder
-    //         .table('users')
-    //         .insert({ username: 'virk', email: 'virk@adonisjs.com', password: 'password'})
-    //     // return ctx
-    // }
+    public async login({ auth, request }) {
+        const email = request.input('email')
+        const password = request.input('password')
+
+        return await auth.use('api').attempt(email, password)
+
+    }
+
+    public async logout({ auth }) {
+        await auth.use('api').authenticate()
+        return await auth.use('api').logout()
+    }
 
 }

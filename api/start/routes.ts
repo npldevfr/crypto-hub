@@ -32,6 +32,15 @@ Route.get('/api/', async () => {
 Route.get('/api/users/profile', async (ctx) => {
   return new UsersController().profile(ctx)
 })
+
+Route.post('/api/users/login', async (ctx) => {
+  return new UsersController().login(ctx)
+})
+
+Route.post('/api/users/logout', async (ctx) => {
+  return new UsersController().logout(ctx)
+})
+
 // Route.post('/api/users/register', async (ctx) => {
 //   return new UsersController().register(ctx)
 // })
