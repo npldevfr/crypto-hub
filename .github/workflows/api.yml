@@ -53,9 +53,8 @@ jobs:
         run: cp .env.example .env
         working-directory: ./api
 
-      - name: Serve API
-        run: |
-          node ace serve --watch
+      - name: Run migrations
+        run: node ace migration:run
         working-directory: ./api
 
       - name: Run tests
