@@ -5,6 +5,8 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -15,6 +17,7 @@
     "@vueuse/nuxt": "^10.6.1",
     "date-fns": "^2.30.0",
     "nuxt": "^3.8.1",
+    "pinia": "^2.1.7",
     "tailwind-variants": "0.1.18",
     "vue": "^3.3.8",
     "vue-router": "^4.2.5"

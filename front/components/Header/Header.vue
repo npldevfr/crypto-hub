@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 const router = useRouter();
 const isLogged = ref(false);
+
+
 </script>
 <template>
   <div class="flex flex-row px-10 w-full p-5 items-center">
