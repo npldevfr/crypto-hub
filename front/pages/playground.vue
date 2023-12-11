@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { login, user } = useAuth()
+const { login, user, isUnauthenticated, logout } = useAuth()
 
 const { post } = login()
 
@@ -18,13 +18,14 @@ const attemptLogin = async () => {
 </script>
 
 <template>
-  <div>
+  <div v-if="isUnauthenticated">
     <div class="bg-red-200" @click="attemptLogin">Login</div>
     <input v-model="loginForm.email" placeholder="email" />
     <input v-model="loginForm.password" type="password" placeholder="password" />
-    <pre>
-      {{ user }}
-    </pre>
+  </div>
+  <div v-else>
+    <div class="bg-green-200" @click="logout">Logout</div>
+    <pre>{{ user }}</pre>
   </div>
 </template>
 

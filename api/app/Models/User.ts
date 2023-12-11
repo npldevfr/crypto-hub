@@ -14,22 +14,22 @@ export default class User extends BaseModel {
   @column()
   public email: string
 
-  @column()
+  @column({ serializeAs: null })
   public password: string
 
   @column()
   public avatar: string | null
 
-  @column()
+  @column({ serializeAs: null})
   public is_blocked: boolean
 
-  @column()
+  @column({ serializeAs: null})
   public remember_me_token: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
   public updatedAt: DateTime
 
   @manyToMany(() => Role, { pivotTable: 'users_roles' })

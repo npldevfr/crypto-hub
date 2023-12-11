@@ -1,30 +1,41 @@
 import Hash from '@ioc:Adonis/Core/Hash'
 import User from '../../Models/User'
+import {schema} from '@ioc:Adonis/Core/Validator'
+import {HttpContextContract} from '@ioc:Adonis/Core/HttpContext'
 
 export default class UsersController {
-  public async profile ({ auth }) {
-    await auth.use('api').authenticate()
-    const user = auth.user!
-    return {
-      id: user.id,
-      username: user.username,
-      email: user.email,
-      avatar: user.avatar,
-      is_blocked: user.is_blocked,
-      remember_me_token: user.remember_me_token,
-    }
+  public async profile ({ auth }: HttpContextContract): Promise<User> {
+    return await User
+      .query()
+      .preload('roles')
+      .where('id', auth.user?.id)
+      .firstOrFail()
   }
 
-  public async login ({ auth, request }) {
-    const email = request.input('email')
-    const password = request.input('password')
-    return await auth.use('api').attempt(email, password)
+  public async login ({ auth, request }: HttpContextContract): Promise<{ token: string, user: User }> {
+    // Get user input
+    const credentialsValidation = schema.create({
+      email: schema.string(),
+      password: schema.string(),
+    })
+
+    // Validate user input and throw validation error if validation fails
+    const { email, password } = await request.validate({ schema: credentialsValidation })
+    const { token } = await auth.use('api').attempt(email, password)
+
+    // Get user from database
+    const user: User = await User
+      .query()
+      .preload('roles')
+      .where('email', email)
+      .firstOrFail()
+
+    return { token, user }
   }
 
-  public async logout ({ auth }) {
-    await auth.use('api').authenticate()
+  public async logout ({ auth, response}: HttpContextContract) {
     await auth.use('api').revoke()
-    return { message: 'Logout successful' }
+    return response.noContent()
   }
 
   public async register ({ request }) {
@@ -51,7 +62,7 @@ export default class UsersController {
       if (newPassword) {
         user.password = await Hash.make(newPassword)
       }
-      await user.save()
+      await user?.save()
 
       return { message: 'Profile updated successfully', user }
     } catch (error) {

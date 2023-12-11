@@ -1,4 +1,3 @@
-import { defineStore, storeToRefs } from 'pinia'
 import type { ComputedRef, Ref } from 'vue'
 import { computed, ref } from 'vue'
 import type { Router } from 'vue-router'
@@ -17,10 +16,6 @@ interface User {
 
 interface Role {
     name: string
-}
-
-export interface ApiResponse<T> {
-    data: T
 }
 
 export function useAuth() {
@@ -67,19 +62,18 @@ export function useAuth() {
                     await router.push({ name: 'login' })
                 }
             },
-        }).json<ApiResponse<User>>()
+        }).json()
 
         return { errorMessage, post }
     }
 
     const logout = async (): Promise<void> => {
-        await $fetch('users/session/log_out', {
-            method: 'DELETE',
+        await $fetch('users/logout', {
+            method: 'POST',
         })
 
         user.value = null
         token.value = null
-        await router.push({ name: 'index' })
     }
 
     const whoami = async (): Promise<void> => {
@@ -94,16 +88,11 @@ export function useAuth() {
                     user.value = data
                 }
             }
-        }).json<ApiResponse<User>>()
-
-        // if ([401, 403].includes(statusCode.value || 0)) {
-        //     user.value = null
-        //     document.cookie = ''
-        //     return
-        // }
+        }).json()
     }
 
     const isLogged: ComputedRef<boolean> = computed(() => !!user.value)
+    const isUnauthenticated: ComputedRef<boolean> = computed(() => !isLogged.value)
 
     return {
         user,
@@ -111,6 +100,7 @@ export function useAuth() {
         register,
         login,
         isLogged,
+        isUnauthenticated,
         whoami,
     }
 }

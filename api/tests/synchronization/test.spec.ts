@@ -3,7 +3,6 @@ import {CryptoEngineAdapter} from '../../app/Synchronization/Generic/CryptoEngin
 import NoProviderException from '../../app/Exceptions/Synchronization/NoProviderException'
 import {CoinGeckoProvider} from '../../app/Synchronization/CoinGeckoProvider'
 import CryptocurrencyData from '../../app/Models/CryptocurrencyData'
-import {CoinMarketCapProvider} from '../../app/Synchronization/CoinMarketCapProvider'
 import Database from '@ioc:Adonis/Lucid/Database'
 
 test.group('Synchronisation', async (group): Promise<void> => {
