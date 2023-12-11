@@ -7,7 +7,8 @@
     "build": "node ace build --production",
     "start": "node server.js",
     "test": "node ace test",
-    "lint": "eslint . --ext=.ts"
+    "lint": "eslint . --ext=.ts",
+    "lint:fix": "eslint . --ext=.ts --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -28,17 +29,21 @@
     "eslint-plugin-adonis": "^2.1.1",
     "pino-pretty": "^10.2.3",
     "typescript": "~4.6",
+    "uuid": "^9.0.1",
     "youch": "^3.3.3",
     "youch-terminal": "^2.2.3"
   },
   "dependencies": {
     "@adonisjs/core": "^5.8.0",
+    "@adonisjs/auth": "^8.2.3",
     "@adonisjs/lucid": "^18.4.2",
     "@adonisjs/repl": "^3.1.0",
+    "adonisjs-scheduler": "^0.0.25",
     "luxon": "^3.4.4",
     "pg": "^8.11.3",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
-    "source-map-support": "^0.5.21"
+    "source-map-support": "^0.5.21",
+    "sqlite3": "^5.1.6"
   }
 }
