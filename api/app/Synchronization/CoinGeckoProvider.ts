@@ -1,8 +1,8 @@
 import {CryptoProvider} from './Generic/CryptoProvider'
 import Cryptocurrency from '../Models/Cryptocurrency'
-import ProviderFetchException from '../Exceptions/ProviderFetchException'
 import CryptocurrencyData from '../Models/CryptocurrencyData'
 import {DateTime} from 'luxon'
+import ProviderFetchException from '../Exceptions/Synchronization/ProviderFetchException'
 
 interface CoinGeckoProviderInterface {
   id: string;

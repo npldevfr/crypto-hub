@@ -1,9 +1,9 @@
 import Env from '@ioc:Adonis/Core/Env'
-import ProviderKeyNotFoundException from '../../Exceptions/ProviderKeyNotFoundException'
 import Synchronization from '../../Models/Synchronization'
 import Cryptocurrency from '../../Models/Cryptocurrency'
 import CryptocurrencyData from '../../Models/CryptocurrencyData'
 import {DateTime} from 'luxon'
+import ProviderKeyNotFoundException from '../../Exceptions/Synchronization/ProviderKeyNotFoundException'
 
 interface CryptoProviderInterface {
 

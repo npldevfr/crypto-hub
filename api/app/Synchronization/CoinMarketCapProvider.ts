@@ -1,5 +1,5 @@
 import {CryptoProvider} from './Generic/CryptoProvider'
-import ProviderFetchException from '../Exceptions/ProviderFetchException'
+import ProviderFetchException from '../Exceptions/Synchronization/ProviderFetchException'
 
 interface CoinMarketCapProviderInterface {
   id: number;
