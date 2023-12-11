@@ -21,6 +21,9 @@ importers:
 
   api:
     dependencies:
+      '@adonisjs/auth':
+        specifier: ^8.2.3
+        version: 8.2.3(@adonisjs/application@5.3.0)(@adonisjs/core@5.9.0)(@adonisjs/lucid@18.4.2)
       '@adonisjs/core':
         specifier: ^5.8.0
         version: 5.9.0
@@ -178,6 +181,33 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@adonisjs/auth@8.2.3(@adonisjs/application@5.3.0)(@adonisjs/core@5.9.0)(@adonisjs/lucid@18.4.2):
+    resolution: {integrity: sha512-js9e8AHEsNC/8MGvho6MgL+uXr8SlhTg9MJJDWQBBiqsKkT7+H7NMP/pLbuSzYaaf40t2u/OXfq6wXuIC5ZYvw==}
+    peerDependencies:
+      '@adonisjs/core': ^5.7.1
+      '@adonisjs/i18n': ^1.5.0
+      '@adonisjs/lucid': ^18.0.0
+      '@adonisjs/redis': ^7.2.0
+      '@adonisjs/session': ^6.2.0
+    peerDependenciesMeta:
+      '@adonisjs/i18n':
+        optional: true
+      '@adonisjs/lucid':
+        optional: true
+      '@adonisjs/redis':
+        optional: true
+      '@adonisjs/session':
+        optional: true
+    dependencies:
+      '@adonisjs/core': 5.9.0
+      '@adonisjs/lucid': 18.4.2(@adonisjs/application@5.3.0)(@adonisjs/core@5.9.0)(pg@8.11.3)(sqlite3@5.1.6)
+      '@poppinss/hooks': 5.0.3(@adonisjs/application@5.3.0)
+      '@poppinss/utils': 5.0.0
+      luxon: 3.4.4
+    transitivePeerDependencies:
+      - '@adonisjs/application'
+    dev: false
 
   /@adonisjs/bodyparser@8.1.9(@adonisjs/application@5.3.0)(@adonisjs/drive@2.3.0)(@adonisjs/http-server@5.12.0):
     resolution: {integrity: sha512-enVETPmoBJhg+CP6AVlG/GSwllpW/5y22wjFpEhYZl0YOXnE7i+wsp2VeGfMtQzl4+snTuAPEfwCtG+I/s6jqQ==}
@@ -6255,6 +6285,7 @@ packages:
 
   /ip@2.0.0:
     resolution: {integrity: sha512-WKa+XuLG1A1R0UWhl2+1XQSi+fZWMsYKffMZTTYsiZaUD8k2yDAj5atimTUD2TZkyCkNEeYE5NhFZmupOGtjYQ==}
+    requiresBuild: true
 
   /ipaddr.js@1.9.1:
     resolution: {integrity: sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==}
@@ -9472,6 +9503,7 @@ packages:
   /smart-buffer@4.2.0:
     resolution: {integrity: sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==}
     engines: {node: '>= 6.0.0', npm: '>= 3.0.0'}
+    requiresBuild: true
 
   /smob@1.4.1:
     resolution: {integrity: sha512-9LK+E7Hv5R9u4g4C3p+jjLstaLe11MDsL21UpYaCNmapvMkYhqCV4A/f/3gyH8QjMyh6l68q9xC85vihY9ahMQ==}

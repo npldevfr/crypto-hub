@@ -15,6 +15,7 @@ export default class extends BaseSchema {
       table.string('password').notNullable()
       table.string('avatar')
       table.boolean('is_blocked').defaultTo(false)
+      table.string('remember_me_token').nullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
