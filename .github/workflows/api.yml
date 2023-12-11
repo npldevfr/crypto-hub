@@ -31,17 +31,9 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: Install Docker and Docker Compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker.io
-          sudo systemctl start docker
-          sudo systemctl enable docker
-          sudo apt-get install -y curl
-          curl -L "https://github.com/docker/compose/releases/download/{DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-          sudo chmod +x /usr/local/bin/docker-compose
-        env:
-          DOCKER_COMPOSE_VERSION: '1.29.2' # Replace with the desired Docker Compose version
+      - uses: KengoTODA/actions-setup-docker-compose@v1
+        with:
+          version: '2.14.2'
 
       - name: Set up PostgreSQL with Docker Compose
         run: |
