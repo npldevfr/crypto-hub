@@ -1,24 +1,38 @@
 import Parser from 'rss-parser'
 import Article from '../app/Models/Article'
+import ArticleSource from '../app/Models/ArticleSource'
+import NoTitleException from '../app/Exceptions/Rss/NoTilteExeptionException'
 
 export default class RssFeedUpdater {
-  public static async run () {
-    console.log('Updating RSS feed')
+  public static async rssFeedPath () {
+    const sources = await ArticleSource.all()
+    for (const source of sources) {
+      await this.insertArticle(source.url, source.id)
+    }
+  }
+
+  public static async insertArticle (urlRss : string, sourceId : string) {
     let parser = new Parser()
-    const url = 'https://coinjournal.net/fr/actualites/feed/'
-    let feed = await parser.parseURL(url)
+    let feed = await parser.parseURL(urlRss)
     console.log(feed.title)
 
-    const articlesData = feed.items.map(item => {
-      return {
-        slug: this.generateSlug(item.title),
-        name: item.title,
-        content: item.contentSnippet,
-      }
-    })
-    await Article.createMany(articlesData)
-
-    console.log('Articles added to the database')
+    try {
+      const articlesData = feed.items.map(item => {
+        if (!item.title) {
+          throw new NoTitleException()
+        }
+        return {
+          slug: this.generateSlug(item.title),
+          name: item.title,
+          content: item.contentSnippet,
+          article_source_id: sourceId,
+        }
+      })
+      await Article.createMany(articlesData)
+      console.log('Articles added to the database')
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   private static generateSlug (title: string): string {
