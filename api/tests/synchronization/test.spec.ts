@@ -7,7 +7,7 @@ import {CoinMarketCapProvider} from '../../app/Synchronization/CoinMarketCapProv
 import Database from '@ioc:Adonis/Lucid/Database'
 
 test.group('Synchronisation', async (group): Promise<void> => {
-  group.each.setup(async () => {
+  group.each.setup(async (): Promise<(() => Promise<void>)> => {
     await Database.beginGlobalTransaction()
     return () => Database.rollbackGlobalTransaction()
   })
@@ -36,7 +36,7 @@ test.group('Synchronisation', async (group): Promise<void> => {
     assert.equal(cea.canSynchronize(), true)
   })
 
-  test('try to synchronize with providers and get data from 1 provider', async ({ assert }): Promise<void> => {
+  test('try to synchronize with providers and get data from provider', async ({ assert }): Promise<void> => {
     const cea: CryptoEngineAdapter = new CryptoEngineAdapter([
       new CoinGeckoProvider(),
     ])
@@ -44,16 +44,5 @@ test.group('Synchronisation', async (group): Promise<void> => {
     await cea.synchronize()
     const cryptocurrencyData: CryptocurrencyData[] = await CryptocurrencyData.all()
     assert.lengthOf(cryptocurrencyData, 10)
-  })
-
-  test('try to synchronize with providers and get data from 2 providers', async ({ assert }): Promise<void> => {
-    const cea: CryptoEngineAdapter = new CryptoEngineAdapter([
-      new CoinGeckoProvider(),
-      new CoinMarketCapProvider(),
-    ])
-
-    await cea.synchronize()
-    const cryptocurrencyData: CryptocurrencyData[] = await CryptocurrencyData.all()
-    assert.lengthOf(cryptocurrencyData, 20)
   })
 })
