@@ -41,6 +41,6 @@ Route.post('/api/users/logout', async (ctx) => {
   return new UsersController().logout(ctx)
 })
 
-// Route.post('/api/users/register', async (ctx) => {
-//   return new UsersController().register(ctx)
-// })
+Route.post('/api/users/register', async (ctx) => {
+  return new UsersController().register(ctx)
+})
