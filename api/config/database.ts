@@ -48,7 +48,18 @@ const databaseConfig: DatabaseConfig = {
       healthCheck: false,
       debug: false,
     },
-
+    sqlite: {
+      client: 'sqlite',
+      connection: {
+        filename: Env.get('DB_FILENAME', 'dev.sqlite3'),
+      },
+      migrations: {
+        naturalSort: true,
+      },
+      healthCheck: false,
+      useNullAsDefault: true,
+      debug: false,
+    },
   },
 }
 

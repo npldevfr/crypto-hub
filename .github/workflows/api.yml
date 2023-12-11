@@ -31,10 +31,30 @@ jobs:
         with:
           node-version: 16.x
 
+      - name: Install Docker and Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker.io
+          sudo systemctl start docker
+          sudo systemctl enable docker
+          sudo apt-get install -y curl
+          curl -L "https://github.com/docker/compose/releases/download/{DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+        env:
+          DOCKER_COMPOSE_VERSION: '1.29.2' # Replace with the desired Docker Compose version
+
+      - name: Set up PostgreSQL with Docker Compose
+        run: |
+          docker-compose -f docker-compose.yml up -d
+
       - run: npm install -g pnpm
         working-directory: ./api
 
       - run: pnpm install --frozen-lockfile
+        working-directory: ./api
+
+      - name: Generate APP_KEY
+        run: node ace generate:key
         working-directory: ./api
 
       - name: Copy .env
@@ -42,5 +62,7 @@ jobs:
         working-directory: ./api
 
       - name: Run tests
-        run: pnpm test
+        run: |
+          pnpm test
+          # Add commands to run tests against the PostgreSQL instance
         working-directory: ./api
