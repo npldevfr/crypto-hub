@@ -23,7 +23,7 @@ const attemptLogin = async () => {
   <Head>
     <Title>
       CryptoHUB &mdash; Connexion
-    </Title>x
+    </Title>
   </Head>
   <div class="flex flex-col items-center pt-10 justify-center">
     <div class="w-1/2">
