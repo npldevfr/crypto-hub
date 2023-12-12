@@ -49,7 +49,7 @@ export default class UsersController {
     return { message: 'Registration successful' }
   }
 
-  public async update ({ auth, request }){
+  public async update ({ auth, request }: HttpContextContract){
     await auth.use('api').authenticate()
 
     try {
