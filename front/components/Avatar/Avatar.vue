@@ -60,7 +60,7 @@ const avatar = tv({
     />
     <AvatarFallback
         :class=" avatar({ size })"
-        class=":uno: h-full w-full flex items-center justify-center bg-primary font-medium text-white dark:text-black"
+        class=":uno: h-full w-full flex items-center justify-center bg-primary font-medium text-white"
         :delay-ms="delayMs"
     >
       {{ getAvatarLetters }}
@@ -68,7 +68,7 @@ const avatar = tv({
 
     <div
         v-if="$slots.default"
-        class=":uno: absolute flex flex-row rounded-full bg-zinc-100 p-1 text-[10px] text-primary -bottom-1 -right-2 blue:bg-slate-700 dark:bg-zinc-800"
+        class=":uno: absolute flex flex-row rounded-full bg-stone-900 p-1 text-[10px] text-primary -bottom-1 -right-2 blue:bg-slate-700 dark:bg-zinc-800"
     >
       <slot />
     </div>
