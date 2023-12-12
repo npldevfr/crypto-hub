@@ -18,32 +18,42 @@
 |
 */
 
-import Route from '@ioc:Adonis/Core/Route'
-import UsersController from '../app/Controllers/Http/UsersController'
+import Route from "@ioc:Adonis/Core/Route";
+import UsersController from "../app/Controllers/Http/UsersController";
 Route.group(() => {
-  Route.get('/profile', async (ctx) => {
-    return new UsersController().profile(ctx)
-  })
+  Route.get("/profile", async (ctx) => {
+    return new UsersController().profile(ctx);
+  });
 
-  Route.post('/login', async (ctx) => {
-    return new UsersController().login(ctx)
-  })
+  Route.post("/login", async (ctx) => {
+    return new UsersController().login(ctx);
+  });
 
-  Route.post('/logout', async (ctx) => {
-    return new UsersController().logout(ctx)
-  })
+  Route.post("/logout", async (ctx) => {
+    return new UsersController().logout(ctx);
+  });
 
-  Route.post('/register', async (ctx) => {
-    return new UsersController().register(ctx)
-  })
+  Route.post("/register", async (ctx) => {
+    return new UsersController().register(ctx);
+  });
 
-  Route.put('/profile', async (ctx) => {
-    return new UsersController().update(ctx)
-  })
-}).prefix('/api/users')
+  Route.put("/profile", async (ctx) => {
+    return new UsersController().update(ctx);
+  });
+}).prefix("/api/users");
 
-Route.get('/', async () => {
-  return { hi: 'coucou from API !' }
-})
+Route.get("/", async () => {
+  return { hi: "coucou from API !" };
+});
 
-Route.get('/cryptocurrency-data', 'CryptocurrencyDataController.index')
+Route.get("/cryptocurrency-data", "CryptocurrencyDataController.index");
+
+Route.get(
+  "oauth/:provider/redirect",
+  "UsersAuthProvidersController.redirect"
+).where("provider", "google");
+
+Route.get(
+  "oauth/:provider/callback",
+  "UsersAuthProvidersController.callback"
+).where("provider", "google");
