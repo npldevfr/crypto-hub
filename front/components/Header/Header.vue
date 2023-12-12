@@ -37,10 +37,10 @@ const { isLogged, user } = useAuth()
         v-else
         class="flex flex-row justify-end items-center space-x-2 w-full"
       >
-        <Button size="sm" type="link" @click="router.push('/login')">
+        <Button size="sm" hierarchy="link" @click="router.push('/register')">
           S'inscrire
         </Button>
-        <Button size="sm" type="primary" @click="router.push('/register')">
+        <Button size="sm" hierarchy="primary" @click="router.push('/login')">
           Connexion
         </Button>
       </div>

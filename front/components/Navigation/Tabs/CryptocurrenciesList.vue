@@ -21,19 +21,5 @@ const headerData = inject<HeaderData>('headerData')
 
       {{ cryptocurrency?.name }}
     </NavigationItem>
-
-    <NavigationItem
-      title="Voir plus"
-      :to="{ name: 'market' }"
-    >
-      <template #prefix>
-        <div class="w-[24px]" />
-      </template>
-
-      + de 1000 cryptomonnaies
-
-    </NavigationItem>
-
-
   </ul>
 </template>

@@ -26,7 +26,7 @@ export function useAuth() {
     const login = () => {
         const errorMessage: Ref<string> = ref<string>('')
 
-        const { data, statusCode, post } = $fetch('users/login', {
+        const { data, statusCode, isFetching, post } = $fetch('users/login', {
             method: 'POST',
         }, {
             immediate: false,
@@ -38,12 +38,12 @@ export function useAuth() {
                     errorMessage.value = ''
                     user.value = data.user
                     token.value = data.token
-                    await router.push({ name: 'home' })
+                    await router.push({ name: 'index' })
                 }
             },
         }).json()
 
-        return { data, statusCode, post, errorMessage }
+        return { data,isFetching, statusCode, post, errorMessage }
     }
 
     const register = () => {

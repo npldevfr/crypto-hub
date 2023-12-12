@@ -2,7 +2,7 @@
 import {tv} from "tailwind-variants";
 
 const props = withDefaults(defineProps<{
-  type: 'primary' | 'secondary' | 'secondary-outline' | 'link'
+  hierarchy: 'primary' | 'secondary' | 'secondary-outline' | 'link'
   size: 'xs' | 'sm' | 'md' | 'lg'
   disabled?: boolean
   loading?: boolean
@@ -12,14 +12,14 @@ const props = withDefaults(defineProps<{
       danger: false,
       disabled: false,
       loading: false,
-      type: 'primary',
+      hierarchy: 'primary',
       size: 'md'
 })
 
 const buttons = tv({
-  base: 'rounded-md flex items-center cursor-pointer font-500 justify-center space-x-2 transition duration-200 ease-in-out',
+  base: 'rounded-md transition-[width,_height] duration-300 select-none flex items-center cursor-pointer font-500 justify-center space-x-2 transition duration-200 ease-in-out',
   variants: {
-    type: {
+    hierarchy: {
       primary: 'bg-stone-900 text-white hover:bg-stone-700',
       secondary: 'bg-stone-500 text-white',
       'secondary-outline': 'bg-white text-gray-500 border border-stone-500',
@@ -35,14 +35,14 @@ const buttons = tv({
       true: 'opacity-50 cursor-not-allowed',
     },
     loading: {
-      true: 'opacity-50 cursor-wait',
+      true: 'opacity-70 cursor-disabled',
     },
     danger: {
       true: 'bg-red-500 text-white',
     },
   },
   defaultVariants: {
-    type: 'primary',
+    hierarchy: 'primary',
     size: 'md',
     danger: false,
     disabled: false,
@@ -52,8 +52,9 @@ const buttons = tv({
 </script>
 
 <template>
-  <button :class="buttons({ danger, type, size, disabled, loading })">
+  <button :class="buttons({ danger, hierarchy, size, disabled, loading })">
     <slot name="prefix" />
+    <div class="i-svg-spinners-ring-resize mx-2" v-if="loading" />
     <slot />
     <slot name="suffix" />
   </button>

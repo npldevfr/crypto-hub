@@ -12,6 +12,10 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@formkit/i18n": "^1.4.0",
+    "@formkit/nuxt": "^1.4.0",
+    "@formkit/themes": "^1.4.0",
+    "@formkit/vue": "^1.4.0",
     "@iconify/json": "^2.2.156",
     "@nuxt/devtools": "latest",
     "@unocss/nuxt": "^0.57.4",
