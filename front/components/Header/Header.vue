@@ -3,11 +3,11 @@ import Avatar from "~/components/Avatar/Avatar.vue";
 
 const router = useRouter();
 
-const { isLogged } = useAuth()
+const { isLogged, user } = useAuth()
 
 </script>
 <template>
-  <div class="flex flex-row border-b px-10 w-full h-[60px] items-center">
+  <div class="flex flex-row border-b px-30 w-full h-[60px] items-center">
     <div class="flex lg-w-75">
       <Logo size="sm" />
     </div>
@@ -33,9 +33,11 @@ const { isLogged } = useAuth()
 <!--      />-->
 <!--    </div>-->
     <div class="flex flex-row justify-end items-center space-x-10 w-full">
-      <Avatar interactive size="lg" alt="npldev" />
       <div v-if="isLogged">
-        <ProfileAvatar />
+        <Avatar :src="user?.avatar"
+                interactive
+                size="lg"
+                :alt="user?.username" />
       </div>
       <div
         v-else
