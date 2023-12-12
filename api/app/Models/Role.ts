@@ -8,6 +8,9 @@ export default class Role extends BaseModel {
   @column()
   public name: string
 
+  @column()
+  public key: string
+
   @column({ serializeAs: null})
   public power: number
 
