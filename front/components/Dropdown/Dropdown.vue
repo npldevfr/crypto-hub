@@ -31,9 +31,7 @@ function handleClick() {
           :side-offset="5"
       >
 
-        <DropdownItem icon="i-mdi-account" title="Mon compte" />
-        <DropdownItem icon="i-mdi-settings" title="Paramètres" />
-        <DropdownItem icon="i-mdi-logout" title="Déconnexion" />
+        <slot name="content" />
 
 
         <DropdownMenuArrow class="fill-white shadow-lg" />

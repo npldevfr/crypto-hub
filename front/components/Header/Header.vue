@@ -1,11 +1,31 @@
 <script lang="ts" setup>
 import Avatar from "~/components/Avatar/Avatar.vue";
 import {headerService} from "~/services/header.service";
+import type {DropdownItemProps} from "~/components/Dropdown/Item.vue";
 
 const router = useRouter();
+const { logout } = useAuth()
 const {getHeaderData} = headerService();
 const {data: headerData} = getHeaderData()
 const {isLogged, user} = useAuth()
+
+const dropdownItems: DropdownItemProps[] = [
+  {
+    title: 'Mon compte',
+    icon: 'i-mdi-account',
+    handle: () => router.push({ name: 'me' })
+  },
+  {
+    title: 'Paramètres',
+    icon: 'i-mdi-settings',
+    handle: () => router.push({ name: 'me-settings' })
+  },
+  {
+    title: 'Déconnexion',
+    icon: 'i-mdi-logout',
+    handle: async () => await logout()
+  }
+]
 
 </script>
 <template>
@@ -27,14 +47,24 @@ const {isLogged, user} = useAuth()
       </Navigation>
     </div>
     <div class="flex flex-row justify-end items-center space-x-10 ">
-      <div v-if="isLogged">
+      <template v-if="isLogged">
         <Dropdown>
           <Avatar :src="user?.avatar"
                   interactive
                   size="lg"
                   :alt="user?.username"/>
+
+          <template #content>
+            <DropdownItem v-for="(item, key) in dropdownItems"
+                          :title="item.title"
+                          :icon="item.icon"
+                          :handle="item.handle"
+                          :key="key"
+            />
+          </template>
+
         </Dropdown>
-      </div>
+      </template>
       <div
           v-else
           class="flex flex-row justify-end items-center space-x-2 w-full"

@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 import { $fetch } from "~/composables/use-fetch";
 import type { AfterFetchContext, OnFetchErrorContext } from '@vueuse/core'
 
-interface User {
+export interface User {
     id: string
     email: string
     username: string
@@ -14,8 +14,9 @@ interface User {
     roles: Role[]
 }
 
-interface Role {
+export interface Role {
     name: string
+    key?: string
 }
 
 export function useAuth() {

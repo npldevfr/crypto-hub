@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import {DropdownMenuItem} from "radix-vue";
 
-const { title, icon, handle } = defineProps<{
+export interface DropdownItemProps {
   icon?: string
   title: string
   handle?: () => void
-}>()
+}
+
+const { title, icon, handle } = defineProps<DropdownItemProps>()
 </script>
 
 <template>
