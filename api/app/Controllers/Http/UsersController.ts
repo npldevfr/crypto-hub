@@ -33,7 +33,7 @@ export default class UsersController {
     return { token, user }
   }
 
-  public async logout ({ auth, response}: HttpContextContract) {
+  public async logout ({ auth, response}: HttpContextContract): Promise<void> {
     await auth.use('api').revoke()
     return response.noContent()
   }
@@ -49,7 +49,7 @@ export default class UsersController {
     return { message: 'Registration successful' }
   }
 
-  public async update ({ auth, request }) {
+  public async update ({ auth, request }){
     await auth.use('api').authenticate()
 
     try {
