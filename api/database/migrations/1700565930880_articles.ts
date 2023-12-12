@@ -12,7 +12,8 @@ export default class extends BaseSchema {
 
       table.string('slug').notNullable()
       table.string('name').notNullable()
-      table.string('content').notNullable()
+      table.text('content').notNullable()
+      table.string('image_url').nullable()
       table.uuid('article_source_id').references('article_sources.id').onDelete('CASCADE')
 
       /**
