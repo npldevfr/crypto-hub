@@ -67,7 +67,8 @@ export const runnerHooks: Pick<Required<Config>, 'setup' | 'teardown'> = {
 | the HTTP server when it is a functional suite.
 */
 export const configureSuite: Required<Config>['configureSuite'] = (suite) => {
-  if (suite.name === 'functional') {
+  const testsuites= ['functional','user_test']
+  if (testsuites.includes(suite.name)) {
     suite.setup(() => TestUtils.httpServer().start())
   }
 }
