@@ -1,11 +1,12 @@
-import { defineConfig, presetUno, presetWebFonts, presetMini, presetWind } from 'unocss'
+import { defineConfig, presetUno, presetIcons, presetWebFonts, presetMini, presetWind } from 'unocss'
 
 export default defineConfig({
     presets: [
         presetMini(),
         presetUno(),
         presetWebFonts(),
-        presetWind()
+        presetWind(),
+        presetIcons()
     ],
     theme: {
         animation: {

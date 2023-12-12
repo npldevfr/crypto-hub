@@ -12,8 +12,16 @@ const { isLogged } = useAuth()
       <Logo size="sm" />
     </div>
 
-    <div class="w-full bg-red">
-      <Navigation />
+    <div class="w-full ">
+      <Navigation>
+        <NavigationLink title="test">
+            <NavigationTabsArticle />
+        </NavigationLink>
+        <NavigationLink title="Marché">
+          <NavigationTabsCryptocurrenciesList />
+        </NavigationLink>
+        <NavigationLink title="NFT" />
+      </Navigation>
     </div>
 
 <!--    <div class="flex px-2">-->
