@@ -11,9 +11,7 @@ const {user} = useAuth()
       <AdminHeaderItem to="/admin/articles" name="Articles" icon="i-mdi-newspaper-variant-outline"/>
       <AdminHeaderItem to="/admin/cryptocurrencies" name="Cryptomonnaies" icon="i-mdi-currency-btc"/>
     </div>
-    <AdminHeaderItem
-      :name="user?.roles.map(role => role.name).join(', ')"
-      icon="i-mdi-account-circle-outline" />
+    <AdminHeaderItem :name="user?.roles.map(role => role.name).join(', ')" />
   </div>
 </template>
 
