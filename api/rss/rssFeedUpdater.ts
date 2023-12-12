@@ -2,10 +2,11 @@ import Parser from 'rss-parser'
 import Article from '../app/Models/Article'
 import ArticleSource from '../app/Models/ArticleSource'
 import NoTitleException from '../app/Exceptions/Rss/NoTilteExeptionException'
+import { JSDOM } from 'jsdom'
 
 export default class RssFeedUpdater {
   public static async rssFeedPath () {
-    const sources = await ArticleSource.all()
+    const sources = await ArticleSource.query().where('is_active', true)
     for (const source of sources) {
       await this.insertArticle(source.url, source.id)
     }
@@ -17,18 +18,27 @@ export default class RssFeedUpdater {
     console.log(feed.title)
 
     try {
-      const articlesData = feed.items.map(item => {
+      const articlesData = feed.items.map(async item => {
         if (!item.title) {
           throw new NoTitleException()
         }
-        return {
+
+        const dom = new JSDOM(item['content:encoded'])
+        const imageUrl = dom.window.document.querySelector('img')?.getAttribute('src') || 'default_image_url'
+
+        const articleData = {
           slug: this.generateSlug(item.title),
           name: item.title,
-          content: item.contentSnippet,
+          content: item['content:encoded'],
+          image_url : imageUrl,
           article_source_id: sourceId,
         }
+
+        const article = await Article.firstOrCreate(articleData)
+        return article
       })
-      await Article.createMany(articlesData)
+
+      await Promise.all(articlesData)
       console.log('Articles added to the database')
     } catch (error) {
       console.error(error)
@@ -38,9 +48,9 @@ export default class RssFeedUpdater {
   private static generateSlug (title: string): string {
     return title
       .toLowerCase()
-      .replace(/[^a-z0-9]/g, '-') // Remplacez les caractères non alphanumériques par des tirets
-      .replace(/-+/g, '-') // Remplacez plusieurs tirets consécutifs par un seul tiret
-      .replace(/(^-|-$)/g, '') // Supprimez les tirets en début et en fin de chaîne
+      .replace(/[^a-z0-9]/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/(^-|-$)/g, '')
   }
 }
 

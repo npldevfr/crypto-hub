@@ -14,6 +14,11 @@ export default class ArticleSourceSeeder extends BaseSeeder {
         'url': 'https://coinacademy.fr/actu/gn',
         'is_active': true,
       },
+      {
+        'name': 'coinjournalAnalyse',
+        'url': 'https://coinjournal.net/fr/actualites/category/analyse/feed/',
+        'is_active': true,
+      },
     ])
     await ArticleSource.createMany(data)
   }
