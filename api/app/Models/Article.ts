@@ -14,6 +14,12 @@ export default class Article extends BaseModel {
   @column()
   public content: string
 
+  @column()
+  public image_url: string
+
+  @column()
+  public article_source_id: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
