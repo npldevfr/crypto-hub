@@ -1,6 +1,6 @@
 {
   "name": "crypto-hub",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "private": true,
   "description": "Manage and track your crypto portfolio",
   "main": "index.js",

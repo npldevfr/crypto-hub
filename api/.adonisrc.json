@@ -20,7 +20,8 @@
   "providers": [
     "./providers/AppProvider",
     "@adonisjs/core",
-    "@adonisjs/lucid"
+    "@adonisjs/lucid",
+    "@adonisjs/auth"
   ],
   "aceProviders": [
     "@adonisjs/repl"
@@ -31,6 +32,13 @@
         "name": "functional",
         "files": [
           "tests/functional/**/*.spec(.ts|.js)"
+        ],
+        "timeout": 60000
+      },
+      {
+        "name": "Synchronization",
+        "files": [
+          "tests/synchronization/**/*.spec(.ts|.js)"
         ],
         "timeout": 60000
       },

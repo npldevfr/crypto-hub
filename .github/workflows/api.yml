@@ -20,7 +20,7 @@ on:
       - 'api/**'
 
 jobs:
-  lint:
+  api:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -29,9 +29,36 @@ jobs:
 
       - uses: actions/setup-node@v2
         with:
-          node-version: 16.x
+          node-version: 20.8.0
+
+      - uses: KengoTODA/actions-setup-docker-compose@v1
+        with:
+          version: '2.14.2'
+
+      - name: Set up PostgreSQL with Docker Compose
+        run: |
+          docker-compose -f docker-compose.yml up -d
+
+      - run: npm install -g pnpm
+        working-directory: ./api
 
       - run: pnpm install --frozen-lockfile
+        working-directory: ./api
 
-      - run: pnpm lint
+      - name: Generate APP_KEY
+        run: node ace generate:key
+        working-directory: ./api
 
+      - name: Copy .env
+        run: cp .env.example .env
+        working-directory: ./api
+
+      - name: Run migrations
+        run: node ace migration:run
+        working-directory: ./api
+
+      - name: Run tests
+        run: |
+          pnpm test
+          # Add commands to run tests against the PostgreSQL instance
+        working-directory: ./api

@@ -12,6 +12,25 @@
       "aliases": [],
       "flags": []
     },
+    "synchronize": {
+      "settings": {
+        "loadApp": true,
+        "stayAlive": false
+      },
+      "commandPath": "./commands/Synchronize",
+      "commandName": "synchronize",
+      "description": "Synchronize datas from crypto providers",
+      "args": [],
+      "aliases": [],
+      "flags": [
+        {
+          "name": "skip-checks",
+          "propertyName": "skipChecks",
+          "type": "boolean",
+          "description": "Force synchronization"
+        }
+      ]
+    },
     "dump:rcfile": {
       "settings": {},
       "commandPath": "@adonisjs/core/build/commands/DumpRc",

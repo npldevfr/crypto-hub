@@ -48,7 +48,6 @@ const databaseConfig: DatabaseConfig = {
       healthCheck: false,
       debug: false,
     },
-
   },
 }
 
