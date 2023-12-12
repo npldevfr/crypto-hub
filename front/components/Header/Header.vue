@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import Avatar from "~/components/Avatar/Avatar.vue";
 import {headerService} from "~/services/header.service";
 import type {DropdownItemProps} from "~/components/Dropdown/Item.vue";
 
@@ -29,6 +28,7 @@ const dropdownItems: DropdownItemProps[] = [
 
 </script>
 <template>
+  <AdminHeaderBar />
   <div class="flex flex-row border-b px-30 w-full h-[60px] items-center">
     <div class="flex lg-w-75">
       <Logo size="sm"/>

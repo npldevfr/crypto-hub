@@ -16,7 +16,7 @@ export interface User {
 
 export interface Role {
     name: string
-    key?: string
+    key: string
 }
 
 export function useAuth() {
