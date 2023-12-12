@@ -2,13 +2,16 @@
 export default defineNuxtConfig({
     // @ts-expect-error
     ssr: false,
-  devtools: { enabled: true },
-
-  modules: [
-    "@vueuse/nuxt",
-    "@unocss/nuxt"
-  ],
-   css: [
+    devtools: {enabled: true},
+    vue: {
+        propsDestructure: true,
+        defineModel: true,
+    },
+    modules: [
+        "@vueuse/nuxt",
+        "@unocss/nuxt"
+    ],
+    css: [
         '@unocss/reset/tailwind.css'
-   ],
+    ],
 })

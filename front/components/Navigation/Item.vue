@@ -1,29 +1,40 @@
 <script setup lang="ts">
-import { NavigationMenuLink } from 'radix-vue'
+import {NavigationMenuLink} from 'radix-vue'
+import type {RouteLocationRaw} from "vue-router";
 
 const props = defineProps<{
   title: string
+  to: RouteLocationRaw
   isNew?: boolean
 }>()
+
+const { push } = useRouter()
+
 </script>
 
 <template>
   <li>
     <NavigationMenuLink as-child>
-      <a
-          v-bind="$attrs"
-          class="focus:shadow-[0_0_0_2px] hover:bg-stone-100 focus:shadow-green7 hover:bg-mauve3 block select-none rounded-[6px] p-3 text-[15px] leading-none no-underline outline-none transition-colors"
+      <div
+          @click="push(props.to)"
+          class="cursor-pointer focus:shadow-[0_0_0_2px] hover:bg-stone-100 block select-none rounded-[6px] p-3 text-[15px] leading-none no-underline outline-none transition-colors"
       >
-        <div class="text-stone-900 items-center gap-2 flex mb-[5px] font-medium leading-[1.2]">
-          {{ props.title }}
-          <Badge v-if="props.isNew">
-            Nouveau!
-          </Badge>
+        <div class="flex flex-row  gap-4">
+          <slot name="prefix"/>
+          <div class="flex flex-col">
+          <div class="text-stone-900 items-center gap-2 flex mb-[5px] font-medium leading-[1.2]">
+            {{ props.title }}
+            <Badge v-if="props.isNew">
+              Nouveau!
+            </Badge>
+          </div>
+          <p class="text-mauve11 my-0 leading-[1.4]">
+            <slot/>
+          </p>
+          </div>
         </div>
-        <p class="text-mauve11 my-0 leading-[1.4]">
-          <slot />
-        </p>
-      </a>
+      </div>
+
     </NavigationMenuLink>
   </li>
 </template>

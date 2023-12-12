@@ -10,13 +10,19 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from 'radix-vue'
+import type {HeaderData} from "~/types/header";
 
+const props = defineProps<{
+  headerData?: HeaderData
+}>()
+
+provide('headerData', computed(() => props.headerData))
 const currentTrigger = ref<string>('')
 </script>
 
 <template>
   <NavigationMenuRoot v-model="currentTrigger" class="relative z-1 flex w-full flex-row ">
-    <NavigationMenuList class="center m-0 flex list-none rounded-[6px]  p-1">
+    <NavigationMenuList class="center gap-2 m-0 flex list-none rounded-[6px]  p-1">
 
       <slot />
 

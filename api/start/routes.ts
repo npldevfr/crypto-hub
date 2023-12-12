@@ -36,4 +36,5 @@ Route.get('/', async () => {
   return { hi: 'coucou from API !' }
 })
 
+Route.get('/api/header-data', 'HeadersController.index')
 Route.get('/cryptocurrency-data', 'CryptocurrencyDataController.index')

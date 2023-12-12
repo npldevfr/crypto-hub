@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import Avatar from "~/components/Avatar/Avatar.vue";
+import {headerService} from "~/services/header.service";
 
 const router = useRouter();
-
+const { getHeaderData } = headerService();
+const { data: headerData } = getHeaderData()
 const { isLogged, user } = useAuth()
 
 </script>
@@ -12,15 +14,16 @@ const { isLogged, user } = useAuth()
       <Logo size="sm" />
     </div>
 
-    <div class="w-full ">
-      <Navigation>
-        <NavigationLink title="test">
+    <div class="w-full">
+      <Navigation :header-data="headerData" >
+        <NavigationLink title="Actualités">
             <NavigationTabsArticle />
         </NavigationLink>
         <NavigationLink title="Marché">
           <NavigationTabsCryptocurrenciesList />
         </NavigationLink>
         <NavigationLink title="NFT" />
+        <NavigationLink title="Convertisseur" />
       </Navigation>
     </div>
 
@@ -32,7 +35,7 @@ const { isLogged, user } = useAuth()
 <!--          placeholder="Rechercher ..."-->
 <!--      />-->
 <!--    </div>-->
-    <div class="flex flex-row justify-end items-center space-x-10 w-full">
+    <div class="flex flex-row justify-end items-center space-x-10 ">
       <div v-if="isLogged">
         <Avatar :src="user?.avatar"
                 interactive
