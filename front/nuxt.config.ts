@@ -2,7 +2,9 @@
 export default defineNuxtConfig({
     // @ts-expect-error
     ssr: false,
-    devtools: {enabled: true},
+    devtools: {
+        enabled: true
+    },
     vue: {
         propsDestructure: true,
         defineModel: true,

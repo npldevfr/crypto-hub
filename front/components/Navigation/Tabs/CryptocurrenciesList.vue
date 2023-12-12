@@ -13,7 +13,7 @@ const headerData = inject<HeaderData>('headerData')
         :key="key"
         :title="cryptocurrency?.symbol"
         :to="{ name: 'market-slug', params: { slug: cryptocurrency?.slug } }"
-        :prefix="true">
+        >
 
       <template #prefix>
         <img :src="cryptocurrency?.logo" :alt="cryptocurrency?.name" class="w-[24px] h-[24px] rounded-[4px]"/>
@@ -21,5 +21,19 @@ const headerData = inject<HeaderData>('headerData')
 
       {{ cryptocurrency?.name }}
     </NavigationItem>
+
+    <NavigationItem
+      title="Voir plus"
+      :to="{ name: 'market' }"
+    >
+      <template #prefix>
+        <div class="w-[24px]" />
+      </template>
+
+      + de 1000 cryptomonnaies
+
+    </NavigationItem>
+
+
   </ul>
 </template>

@@ -2,7 +2,7 @@
 import {tv} from "tailwind-variants";
 
 const props = withDefaults(defineProps<{
-  type: 'primary' | 'secondary' | 'secondary-outline'
+  type: 'primary' | 'secondary' | 'secondary-outline' | 'link'
   size: 'xs' | 'sm' | 'md' | 'lg'
   disabled?: boolean
   loading?: boolean
@@ -17,12 +17,13 @@ const props = withDefaults(defineProps<{
 })
 
 const buttons = tv({
-  base: 'rounded-md flex items-center justify-center space-x-2 transition duration-200 ease-in-out',
+  base: 'rounded-md flex items-center cursor-pointer font-500 justify-center space-x-2 transition duration-200 ease-in-out',
   variants: {
     type: {
-      primary: 'bg-black text-white',
-      secondary: 'bg-gray-500 text-white',
-      'secondary-outline': 'bg-white text-gray-500 border border-gray-500',
+      primary: 'bg-stone-900 text-white hover:bg-stone-700',
+      secondary: 'bg-stone-500 text-white',
+      'secondary-outline': 'bg-white text-gray-500 border border-stone-500',
+      link: 'bg-transparent text-stone-900 hover:bg-stone-100',
     },
     size: {
       xs: 'text-xs px-2 py-1',
@@ -51,9 +52,9 @@ const buttons = tv({
 </script>
 
 <template>
-  <div :class="buttons({ danger, type, size, disabled, loading })">
+  <button :class="buttons({ danger, type, size, disabled, loading })">
     <slot name="prefix" />
     <slot />
     <slot name="suffix" />
-  </div>
+  </button>
 </template>

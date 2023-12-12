@@ -4,7 +4,7 @@ import type {RouteLocationRaw} from "vue-router";
 
 const props = defineProps<{
   title: string
-  to: RouteLocationRaw
+  to?: RouteLocationRaw
   isNew?: boolean
 }>()
 
@@ -16,8 +16,8 @@ const { push } = useRouter()
   <li>
     <NavigationMenuLink as-child>
       <div
-          @click="push(props.to)"
-          class="cursor-pointer focus:shadow-[0_0_0_2px] hover:bg-stone-100 block select-none rounded-[6px] p-3 text-[15px] leading-none no-underline outline-none transition-colors"
+          @click="push(props.to || { name: 'index'})"
+          class="cursor-pointer focus:shadow-[0_0_0_2px] hover:bg-stone-100 block select-none rounded-[6px] p-3 text-[15px] leading-none no-underline w-full outline-none transition-colors"
       >
         <div class="flex flex-row  gap-4">
           <slot name="prefix"/>
@@ -28,9 +28,9 @@ const { push } = useRouter()
               Nouveau!
             </Badge>
           </div>
-          <p class="text-mauve11 my-0 leading-[1.4]">
+          <div class="text-stone-700 leading-[1.4] text-wrap">
             <slot/>
-          </p>
+          </div>
           </div>
         </div>
       </div>
