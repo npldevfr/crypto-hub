@@ -15,7 +15,7 @@ const headerData = inject<HeaderData>('headerData')
             href="/"
         >
           <div class="mt-4 mb-[7px] text-[18px] font-medium leading-[1.2] text-white">À la une</div>
-          <p class="text-stone-200 text-[14px] leading-[1.3]">
+          <p class="text-stone-200 text-[14px] line-clamp-2 leading-[1.3]">
             {{ headerData.articles[0].name }}
           </p>
         </a>

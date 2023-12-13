@@ -28,7 +28,7 @@ const { push } = useRouter()
               Nouveau!
             </Badge>
           </div>
-          <div class="text-stone-700 leading-[1.4] text-wrap">
+          <div class="text-stone-700 line-clamp-2 leading-[1.4] text-wrap">
             <slot/>
           </div>
           </div>
