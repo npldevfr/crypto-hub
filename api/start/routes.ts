@@ -26,6 +26,8 @@ Route.group((): void => {
     Route.get('/profile', 'UsersController.profile')
     Route.put('/profile', 'UsersController.update')
     Route.post('/logout', 'UsersController.logout')
+
+    Route.get('/', 'UserManagementController.index')
   }).middleware('auth:api')
 
   Route.post('/login', 'UsersController.login')

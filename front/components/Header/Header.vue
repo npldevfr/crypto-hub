@@ -3,7 +3,7 @@ import {headerService} from "~/services/header.service";
 import type {DropdownItemProps} from "~/components/Dropdown/Item.vue";
 
 const router = useRouter();
-const { logout } = useAuth()
+const {logout} = useAuth()
 const {getHeaderData} = headerService();
 const {data: headerData} = getHeaderData()
 const {isLogged, user} = useAuth()
@@ -12,12 +12,12 @@ const dropdownItems: DropdownItemProps[] = [
   {
     title: 'Mon compte',
     icon: 'i-mdi-account',
-    handle: () => router.push({ name: 'me' })
+    handle: () => router.push({name: 'me'})
   },
   {
     title: 'Paramètres',
     icon: 'i-mdi-settings',
-    handle: () => router.push({ name: 'me-settings' })
+    handle: () => router.push({name: 'me-settings'})
   },
   {
     title: 'Déconnexion',
@@ -28,12 +28,9 @@ const dropdownItems: DropdownItemProps[] = [
 
 </script>
 <template>
-  <AdminHeaderBar />
-  <div class="flex flex-row border-b px-30 w-full h-[60px] items-center">
-    <div class="flex lg-w-75">
-      <Logo size="sm"/>
-    </div>
-
+  <AdminHeaderBar/>
+  <div class="flex flex-row border-b gap-10 px-30 w-full h-[60px] items-center">
+    <Logo size="sm"/>
     <div class="w-full">
       <Navigation :header-data="headerData">
         <NavigationLink title="Actualités">
@@ -47,7 +44,11 @@ const dropdownItems: DropdownItemProps[] = [
       </Navigation>
     </div>
     <div class="flex flex-row justify-end items-center space-x-10 ">
-      <template v-if="isLogged">
+      <div class="flex items-center gap-2" v-if="isLogged">
+        <div class="flex flex-col justify-center leading-5 items-end">
+          {{ user?.username }}
+         <span class="text-xs text-stone-500">{{ user?.email }}</span>
+        </div>
         <Dropdown>
           <Avatar :src="user?.avatar"
                   interactive
@@ -64,7 +65,7 @@ const dropdownItems: DropdownItemProps[] = [
           </template>
 
         </Dropdown>
-      </template>
+      </div>
       <div
           v-else
           class="flex flex-row justify-end items-center space-x-2 w-full"
