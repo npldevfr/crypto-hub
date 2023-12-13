@@ -28,7 +28,6 @@ export default class RssFeed extends BaseCommand {
   }
 
   public async run () {
-    console.log('Updating RSS feed')
     await RssFeedUpdater.rssFeedPath()
   }
 }

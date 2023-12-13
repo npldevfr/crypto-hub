@@ -10,6 +10,7 @@ export default class extends BaseSchema {
         .defaultTo(this.db.rawQuery('uuid_generate_v4()').knexQuery)
 
       table.string('name').notNullable()
+      table.string('key').notNullable()
       table.integer('power').defaultTo(0)
 
       /**
