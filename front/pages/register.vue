@@ -26,7 +26,7 @@ const attemptRegister = async () => {
 <template>
   <Head>
     <Title>
-      CryptoHUB &mdash; Connexion
+      CryptoHUB &mdash; Inscription
     </Title>
   </Head>
   <div class="flex flex-col items-center pt-10 justify-center">
