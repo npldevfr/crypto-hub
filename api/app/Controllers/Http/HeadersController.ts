@@ -2,6 +2,7 @@
 
 import {HttpContextContract} from '@ioc:Adonis/Core/HttpContext'
 import Cryptocurrency from '../../Models/Cryptocurrency'
+import Article from '../../Models/Article'
 
 export default class HeadersController {
   /**
@@ -9,10 +10,12 @@ export default class HeadersController {
    * with articles, cryptocurrencies and exchanges
    */
   public async index ({}: HttpContextContract) {
-    const cryptos: Cryptocurrency[] = await Cryptocurrency.all()
+    const cryptos: Cryptocurrency[] = await Cryptocurrency.query().orderBy('sequence', 'asc').limit(6)
+    const articles: Article[] = await Article.query().orderBy('created_at', 'desc').limit(4)
+
     return {
-      cryptocurrencies: cryptos?.splice(0, 6),
-      articles: [],
+      cryptocurrencies: cryptos,
+      articles: articles,
     }
   }
 }

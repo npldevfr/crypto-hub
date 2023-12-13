@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import {NavigationMenuLink} from "radix-vue";
+import type {HeaderData} from "~/types/header";
+
+const headerData = inject<HeaderData>('headerData')
+
 </script>
 
 <template>
@@ -11,19 +15,17 @@ import {NavigationMenuLink} from "radix-vue";
             href="/"
         >
           <div class="mt-4 mb-[7px] text-[18px] font-medium leading-[1.2] text-white">À la une</div>
-          <p class="text-stone-200 text-[14px] leading-[1.3]">Unstyled, accessible components for Vue.</p>
+          <p class="text-stone-200 text-[14px] leading-[1.3]">
+            {{ headerData.articles[0].name }}
+          </p>
         </a>
       </NavigationMenuLink>
     </li>
-
-    <NavigationItem href="https://stitches.dev/" title="NFT" is-new>
-      Liste des NFTs disponibles sur la plateforme.
-    </NavigationItem>
-    <NavigationItem href="/colors" title="Finance">
-      FTX, la chute du pilier de la finance décentralisée.
-    </NavigationItem>
-    <NavigationItem href="/typography" title="Gaming">
-      Les jeux vidéo, un marché en pleine expansion.
+    <NavigationItem href="https://stitches.dev/"
+                    title="articleName"
+                    v-for="(article, key) in headerData.articles.slice(1, 4)"
+                    :key="key">
+      {{ article.name }}
     </NavigationItem>
   </ul>
 </template>
