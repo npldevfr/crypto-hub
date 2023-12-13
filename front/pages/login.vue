@@ -65,12 +65,12 @@ const attemptLogin = async () => {
             />
           </div>
 
-          <RouterLink
+          <NuxtLink
               to="/register"
               class="text-xs text-gray-500 hover:text-gray-700"
           >
             Pas encore de compte ? <span class="underline">S'inscrire</span>
-          </RouterLink>
+          </NuxtLink>
 
           <div class="flex justify-end">
             <Button :loading="isFetching" type="submit" hierarchy="primary" size="sm">

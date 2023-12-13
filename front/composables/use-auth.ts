@@ -50,7 +50,7 @@ export function useAuth() {
     const register = () => {
         const errorMessage: Ref<string> = ref<string>('')
 
-        const { post } = $fetch('users/register', {
+        const { post, isFetching } = $fetch('users/register', {
             method: 'POST',
         }, {
             immediate: false,
@@ -65,7 +65,7 @@ export function useAuth() {
             },
         }).json()
 
-        return { errorMessage, post }
+        return { errorMessage, post, isFetching}
     }
 
     const logout = async (): Promise<void> => {

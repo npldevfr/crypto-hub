@@ -15,7 +15,6 @@ export default class RssFeedUpdater {
   public static async insertArticle (urlRss : string, sourceId : string) {
     let parser = new Parser()
     let feed = await parser.parseURL(urlRss)
-    console.log(feed.title)
 
     try {
       const articlesData = feed.items.map(async item => {
@@ -39,7 +38,6 @@ export default class RssFeedUpdater {
       })
 
       await Promise.all(articlesData)
-      console.log('Articles added to the database')
     } catch (error) {
       console.error(error)
     }

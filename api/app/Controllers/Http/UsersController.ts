@@ -39,6 +39,15 @@ export default class UsersController {
   }
 
   public async register ({ request }) {
+    // const registerValidation = schema.create({
+    //   username: schema.string({ trim: true }),
+    //   email: schema.string({ trim: true }),
+    //   password: schema.string({ trim: true }),
+    //   password_confirmation: schema.string({ trim: true }, [
+    //     // should be the same as the password field
+    //   ]),
+    // })
+
     const username = request.input('username')
     const email = request.input('email')
     const password = request.input('password')
