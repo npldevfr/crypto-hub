@@ -1,6 +1,6 @@
 import Hash from '@ioc:Adonis/Core/Hash'
 import User from '../../Models/User'
-import {schema} from '@ioc:Adonis/Core/Validator'
+import {schema, rules, validator} from '@ioc:Adonis/Core/Validator'
 import {HttpContextContract} from '@ioc:Adonis/Core/HttpContext'
 
 export default class UsersController {
@@ -38,24 +38,37 @@ export default class UsersController {
     return response.noContent()
   }
 
-  public async register ({ request }) {
-    // const registerValidation = schema.create({
-    //   username: schema.string({ trim: true }),
-    //   email: schema.string({ trim: true }),
-    //   password: schema.string({ trim: true }),
-    //   password_confirmation: schema.string({ trim: true }, [
-    //     // should be the same as the password field
-    //   ]),
-    // })
+  public async register ({ request, auth }: HttpContextContract) {
+    // Get user input for registration
+    const registerValidation = schema.create({
+      username: schema.string(),
+      email: schema.string({}, [
+        rules.email(),
+      ]),
+      password: schema.string({}, [
+        rules.confirmed(),
+      ]),
+    })
 
-    const username = request.input('username')
-    const email = request.input('email')
-    const password = request.input('password')
+    // Validate user input and throw validation error if validation fails
+    const { email, password, username} = await validator.validate({
+      schema: registerValidation,
+      data: request.all(),
+    })
 
-    const hashedPassword = await Hash.make(password)
-    await User.create({ username, email, password: hashedPassword })
+    // Create new user
+    const user = await User.create({
+      username,
+      email,
+      password: await Hash.make(password),
+    })
 
-    return { message: 'Registration successful' }
+    const { token } = await auth.use('api').attempt(email, password)
+    return {
+      message: 'User registered successfully',
+      token,
+      user,
+    }
   }
 
   public async update ({ auth, request }: HttpContextContract){

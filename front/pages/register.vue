@@ -7,10 +7,10 @@ definePageMeta({
 const {post, errorMessage, isFetching} = register()
 
 const registerForm = ref({
-  username: '',
-  email: '',
-  password: '',
-  password_confirmation: '',
+  username: 'test',
+  email: 'test@gmail.com',
+  password: 'test',
+  password_confirmation: 'test',
 })
 
 const attemptRegister = async () => {
