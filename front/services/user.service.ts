@@ -1,6 +1,7 @@
 import { $fetch } from "~/composables/use-fetch";
 import type {User} from "~/composables/use-auth";
 import type {ComputedRef, Ref} from "vue";
+import type {PaginatedData} from "~/types/pagination";
 
 export function userService() {
 
@@ -16,7 +17,7 @@ export function userService() {
         const { get, data } = $fetch(computedPage, {
             immediate: true,
             refetch: true
-        }).json<User[]>()
+        }).json<PaginatedData<User>>()
 
         return {
             page,

@@ -1,18 +1,11 @@
 <script setup lang="ts">
-useHead({
-  bodyAttrs: {
-    class: 'bg-stone-200'
-  }
-})
+
 </script>
 
 <template>
   <AdminHeaderBar />
-  <Head>
-    <Title>◈ CryptoHUB &mdash; Utilisateurs</Title>
-  </Head>
   <div class="w-full flex justify-center items-center">
-    <div class="w-3/4 py-2">
+    <div class="py-2 w-full px-20">
       <slot />
     </div>
   </div>

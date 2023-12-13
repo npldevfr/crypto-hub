@@ -10,7 +10,7 @@ const isOnAdminPage = computed(() => {
 </script>
 
 <template>
-  <div class="w-full flex items-center justify-between bg-stone-900 h-[35px]" v-if="hasRoles(['admin'])">
+  <div class="w-full flex items-center justify-between bg-zinc-200 border-b border-stone-20à h-[35px]" v-if="hasRoles(['admin'])">
     <div class="flex flex-row h-full">
       <AdminHeaderItem to="/" name="Retour au site" icon="i-mdi-arrow-back" v-if="isOnAdminPage"/>
       <AdminHeaderItem to="/admin" name="Dashboard" icon="i-mdi-view-dashboard-outline"/>

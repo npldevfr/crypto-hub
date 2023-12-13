@@ -1,10 +1,10 @@
 <script setup lang="ts" generic="T">
 interface DataTableProps {
-  isLoading: boolean
+  isLoading?: boolean
   columns: DataTableColumn[]
-  pagination: number
   data: T[] | []
   sort?: DataTableSort
+  multiple?: boolean
 }
 
 const query = defineModel<string>('query', {
@@ -16,8 +16,8 @@ const sortable = defineModel<DataTableSort>('sort', {
     direction: 'asc'
   }
 })
-const page = defineModel<number>('page', {
-  default: 1
+const modelValue = defineModel<T[]>('modelValue', {
+  default: []
 })
 
 type SortValues = 'asc' | 'desc'
@@ -51,15 +51,38 @@ const onSort = (column: DataTableColumn) => {
     sortable.value.direction = 'asc'
   }
 }
+
+const toggleSelectedItem = (item: T) => {
+  if (!props.multiple) {
+    modelValue.value = [item]
+    return
+  }
+  const index = modelValue.value.findIndex((value) => value === item)
+  if (index === -1) {
+    modelValue.value.push(item)
+  } else {
+    modelValue.value.splice(index, 1)
+  }
+}
+
 </script>
 
 <template>
-  <input type="text" v-model="query" class="w-12 px-2 py-1 border border-stone-300 rounded-md">
 
-  <div class="relative w-full border border-stone-300 rounded-md">
+  <div class="w-full flex justify-between items-center">
+    <div class="w-1/4">
+      <FormKit
+          type="text"
+          placeholder="Rechercher"
+          v-model="query"
+      />
+    </div>
+    <slot/>
+  </div>
+  <div class="relative w-full bg-stone-100 border border-stone-300/50 rounded-md">
     <table class="w-full table-auto select-none overflow-hidden rounded">
       <thead class="bg-stone-100">
-      <tr class="border-b border-stone-200 ">
+      <tr class="border-b border-stone-200/50 ">
         <th class="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase text-stone-500"
             v-for="column in props.columns" :key="column.name">
           <div class="flex w-fit px-2 py-1 rounded cursor-pointer gap-2 items-center"
@@ -81,14 +104,15 @@ const onSort = (column: DataTableColumn) => {
       </thead>
       <tbody class="bg-stone-50 divide-y divide-stone-200">
       <tr class="bg-stone-50 hover:bg-stone-100 cursor-pointer " v-for="(item, key) in props.data" :key="key">
-        <td class="whitespace-nowrap px-6 py-2"
+        <td class="whitespace-nowrap text-sm px-6 py-2"
+            :class="{'bg-stone-100': modelValue.includes(item)}"
+            @click="toggleSelectedItem(item)"
             v-for="column in props.columns" :key="column.name">
           {{ column.format ? column.format(item[column.name]) : item[column.name] }}
         </td>
       </tr>
       </tbody>
     </table>
-    <Pagination />
   </div>
 </template>
 
