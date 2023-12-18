@@ -33,9 +33,15 @@ export default class UsersController {
     const password = request.input('password')
 
     const hashedPassword = await Hash.make(password)
-    await User.create({ username, email, password: hashedPassword })
+    const user= await User.findBy('email', email)
+    if (!user){
+      await User.create({ username, email, password: hashedPassword })
+      return { message: 'Registration successful' }
+    }
+    else{
+      return { message: 'An account with this email already exist' }
+    }
 
-    return { message: 'Registration successful' }
   }
 
   public async update ({ auth, request }) {
