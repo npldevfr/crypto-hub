@@ -33,7 +33,12 @@ Route.group((): void => {
 }).prefix('/api/users')
 
 Route.group((): void => {
+  Route.get('/get-all/', 'ArticleSourcesController.index')
+  Route.get('/get-one/:id', 'ArticleSourcesController.show')
+  Route.patch('/change-active-status/:id', 'ArticleSourcesController.changeActiveStatus')
+  Route.delete('/delete/:id', 'ArticleSourcesController.delete')
   Route.post('/verify-rss-source/', 'ArticleSourcesController.verifyRssSource')
+  Route.post('/add-rss-source/', 'ArticleSourcesController.addRssSource')
 }).prefix('/api/article-sources')
 
 Route.get('/', async () => {
