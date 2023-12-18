@@ -1,6 +1,6 @@
 import Parser from 'rss-parser'
-import Article from '../app/Models/Article'
-import ArticleSource from '../app/Models/ArticleSource'
+import Article from 'App/Models/Article'
+import ArticleSource from 'App/Models/ArticleSource'
 import NoTitleException from '../app/Exceptions/Rss/NoTilteExeptionException'
 import { JSDOM } from 'jsdom'
 
