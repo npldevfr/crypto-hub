@@ -28,7 +28,6 @@ export default class UsersAuthProvidersController {
     // await auth.use("api").login(user);
 
     if (!userAuthProvider) {
-      // return socialUser;
       await User.create({
         email: socialUser.email,
         username: socialUser.name,
