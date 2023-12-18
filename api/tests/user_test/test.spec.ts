@@ -64,7 +64,7 @@ test.group('User', async (): Promise<void> => {
     }
     const response = await client.post('/api/users/register').form(registrationForm)
     response.assertStatus(200)
-    assert.equal(response.body().message, 'Registration successful')
+    assert.equal(response.body().message, 'User registered successfully')
   })
 
   // test('A person register with an existing email', async ({ client, assert }) => {
