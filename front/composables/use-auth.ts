@@ -109,6 +109,11 @@ export function useAuth() {
     ).json();
   };
 
+  const setUser = async (tokenFromString: string): Promise<void> => {
+    token.value = tokenFromString;
+    await whoami();
+  };
+
   const isLogged: ComputedRef<boolean> = computed(() => !!user.value);
   const isUnauthenticated: ComputedRef<boolean> = computed(
     () => !isLogged.value
@@ -122,5 +127,6 @@ export function useAuth() {
     isLogged,
     isUnauthenticated,
     whoami,
+    setUser,
   };
 }

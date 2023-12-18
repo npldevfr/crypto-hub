@@ -50,7 +50,7 @@ const allyConfig: AllyConfig = {
     driver: "facebook",
     clientId: Env.get("FACEBOOK_CLIENT_ID"),
     clientSecret: Env.get("FACEBOOK_CLIENT_SECRET"),
-    callbackUrl: "http://localhost:3333/oauth/facebook/callback",
+    callbackUrl: "http://localhost:3333/facebook/callback",
   },
 };
 

@@ -5,7 +5,16 @@ import User from "../../Models/User";
 import Env from "@ioc:Adonis/Core/Env";
 
 export default class UsersAuthProvidersController {
-  public redirect({ ally, params }: HttpContextContract) {
+  private getAllowedProviders(): string[] {
+    return ["google", "twitter"];
+  }
+
+  public redirect({ ally, params, response }: HttpContextContract) {
+    if (!this.getAllowedProviders().includes(params.provider)) {
+      return response.notFound({
+        error: `Provider ${params.provider} is not supported`,
+      });
+    }
     return ally.use(params.provider).stateless().redirect();
   }
 

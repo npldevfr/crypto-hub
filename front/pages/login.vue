@@ -4,6 +4,14 @@ definePageMeta({
   middleware: "not-autenticathed",
 });
 
+const route = useRoute();
+const { setUser } = useAuth();
+
+onMounted(async () => {
+  if (route.query.token) {
+    await setUser(route.query.token as string);
+  }
+});
 const { post, errorMessage, isFetching } = login();
 
 const loginForm = ref({
@@ -33,7 +41,6 @@ const attemptLogin = async () => {
 
         <SocialList>
           <SocialProvider provider-name="google" icon="i-logos-google-icon" />
-          <SocialProvider provider-name="facebook" icon="i-logos-facebook" />
           <SocialProvider provider-name="twitter" icon="i-logos-twitter" />
         </SocialList>
         <Separator> Ou </Separator>
