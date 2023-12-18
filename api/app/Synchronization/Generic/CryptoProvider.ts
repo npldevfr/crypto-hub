@@ -124,7 +124,7 @@ export class CryptoProvider implements CryptoProviderInterface {
     const lastSynchronizationDate: Date = lastSynchronization.createdAt.toJSDate()
     const can: boolean = now.getTime() > lastSynchronizationDate.getTime() + this.getCallsPerMinute()
 
-    console.log(`Synchronization ${can ? 'needed' : 'not needed'} for ${this.getName()}`)
+    // console.log(`Synchronization ${can ? 'needed' : 'not needed'} for ${this.getName()}`)
     return can
   }
 

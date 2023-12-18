@@ -57,3 +57,5 @@ Route.get(
   "oauth/:provider/callback",
   "UsersAuthProvidersController.callback"
 ).where("provider", "google");
+Route.get("/api/header-data", "HeadersController.index");
+Route.get("/cryptocurrency-data", "CryptocurrencyDataController.index");

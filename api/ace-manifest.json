@@ -1,5 +1,17 @@
 {
   "commands": {
+    "rss:feed": {
+      "settings": {
+        "loadApp": true,
+        "stayAlive": false
+      },
+      "commandPath": "./commands/RssFeed",
+      "commandName": "rss:feed",
+      "description": "Update RSS feed",
+      "args": [],
+      "aliases": [],
+      "flags": []
+    },
     "synchronize": {
       "settings": {
         "loadApp": true,
