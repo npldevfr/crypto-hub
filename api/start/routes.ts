@@ -32,6 +32,10 @@ Route.group((): void => {
   Route.post('/register', 'UsersController.register')
 }).prefix('/api/users')
 
+Route.group((): void => {
+  Route.post('/verify-rss-source/', 'ArticleSourcesController.verifyRssSource')
+}).prefix('/api/article-sources')
+
 Route.get('/', async () => {
   return { hi: 'coucou from API !' }
 })
