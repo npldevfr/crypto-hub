@@ -4,7 +4,9 @@ interface DataTableProps {
   columns: DataTableColumn[]
   data: T[] | []
   sort?: DataTableSort
+  selectable?: boolean
   multiple?: boolean
+  handle: (item: T) => void
 }
 
 const query = defineModel<string>('query', {
@@ -53,6 +55,11 @@ const onSort = (column: DataTableColumn) => {
 }
 
 const toggleSelectedItem = (item: T) => {
+  if (!props.selectable) {
+    props?.handle(item)
+    return
+  }
+
   if (!props.multiple) {
     modelValue.value = [item]
     return

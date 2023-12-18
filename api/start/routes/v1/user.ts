@@ -1,15 +1,13 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.group((): void => {
-  // Users paginated list
-  Route.get('/', 'UserManagementController.index')
-    .as('users.index')
+  /**
+   * Manage users (CRUD)
+   */
+  Route.resource('users', 'UserManagementController')
+    .only(['index', 'show', 'destroy', 'update'])
 
-  // Delete user by id
-  Route.delete('/:id', 'UserManagementController.delete')
-    .as('users.delete')
-
-  // Update user by id
-  Route.put('/:id', 'UserManagementController.update')
-    .as('users.update')
-}).prefix('/api/users').middleware('auth:api')
+  Route.post('users/:id/toggle-block', 'UserManagementController.toggleBlock')
+    .as('users.toggle-block')
+}).prefix('/api')
+  .middleware('auth:api')

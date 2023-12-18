@@ -3,9 +3,9 @@ import type {User} from "~/composables/use-auth";
 import type {ComputedRef, Ref} from "vue";
 import type {PaginatedData} from "~/types/pagination";
 
-export function userService() {
+export function userServiceController() {
 
-    const getPaginatedUsers = () => {
+    const index = () => {
         const page: Ref<number> = ref<number>(1)
         const sortable = ref({
             column: 'email',
@@ -37,36 +37,32 @@ export function userService() {
         }
     }
 
-    const updateUser = () => {
-        const userId = ref<Pick<User, 'id'>['id'] | null>(null)
-        const { put, data } = $fetch(`/users/${userId}`, {
-            immediate: false
-        }).json<User>()
-
-        return {
-            userId,
-            data,
-            put
-        }
+    const show = (user_id: Pick<User, 'id'>['id']) => {
+        return $fetch(`/users/${user_id}`).json<User>()
     }
 
-    const deleteUser = () => {
-        const userId= ref<Pick<User, 'id'>['id'] | null>(null)
-        const { delete: destroy, data } = $fetch(`/users/${userId}`, {
+    const update = (user_id: Pick<User, 'id'>['id']) => {
+        return $fetch(`/users/${user_id}`, {
+            immediate: false
+        }).json<User>()
+    }
+
+    const destroy = (user_id: Pick<User, 'id'>['id']) => {
+        const { delete: destroy, data } = $fetch(`/users/${user_id}`, {
             immediate: false
         }).json<User>()
 
         return {
-            userId,
             data,
             destroy
         }
     }
 
     return {
-        deleteUser,
-        getPaginatedUsers,
-        updateUser
+        index,
+        show,
+        update,
+        destroy
     }
 
 }

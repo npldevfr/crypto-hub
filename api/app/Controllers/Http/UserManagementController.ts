@@ -34,9 +34,20 @@ export default class UserManagementController {
   }
 
   /**
+   * Get user by id
+   */
+  public async show ({ params }: HttpContextContract): Promise<User> {
+    return await User
+      .query()
+      .preload('roles')
+      .where('id', params.id)
+      .firstOrFail()
+  }
+
+  /**
    * Get user by id and delete it
    */
-  public async delete ({ params, response }: HttpContextContract): Promise<void> {
+  public async destroy ({ params, response }: HttpContextContract): Promise<void> {
     const user: User = await User
       .query()
       .where('id', params.id)
@@ -72,6 +83,24 @@ export default class UserManagementController {
         username,
       })
       .firstOrFail()
+
+    return response.ok({
+      message: 'User updated successfully',
+      user,
+    })
+  }
+
+  /**
+   * Toggle user block status
+   */
+  public async toggleBlock ({ params, response }: HttpContextContract): Promise<void> {
+    const user: User = await User
+      .query()
+      .where('id', params.id)
+      .firstOrFail()
+
+    user.is_blocked = !user.is_blocked
+    await user.save()
 
     return response.ok({
       message: 'User updated successfully',

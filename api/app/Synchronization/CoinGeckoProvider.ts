@@ -1,6 +1,6 @@
 import {CryptoProvider} from './Generic/CryptoProvider'
-import Cryptocurrency from '../Models/Cryptocurrency'
-import CryptocurrencyData from '../Models/CryptocurrencyData'
+import Cryptocurrency from 'App/Models/Cryptocurrency'
+import CryptocurrencyData from 'App/Models/CryptocurrencyData'
 import {DateTime} from 'luxon'
 import ProviderFetchException from '../Exceptions/Synchronization/ProviderFetchException'
 

@@ -31,7 +31,7 @@ Route.group((): void => {
 
   Route.post('/login', 'UsersController.login')
   Route.post('/register', 'UsersController.register')
-}).prefix('/api/users')
+}).prefix('/api')
 
 Route.get('/', async () => {
   return { hi: 'coucou from API !' }
