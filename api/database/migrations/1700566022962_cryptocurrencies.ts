@@ -13,6 +13,7 @@ export default class extends BaseSchema {
       table.string('slug').notNullable().unique()
       table.string('symbol').notNullable()
       table.string('name').notNullable()
+      table.integer('sequence').notNullable()
       table.string('logo').nullable()
 
       /**

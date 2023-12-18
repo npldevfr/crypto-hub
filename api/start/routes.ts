@@ -17,6 +17,7 @@
 | import './routes/customer'
 |
 */
+import './routes/v1/user'
 
 import Route from '@ioc:Adonis/Core/Route'
 
@@ -30,7 +31,7 @@ Route.group((): void => {
 
   Route.post('/login', 'UsersController.login')
   Route.post('/register', 'UsersController.register')
-}).prefix('/api/users')
+}).prefix('/api')
 
 Route.group((): void => {
   Route.get('/get-all/', 'ArticleSourcesController.index')

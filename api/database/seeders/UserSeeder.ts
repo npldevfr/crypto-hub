@@ -22,6 +22,6 @@ export default class extends BaseSeeder {
     await user.related('roles').attach([adminRole.id])
 
     // Create 10 users
-    await UserFactory.createMany(10)
+    await UserFactory.createMany(60)
   }
 }

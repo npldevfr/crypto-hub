@@ -34,8 +34,9 @@
     "youch-terminal": "^2.2.3"
   },
   "dependencies": {
-    "@adonisjs/core": "^5.8.0",
     "@adonisjs/auth": "^8.2.3",
+    "@adonisjs/bouncer": "^2.3.0",
+    "@adonisjs/core": "^5.8.0",
     "@adonisjs/lucid": "^18.4.2",
     "@adonisjs/repl": "^3.1.0",
     "adonisjs-scheduler": "^0.0.25",
@@ -44,9 +45,8 @@
     "pg": "^8.11.3",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
-    "source-map-support": "^0.5.21",
-    "sqlite3": "^5.1.6",
     "rss-parser": "^3.13.0",
-    "source-map-support": "^0.5.21"
+    "source-map-support": "^0.5.21",
+    "sqlite3": "^5.1.6"
   }
 }
