@@ -5,7 +5,7 @@
  * file.
  */
 
-import type { AuthConfig } from '@ioc:Adonis/Addons/Auth'
+import type { AuthConfig } from "@ioc:Adonis/Addons/Auth";
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +17,7 @@ import type { AuthConfig } from '@ioc:Adonis/Addons/Auth'
 |
 */
 const authConfig: AuthConfig = {
-  guard: 'api',
+  guard: "api",
   guards: {
     /*
     |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ const authConfig: AuthConfig = {
     |
     */
     api: {
-      driver: 'oat',
+      driver: "oat",
 
       /*
       |--------------------------------------------------------------------------
@@ -49,10 +49,10 @@ const authConfig: AuthConfig = {
       |
       */
       tokenProvider: {
-        type: 'api',
-        driver: 'database',
-        table: 'api_tokens',
-        foreignKey: 'user_id',
+        type: "api",
+        driver: "database",
+        table: "api_tokens",
+        foreignKey: "user_id",
       },
 
       provider: {
@@ -64,7 +64,7 @@ const authConfig: AuthConfig = {
         | Name of the driver
         |
         */
-        driver: 'lucid',
+        driver: "lucid",
 
         /*
         |--------------------------------------------------------------------------
@@ -75,7 +75,7 @@ const authConfig: AuthConfig = {
         | the primary key is the right choice.
         |
         */
-        identifierKey: 'id',
+        identifierKey: "id",
 
         /*
         |--------------------------------------------------------------------------
@@ -87,7 +87,7 @@ const authConfig: AuthConfig = {
         | of the mentioned columns to find their user record.
         |
         */
-        uids: ['email'],
+        uids: ["email"],
 
         /*
         |--------------------------------------------------------------------------
@@ -100,10 +100,10 @@ const authConfig: AuthConfig = {
         | that time.
         |
         */
-        model: () => import('App/Models/User'),
+        model: () => import("App/Models/User"),
       },
     },
   },
-}
+};
 
-export default authConfig
+export default authConfig;
