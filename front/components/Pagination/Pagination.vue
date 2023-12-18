@@ -20,7 +20,7 @@ const props = defineProps<PaginationRootProps>()
         <div class="i-radix-icons:chevron-left" />
       </PaginationPrev>
       <template v-for="(page, index) in items">
-        <PaginationListItem v-if="page.type === 'page'" :key="index" class="w-9 h-9 border rounded  data-[selected]:bg-stone-900 data-[selected]:text-white hover:bg-stone-900/10 transition focus-within:outline focus-within:outline-1 focus-within:outline-offset-1" :value="page.value">
+        <PaginationListItem v-if="page.type === 'page'" :key="index" class="w-9 h-9 border rounded  data-[selected]:bg-stone-900 data-[selected]:text-white hover:bg-stone-900/10 transition" :value="page.value">
           {{ page.value }}
         </PaginationListItem>
         <PaginationEllipsis v-else :key="page.type" :index="index" class="w-9 h-9 flex items-center justify-center">

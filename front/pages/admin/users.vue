@@ -7,29 +7,41 @@ definePageMeta({
   middleware: ['admin']
 })
 
-const {getPaginatedUsers} = userService()
-const {data, get, page, sortable, query} = getPaginatedUsers()
+const {getPaginatedUsers, updateUser, deleteUser} = userService()
+const {data: paginatedUsersList, get, page, sortable, query} = getPaginatedUsers()
+const { userId: updateUserId, put: updateSelectedUser } = updateUser()
+const { userId: deleteUserId, destroy: deleteSelectedUser } = deleteUser()
 const selected = ref<User[]>([])
+
+// When the selected user changes, update the userIds for the update and delete requests
+watch(selected, (value) => {
+  const userId = value[0]?.id
+  if (userId) {
+    updateUserId.value = userId
+    deleteUserId.value = userId
+  } 
+})
 
 
 </script>
 
 <template>
   <Head>
-    <Title>◈ CryptoHUB &mdash; Utilisateurs</Title>
+    <Title>CryptoHUB &mdash; Utilisateurs</Title>
   </Head>
-  <Section
-      title="Gestion des utilisateurs"
-      subtitle="Liste des utilisateurs">
 
-    <div class="w-full grid grid-cols-3 gap-2">
-      <div :class="{
+
+  <div class="w-full grid h-full grid-cols-3 gap-2">
+    <div class="p-4" :class="{
         'col-span-3': selected.length === 0,
         'col-span-2': selected.length > 0
       }">
 
-        <DataTable :data="data?.data"
-                   v-if="data"
+      <Section title="Utilisateurs"
+               subtitle="Liste des utilisateurs de la plateforme">
+
+        <DataTable :data="paginatedUsersList?.data"
+                   v-if="paginatedUsersList"
                    v-model:query="query"
                    v-model:sort="sortable"
                    v-model="selected"
@@ -40,15 +52,15 @@ const selected = ref<User[]>([])
                ]"
         >
           <Pagination v-model:page="page"
-                      :per-page="data?.meta.per_page"
-                      :total="data?.meta.total"
+                      :per-page="paginatedUsersList?.meta.per_page"
+                      :total="paginatedUsersList?.meta.total"
                       show-edges
           />
         </DataTable>
-      </div>
-      <div v-if="selected.length > 0" class="col-span-1">
-        <UserManagementCard @close="selected = []" :user="selected[0]"/>
-      </div>
+      </Section>
     </div>
-  </Section>
+    <div v-if="selected.length > 0" class="col-span-1">
+      <UserManagementCard @close="selected = []" :user="selected[0]"/>
+    </div>
+  </div>
 </template>

@@ -57,7 +57,7 @@ export default class UsersController {
     })
 
     // Create new user
-    const user = await User.create({
+    const user: User = await User.create({
       username,
       email,
       password: await Hash.make(password),

@@ -19,6 +19,15 @@ export function userService() {
             refetch: true
         }).json<PaginatedData<User>>()
 
+        // If the page is greater than the last page, we set the page to the last page
+        watch(data, (newData) => {
+            if (newData) {
+                if (page.value > newData.meta.last_page) {
+                    page.value = newData.meta.last_page
+                }
+            }
+        })
+
         return {
             page,
             data,
@@ -28,8 +37,36 @@ export function userService() {
         }
     }
 
+    const updateUser = () => {
+        const userId = ref<Pick<User, 'id'>['id'] | null>(null)
+        const { put, data } = $fetch(`/users/${userId}`, {
+            immediate: false
+        }).json<User>()
+
+        return {
+            userId,
+            data,
+            put
+        }
+    }
+
+    const deleteUser = () => {
+        const userId= ref<Pick<User, 'id'>['id'] | null>(null)
+        const { delete: destroy, data } = $fetch(`/users/${userId}`, {
+            immediate: false
+        }).json<User>()
+
+        return {
+            userId,
+            data,
+            destroy
+        }
+    }
+
     return {
-        getPaginatedUsers
+        deleteUser,
+        getPaginatedUsers,
+        updateUser
     }
 
 }

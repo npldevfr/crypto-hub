@@ -3,6 +3,7 @@
 import {ModelPaginatorContract} from '@ioc:Adonis/Lucid/Orm'
 import User from '../../Models/User'
 import {HttpContextContract} from '@ioc:Adonis/Core/HttpContext'
+import {rules, schema, validator} from '@ioc:Adonis/Core/Validator'
 
 export default class UserManagementController {
   /**
@@ -30,5 +31,51 @@ export default class UserManagementController {
 
     // Apply sorting and pagination
     return await usersQuery.orderBy(sortBy || 'email', sortDirection || 'asc').paginate(page || 1, perPage || 10)
+  }
+
+  /**
+   * Get user by id and delete it
+   */
+  public async delete ({ params, response }: HttpContextContract): Promise<void> {
+    const user: User = await User
+      .query()
+      .where('id', params.id)
+      .firstOrFail()
+
+    await user.delete()
+    return response.ok({
+      message: 'User deleted successfully',
+    })
+  }
+
+  /**
+   * Update user details (email, username) by id
+   */
+  public async update ({ params, request, response }: HttpContextContract): Promise<void> {
+    const updateValidation = schema.create({
+      username: schema.string(),
+      email: schema.string({}, [
+        rules.email(),
+      ]),
+    })
+
+    const { email, username} = await validator.validate({
+      schema: updateValidation,
+      data: request.all(),
+    })
+
+    const user: User = await User
+      .query()
+      .where('id', params.id)
+      .update({
+        email,
+        username,
+      })
+      .firstOrFail()
+
+    return response.ok({
+      message: 'User updated successfully',
+      user,
+    })
   }
 }

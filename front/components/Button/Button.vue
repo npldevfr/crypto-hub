@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import {tv} from "tailwind-variants";
 
-const props = withDefaults(defineProps<{
-  hierarchy: 'primary' | 'secondary' | 'secondary-outline' | 'link'
-  size: 'xs' | 'sm' | 'md' | 'lg'
+export interface ButtonProps {
+  hierarchy?: 'primary' | 'secondary' | 'secondary-outline' | 'link'
+  size?: 'xs' | 'sm' | 'md' | 'lg'
   disabled?: boolean
   loading?: boolean
   danger?: boolean
-}>(),
+}
+
+const props = withDefaults(defineProps<ButtonProps>(),
     {
       danger: false,
       disabled: false,
@@ -35,10 +37,10 @@ const buttons = tv({
       true: 'opacity-50 cursor-not-allowed',
     },
     loading: {
-      true: 'opacity-70 cursor-disabled',
+      true: 'hover:cursor-not-allowed',
     },
     danger: {
-      true: 'bg-red-500 text-white',
+      true: 'bg-red-500 hover:bg-red-700 text-white',
     },
   },
   defaultVariants: {
