@@ -1,50 +1,77 @@
 import Hash from '@ioc:Adonis/Core/Hash'
 import User from '../../Models/User'
+import {schema, rules, validator} from '@ioc:Adonis/Core/Validator'
+import {HttpContextContract} from '@ioc:Adonis/Core/HttpContext'
 
 export default class UsersController {
-  public async profile ({ auth }) {
-    await auth.use('api').authenticate()
-    const user = auth.user!
-    return {
-      id: user.id,
-      username: user.username,
-      email: user.email,
-      avatar: user.avatar,
-      is_blocked: user.is_blocked,
-      remember_me_token: user.remember_me_token,
-    }
+  public async profile ({ auth }: HttpContextContract): Promise<User> {
+    return await User
+      .query()
+      .preload('roles')
+      .where('id', auth.user?.id)
+      .firstOrFail()
   }
 
-  public async login ({ auth, request }) {
-    const email = request.input('email')
-    const password = request.input('password')
-    return await auth.use('api').attempt(email, password)
+  public async login ({ auth, request }: HttpContextContract): Promise<{ token: string, user: User }> {
+    // Get user input
+    const credentialsValidation = schema.create({
+      email: schema.string(),
+      password: schema.string(),
+    })
+
+    // Validate user input and throw validation error if validation fails
+    const { email, password } = await request.validate({ schema: credentialsValidation })
+    const { token } = await auth.use('api').attempt(email, password)
+
+    // Get user from database
+    const user: User = await User
+      .query()
+      .preload('roles')
+      .where('email', email)
+      .firstOrFail()
+
+    return { token, user }
   }
 
-  public async logout ({ auth }) {
-    await auth.use('api').authenticate()
+  public async logout ({ auth, response}: HttpContextContract): Promise<void> {
     await auth.use('api').revoke()
-    return { message: 'Logout successful' }
+    return response.noContent()
   }
 
-  public async register ({ request }) {
-    const username = request.input('username')
-    const email = request.input('email')
-    const password = request.input('password')
+  public async register ({ request, auth }: HttpContextContract) {
+    // Get user input for registration
+    const registerValidation = schema.create({
+      username: schema.string(),
+      email: schema.string({}, [
+        rules.email(),
+      ]),
+      password: schema.string({}, [
+        rules.confirmed(),
+      ]),
+    })
 
-    const hashedPassword = await Hash.make(password)
-    const user= await User.findBy('email', email)
-    if (!user){
-      await User.create({ username, email, password: hashedPassword })
-      return { message: 'Registration successful' }
-    }
-    else{
-      return { message: 'An account with this email already exist' }
-    }
+    // Validate user input and throw validation error if validation fails
+    const { email, password, username} = await validator.validate({
+      schema: registerValidation,
+      data: request.all(),
+    })
 
+    // Create new user
+    const user = await User.create({
+      username,
+      email,
+      password: await Hash.make(password),
+    })
+
+    const { token } = await auth.use('api').attempt(email, password)
+    return {
+      message: 'User registered successfully',
+      token,
+      user,
+    }
   }
 
-  public async update ({ auth, request }) {
+  public async update ({ auth, request }: HttpContextContract){
     await auth.use('api').authenticate()
 
     try {
@@ -57,7 +84,7 @@ export default class UsersController {
       if (newPassword) {
         user.password = await Hash.make(newPassword)
       }
-      await user.save()
+      await user?.save()
 
       return { message: 'Profile updated successfully', user }
     } catch (error) {

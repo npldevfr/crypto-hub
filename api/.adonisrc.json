@@ -48,6 +48,13 @@
           "tests/synchronization/**/*.spec(.ts|.js)"
         ],
         "timeout": 60000
+      },
+      {
+        "name": "rss",
+        "files": [
+          "tests/rss/**/*.spec(.ts|.js)"
+        ],
+        "timeout": 60000
       }
     ]
   },

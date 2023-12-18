@@ -19,31 +19,22 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
-import UsersController from '../app/Controllers/Http/UsersController'
-Route.group(() => {
-  Route.get('/profile', async (ctx) => {
-    return new UsersController().profile(ctx)
-  })
 
-  Route.post('/login', async (ctx) => {
-    return new UsersController().login(ctx)
-  })
+Route.group((): void => {
+  // Authenticated routes (require a valid token)
+  Route.group((): void => {
+    Route.get('/profile', 'UsersController.profile')
+    Route.put('/profile', 'UsersController.update')
+    Route.post('/logout', 'UsersController.logout')
+  }).middleware('auth:api')
 
-  Route.post('/logout', async (ctx) => {
-    return new UsersController().logout(ctx)
-  })
-
-  Route.post('/register', async (ctx) => {
-    return new UsersController().register(ctx)
-  })
-
-  Route.put('/profile', async (ctx) => {
-    return new UsersController().update(ctx)
-  })
+  Route.post('/login', 'UsersController.login')
+  Route.post('/register', 'UsersController.register')
 }).prefix('/api/users')
 
 Route.get('/', async () => {
   return { hi: 'coucou from API !' }
 })
 
+Route.get('/api/header-data', 'HeadersController.index')
 Route.get('/cryptocurrency-data', 'CryptocurrencyDataController.index')

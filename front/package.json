@@ -5,19 +5,30 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@formkit/i18n": "^1.4.0",
+    "@formkit/nuxt": "^1.4.0",
+    "@formkit/themes": "^1.4.0",
+    "@formkit/vue": "^1.4.0",
+    "@iconify/json": "^2.2.156",
     "@nuxt/devtools": "latest",
     "@unocss/nuxt": "^0.57.4",
     "@vueuse/nuxt": "^10.6.1",
+    "date-fns": "^2.30.0",
     "nuxt": "^3.8.1",
+    "pinia": "^2.1.7",
+    "tailwind-variants": "0.1.18",
     "vue": "^3.3.8",
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@unocss/reset": "^0.57.4"
+    "@unocss/reset": "^0.57.4",
+    "radix-vue": "^1.2.4"
   }
 }
