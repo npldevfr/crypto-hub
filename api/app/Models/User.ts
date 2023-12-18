@@ -23,7 +23,7 @@ export default class User extends BaseModel {
   @column()
   public is_blocked: boolean
 
-  @column({ serializeAs: null})
+  @column()
   public remember_me_token: string
 
   @column.dateTime({ autoCreate: true })

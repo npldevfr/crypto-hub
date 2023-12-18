@@ -5,6 +5,7 @@ import NoTitleException from 'App/Exceptions/Rss/NoTilteExeptionException'
 import { JSDOM } from 'jsdom'
 
 export default class RssFeedUpdater {
+  // function that get all rss feed path in database and call insertArticle function
   public static async rssFeedPath () {
     const sources = await ArticleSource.query().where('is_active', true)
     for (const source of sources) {
@@ -12,6 +13,7 @@ export default class RssFeedUpdater {
     }
   }
 
+  // function that insert article in database
   public static async insertArticle (urlRss : string, sourceId : string) {
     let parser = new Parser()
     let feed = await parser.parseURL(urlRss)
@@ -43,6 +45,7 @@ export default class RssFeedUpdater {
     }
   }
 
+  // function that generate slug for article
   private static generateSlug (title: string): string {
     return title
       .toLowerCase()

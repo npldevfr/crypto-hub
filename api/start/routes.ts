@@ -33,6 +33,15 @@ Route.group((): void => {
   Route.post('/register', 'UsersController.register')
 }).prefix('/api')
 
+Route.group((): void => {
+  Route.get('/get-all/', 'ArticleSourcesController.index')
+  Route.get('/get-one/:id', 'ArticleSourcesController.show')
+  Route.patch('/change-active-status/:id', 'ArticleSourcesController.changeActiveStatus')
+  Route.delete('/delete/:id', 'ArticleSourcesController.delete')
+  Route.post('/verify-rss-source/', 'ArticleSourcesController.verifyRssSource')
+  Route.post('/add-rss-source/', 'ArticleSourcesController.addRssSource')
+}).prefix('/api/article-sources')
+
 Route.get('/', async () => {
   return { hi: 'coucou from API !' }
 })

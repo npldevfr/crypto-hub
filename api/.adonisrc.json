@@ -39,6 +39,13 @@
         "timeout": 60000
       },
       {
+        "name": "user_test",
+        "files": [
+          "tests/user_test/**/*.spec(.ts|.js)"
+        ],
+        "timeout": 60000
+      },
+      {
         "name": "Synchronization",
         "files": [
           "tests/synchronization/**/*.spec(.ts|.js)"
