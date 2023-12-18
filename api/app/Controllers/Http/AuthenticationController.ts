@@ -3,7 +3,7 @@ import User from '../../Models/User'
 import {schema, rules, validator} from '@ioc:Adonis/Core/Validator'
 import {HttpContextContract} from '@ioc:Adonis/Core/HttpContext'
 
-export default class UsersController {
+export default class AuthenticationController {
   public async profile ({ auth }: HttpContextContract): Promise<User> {
     return await User
       .query()
