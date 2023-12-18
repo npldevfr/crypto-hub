@@ -17,31 +17,13 @@
 | import './routes/customer'
 |
 */
-import './routes/v1/user'
-
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.group((): void => {
-  // Authenticated routes (require a valid token)
-  Route.group((): void => {
-    Route.get('/profile', 'UsersController.profile')
-    Route.put('/profile', 'UsersController.update')
-    Route.post('/logout', 'UsersController.logout')
-  }).middleware('auth:api')
+import './routes/v1/users'
+import './routes/v1/article-source'
+import './routes/v1/authentication'
 
-  Route.post('/login', 'UsersController.login')
-  Route.post('/register', 'UsersController.register')
-}).prefix('/api')
-
-Route.group((): void => {
-  Route.get('/get-all/', 'ArticleSourcesController.index')
-  Route.get('/get-one/:id', 'ArticleSourcesController.show')
-  Route.patch('/change-active-status/:id', 'ArticleSourcesController.changeActiveStatus')
-  Route.delete('/delete/:id', 'ArticleSourcesController.delete')
-  Route.post('/verify-rss-source/', 'ArticleSourcesController.verifyRssSource')
-  Route.post('/add-rss-source/', 'ArticleSourcesController.addRssSource')
-}).prefix('/api/article-sources')
-
+// TODO : remove theses routes under
 Route.get('/', async () => {
   return { hi: 'coucou from API !' }
 })

@@ -27,7 +27,7 @@ export default class ArticleSourcesController {
   }
 
   // function to change active status of a rss source
-  public async changeActiveStatus ({ params, response }: HttpContextContract): Promise<ArticleSource | null> {
+  public async toggleActiveStatus ({ params, response }: HttpContextContract): Promise<ArticleSource | null> {
     try {
       let source = await ArticleSource.findOrFail(params.id)
       source.is_active = !source.is_active
@@ -40,7 +40,7 @@ export default class ArticleSourcesController {
   }
 
   // function to delete a rss source
-  public async delete ({ params, response }: HttpContextContract): Promise<void> {
+  public async destroy ({ params, response }: HttpContextContract): Promise<void> {
     try {
       let source = await ArticleSource.findOrFail(params.id)
       await source.delete()

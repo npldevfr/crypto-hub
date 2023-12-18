@@ -5,7 +5,7 @@ import User from '../../Models/User'
 import {HttpContextContract} from '@ioc:Adonis/Core/HttpContext'
 import {rules, schema, validator} from '@ioc:Adonis/Core/Validator'
 
-export default class UserManagementController {
+export default class UserController {
   /**
    * Get all users
    * @param request
