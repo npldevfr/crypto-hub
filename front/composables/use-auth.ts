@@ -12,6 +12,7 @@ export interface User {
     avatar: string
     created_at: string
     roles: Role[]
+    is_blocked: boolean
 }
 
 export interface Role {

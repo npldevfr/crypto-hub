@@ -107,4 +107,23 @@ export default class UserManagementController {
       user,
     })
   }
+
+  /**
+   * Login as user
+   */
+  public async loginAs ({ params, response, auth}: HttpContextContract): Promise<void> {
+    const user: User = await User
+      .query()
+      .preload('roles')
+      .where('id', params.id)
+      .firstOrFail()
+
+    const { token } = await auth.use('api').login(user)
+
+    return response.ok({
+      message: 'User logged in successfully',
+      token,
+      user,
+    })
+  }
 }

@@ -9,5 +9,8 @@ Route.group((): void => {
 
   Route.post('users/:id/toggle-block', 'UserManagementController.toggleBlock')
     .as('users.toggle-block')
+
+  Route.post('users/:id/login-as', 'UserManagementController.loginAs')
+    .as('users.login-as')
 }).prefix('/api')
   .middleware('auth:api')

@@ -2,6 +2,7 @@ import { $fetch } from "~/composables/use-fetch";
 import type {User} from "~/composables/use-auth";
 import type {ComputedRef, Ref} from "vue";
 import type {PaginatedData} from "~/types/pagination";
+import type {AfterFetchContext} from "@vueuse/core";
 
 export function userServiceController() {
 
@@ -41,28 +42,42 @@ export function userServiceController() {
         return $fetch(`/users/${user_id}`).json<User>()
     }
 
-    const update = (user_id: Pick<User, 'id'>['id']) => {
+    const updateOrDelete = (user_id: Pick<User, 'id'>['id']) => {
         return $fetch(`/users/${user_id}`, {
             immediate: false
         }).json<User>()
     }
 
-    const destroy = (user_id: Pick<User, 'id'>['id']) => {
-        const { delete: destroy, data } = $fetch(`/users/${user_id}`, {
+    const toggleBlock = (user_id: Pick<User, 'id'>['id']) => {
+        return $fetch(`/users/${user_id}/toggle-block`, {
             immediate: false
         }).json<User>()
+    }
 
-        return {
-            data,
-            destroy
-        }
+    const loginAs = (user_id: Pick<User, 'id'>['id']) => {
+
+        const { user } = useAuth()
+        const router = useRouter()
+        const token = useCookie('token')
+
+        return $fetch(`/users/${user_id}/login-as`, {
+            immediate: false,
+            async afterFetch({ data }: AfterFetchContext<{ token: string, user: User}>): Promise<any> {
+                if (data?.token) {
+                    user.value = data.user
+                    token.value = data.token
+                    await router.push({ name: 'index' })
+                }
+            },
+        }).json<User>()
     }
 
     return {
         index,
         show,
-        update,
-        destroy
+        updateOrDelete,
+        toggleBlock,
+        loginAs
     }
 
 }

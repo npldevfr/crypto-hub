@@ -7,11 +7,14 @@ definePageMeta({
 })
 
 const { params } = useRoute()
-const { show, destroy, update } = userServiceController()
+const { push } = useRouter()
 const user_id = params.id.toString()
+const { show, updateOrDelete, toggleBlock, loginAs } = userServiceController()
 
-const { data: user } = show(user_id)
-const { put: updateUser, isFetching: isUpdating } = update(user_id)
+const { data: user, get: refreshUser } = show(user_id)
+const { put: updateUser, delete: deleteUser, isFetching: isProcessing } = updateOrDelete(user_id)
+const { post: toggleBlockedUser, isFetching: isBlocking } = toggleBlock(user_id)
+const { post: loginAsUser } = loginAs(user_id)
 
 </script>
 
@@ -20,10 +23,29 @@ const { put: updateUser, isFetching: isUpdating } = update(user_id)
     <Title>CryptoHUB &mdash; Utilisateurs</Title>
   </Head>
 
+  <Button danger
+          size="lg"
+          @click="deleteUser().execute().then(() => push({ name: 'admin-users' }))">
+    Supprimer
+  </Button>
+
+  <Button size="lg"
+          @click="loginAsUser().execute().then(() => push({ name: 'index' }))">
+    Login as {{ user?.username }}
+  </Button>
+
+  <Button size="lg"
+          :danger="user?.is_blocked"
+          @click="toggleBlockedUser().execute().then(() => refreshUser().execute())">
+    {{ user?.is_blocked ? 'Débloquer' : 'Bloquer' }}
+  </Button>
+
+  <Avatar
+      :src="user?.avatar" :alt="user?.username" size="profile" />
 
   <FormKit v-if="user"
       type="form"
-           :disabled="isUpdating"
+           :disabled="isProcessing"
       :actions="false"
       @submit="updateUser({
         email: user.email,
@@ -47,7 +69,7 @@ const { put: updateUser, isFetching: isUpdating } = update(user_id)
         type="text"
     />
 
-    <Button :loading="isUpdating" type="submit" hierarchy="primary" size="sm">
+    <Button :loading="isProcessing" type="submit" hierarchy="primary" size="sm">
       Enregistrer
     </Button>
 
