@@ -96,8 +96,6 @@ export function useAuth() {
     if (!token.value)
       return
 
-    const route = useRoute()
-
     await $fetch<User>(`${authPrefix}profile`, {
       method: 'GET',
     }, {

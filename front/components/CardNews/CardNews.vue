@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { format } from 'date-fns'
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     verticalLayout: boolean
     imageUrl: string
@@ -15,7 +15,6 @@ const props = withDefaults(
   }>(),
   {
     verticalLayout: true,
-    tags: [],
     additionalInfo: '',
     avatarUrl: '',
     authorName: '',

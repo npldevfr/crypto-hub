@@ -6,12 +6,6 @@ import {
   DropdownMenuRoot,
   DropdownMenuTrigger,
 } from 'radix-vue'
-
-// const toggleState = ref(false)
-
-function handleClick() {
-  alert('hello!')
-}
 </script>
 
 <template>

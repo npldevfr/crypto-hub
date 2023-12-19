@@ -8,7 +8,7 @@ definePageMeta({
 
 const router = useRouter()
 const { index } = userServiceController()
-const { data: paginatedUsersList, get, page, sortable, query } = index()
+const { data: paginatedUsersList, page, sortable, query } = index()
 </script>
 
 <template>

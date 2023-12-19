@@ -12,7 +12,5 @@ declare module '@japa/runner' {
     // Extend context
   }
 
-  interface Test<TestData> {
-    // Extend test
-  }
+  // interface Test<TestData> {}
 }

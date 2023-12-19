@@ -8,11 +8,11 @@ import User from '../../Models/User'
 export default class UserController {
   /**
    * Get all users
-   * @param request
+   * @param {HttpContextContract} ctx
    * In the body, you can pass the following parameters:
    * - page: number
    * - perPage: number
-   * @returns {Promise<ModelPaginatorContract<User>>}
+   * @returns {Promise<ModelPaginatorContract<User>>} Users paginated list
    */
   public async index({ request }: HttpContextContract): Promise<ModelPaginatorContract<User>> {
     const { page, perPage, sortBy, sortDirection, query } = request.qs()

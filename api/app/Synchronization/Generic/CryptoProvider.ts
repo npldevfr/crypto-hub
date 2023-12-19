@@ -106,7 +106,7 @@ export class CryptoProvider implements CryptoProviderInterface {
 
   /**
    * Checks if synchronization is needed
-   * @returns {Promise<boolean>}
+   * @returns {Promise<boolean>} True if synchronization is needed, false otherwise
    */
   private async isSynchronizationNeeded(): Promise<boolean> {
     const lastSynchronization: Synchronization | null = await Synchronization.query()
@@ -120,10 +120,7 @@ export class CryptoProvider implements CryptoProviderInterface {
 
     const now: Date = new Date()
     const lastSynchronizationDate: Date = lastSynchronization.createdAt.toJSDate()
-    const can: boolean = now.getTime() > lastSynchronizationDate.getTime() + this.getCallsPerMinute()
-
-    // console.log(`Synchronization ${can ? 'needed' : 'not needed'} for ${this.getName()}`)
-    return can
+    return now.getTime() > lastSynchronizationDate.getTime() + this.getCallsPerMinute()
   }
 
   /**

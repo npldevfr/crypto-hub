@@ -13,7 +13,7 @@ const { show, updateOrDelete, toggleBlock, loginAs } = userServiceController()
 
 const { data: user, get: refreshUser } = show(user_id)
 const { put: updateUser, delete: deleteUser, isFetching: isProcessing } = updateOrDelete(user_id)
-const { post: toggleBlockedUser, isFetching: isBlocking } = toggleBlock(user_id)
+const { post: toggleBlockedUser } = toggleBlock(user_id)
 const { post: loginAsUser } = loginAs(user_id)
 </script>
 

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const dd = useRouter()
 </script>
 
 <template>

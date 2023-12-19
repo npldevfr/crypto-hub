@@ -3,13 +3,13 @@ import { PaginationEllipsis, PaginationFirst, PaginationLast, PaginationList, Pa
 import type { PaginationRootProps } from 'radix-vue'
 
 const props = defineProps<PaginationRootProps>()
-const page = defineModel<number>('page', {
+const customPage = defineModel<number>('page', {
   default: 1,
 })
 </script>
 
 <template>
-  <PaginationRoot v-bind="props" v-model:page="page">
+  <PaginationRoot v-bind="props" v-model:page="customPage">
     <PaginationList v-slot="{ items }" class="flex items-center gap-1 text-stone-900">
       <PaginationFirst class="w-9 h-9  flex items-center justify-center  disabled:opacity-50  rounded">
         <div class="i-radix-icons:double-arrow-left" />

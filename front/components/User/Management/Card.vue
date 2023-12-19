@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { User } from '~/composables/use-auth'
 
-const props = defineProps<{
+defineProps<{
   user: User
 }>()
 

@@ -9,7 +9,7 @@ export interface ButtonProps {
   danger?: boolean
 }
 
-const props = withDefaults(defineProps<ButtonProps>(), {
+withDefaults(defineProps<ButtonProps>(), {
   danger: false,
   disabled: false,
   loading: false,
