@@ -10,14 +10,14 @@ export default class CryptocurrenciesController {
         return await Cryptocurrency.all()
     }
     // return one Cryptocurrency
-    public async oneCryptocurrencyBySlug({ params }: HttpContextContract) {
-        const cryptocurrency = await Cryptocurrency.findBy('slug', params.slug)
-        if (cryptocurrency) {
-            return cryptocurrency
-        }
-        else {
-            return { message: 'no Cryptocurrency with this slug' }
-        }
+    public async oneCryptocurrencyBySlug({ params,response }: HttpContextContract) {
+        // const cryptocurrency = await Cryptocurrency.findBy('slug', params.slug)
+        try {
+            return await Cryptocurrency.findByOrFail('slug', params.slug)
+          } catch (e){
+            response.notAcceptable({error: 'This slug is not affected to a Cryptocurrency'})
+            return null
+          }
     }
     // Add a new Cryptocurrency
     public async newCryptocurrency({ request, response }: HttpContextContract): Promise<void> {
