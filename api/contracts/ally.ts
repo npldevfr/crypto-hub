@@ -5,7 +5,7 @@
  * file.
  */
 
-declare module "@ioc:Adonis/Addons/Ally" {
+declare module '@ioc:Adonis/Addons/Ally' {
   interface SocialProviders {
     google: {
       config: GoogleDriverConfig;

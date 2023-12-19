@@ -5,8 +5,8 @@
  * file.
  */
 
-import Env from "@ioc:Adonis/Core/Env";
-import { AllyConfig } from "@ioc:Adonis/Addons/Ally";
+import Env from '@ioc:Adonis/Core/Env'
+import { AllyConfig } from '@ioc:Adonis/Addons/Ally'
 
 /*
 |--------------------------------------------------------------------------
@@ -24,11 +24,11 @@ const allyConfig: AllyConfig = {
 	|--------------------------------------------------------------------------
 	*/
   google: {
-    driver: "google",
-    clientId: Env.get("GOOGLE_CLIENT_ID"),
-    clientSecret: Env.get("GOOGLE_CLIENT_SECRET"),
-    callbackUrl: "http://localhost:3333/oauth/google/callback",
-    scopes: ["profile", "email"],
+    driver: 'google',
+    clientId: Env.get('GOOGLE_CLIENT_ID'),
+    clientSecret: Env.get('GOOGLE_CLIENT_SECRET'),
+    callbackUrl: 'http://localhost:3333/oauth/google/callback',
+    scopes: ['profile', 'email'],
   },
   /*
 	|--------------------------------------------------------------------------
@@ -36,11 +36,11 @@ const allyConfig: AllyConfig = {
 	|--------------------------------------------------------------------------
 	*/
   twitter: {
-    driver: "twitter",
-    clientId: Env.get("TWITTER_CLIENT_ID"),
-    clientSecret: Env.get("TWITTER_CLIENT_SECRET"),
-    callbackUrl: "http://localhost:3333/oauth/twitter/callback",
+    driver: 'twitter',
+    clientId: Env.get('TWITTER_CLIENT_ID'),
+    clientSecret: Env.get('TWITTER_CLIENT_SECRET'),
+    callbackUrl: 'http://localhost:3333/oauth/twitter/callback',
   },
-};
+}
 
-export default allyConfig;
+export default allyConfig
