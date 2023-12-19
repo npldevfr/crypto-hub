@@ -9,6 +9,16 @@ export default class CryptocurrenciesController {
     public async listCryptocurrencies() {
         return await Cryptocurrency.all()
     }
+    // return one Cryptocurrency
+    public async oneCryptocurrencyBySlug({ params }: HttpContextContract) {
+        const cryptocurrency = await Cryptocurrency.findBy('slug', params.slug)
+        if (cryptocurrency) {
+            return cryptocurrency
+        }
+        else {
+            return { message: 'no Cryptocurrency with this slug' }
+        }
+    }
     // Add a new Cryptocurrency
     public async newCryptocurrency({ request, response }: HttpContextContract): Promise<void> {
         const existingCryptoVersion = await Cryptocurrency.findBy('slug', request.input('slug'))
