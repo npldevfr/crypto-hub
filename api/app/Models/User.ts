@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm'
+import {BaseModel, hasMany, column, manyToMany, ManyToMany, HasMany} from '@ioc:Adonis/Lucid/Orm'
 import Role from './Role'
+import UsersAuthProvider from './UsersAuthProvider'
 
 export default class User extends BaseModel {
   public static selfAssignPrimaryKey = true
@@ -34,6 +35,9 @@ export default class User extends BaseModel {
 
   @manyToMany(() => Role, { pivotTable: 'users_roles' })
   public roles: ManyToMany<typeof Role>
+
+  @hasMany(() => UsersAuthProvider)
+  public authProviders: HasMany<typeof UsersAuthProvider>
 
   public hasPowerMoreThan (power: number): boolean {
     return this.roles.reduce((hasPower: boolean, role: Role) => {

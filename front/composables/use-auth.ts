@@ -28,7 +28,7 @@ export function useAuth() {
     const login = () => {
         const errorMessage: Ref<string> = ref<string>('')
 
-        const { data, statusCode, isFetching, post } = $fetch('login', {
+        const { data, statusCode, isFetching, post } = $fetch('/users/login', {
             method: 'POST',
         }, {
             immediate: false,
@@ -51,7 +51,7 @@ export function useAuth() {
     const register = () => {
         const errorMessage: Ref<string> = ref<string>('')
 
-        const { post, isFetching } = $fetch('register', {
+        const { post, isFetching } = $fetch('/users/register', {
             method: 'POST',
         }, {
             immediate: false,
@@ -72,7 +72,7 @@ export function useAuth() {
     }
 
     const logout = async (): Promise<void> => {
-        await $fetch('logout', {
+        await $fetch('/users/logout', {
             method: 'POST',
         })
 
@@ -84,7 +84,7 @@ export function useAuth() {
         if (!token.value)
             return
 
-        await $fetch<User>('profile', {
+        await $fetch<User>('/users/profile', {
             method: 'GET',
         }, {
             afterFetch({ data }: AfterFetchContext<User>): any {

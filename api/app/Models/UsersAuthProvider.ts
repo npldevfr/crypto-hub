@@ -5,27 +5,27 @@ export default class UsersAuthProvider extends BaseModel {
   @column({ isPrimary: true })
   public id: string
 
-  @column()
+  @column({ serializeAs: null })
   public refreshToken: string
 
-  @column.dateTime()
+  @column.dateTime({ serializeAs: null })
   public expiration: DateTime
 
-  @column()
+  @column({ serializeAs: null })
   public email: string
 
-  @column()
+  @column({ serializeAs: null })
   public username: string
 
   @column()
   public provider: string
 
-  @column()
+  @column({ serializeAs: null })
   public userId: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
   public updatedAt: DateTime
 }
