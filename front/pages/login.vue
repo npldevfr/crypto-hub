@@ -5,11 +5,13 @@ definePageMeta({
 });
 
 const route = useRoute();
+const router = useRouter();
 const { setUser } = useAuth();
 
 onMounted(async () => {
   if (route.query.token) {
     await setUser(route.query.token as string);
+    router.push("/");
   }
 });
 const { post, errorMessage, isFetching } = login();
