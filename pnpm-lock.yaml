@@ -140,6 +140,9 @@ importers:
       '@unocss/nuxt':
         specifier: ^0.57.4
         version: 0.57.6(postcss@8.4.31)(vite@4.5.0)(webpack@5.89.0)
+      '@vueuse/core':
+        specifier: ^7.3.0
+        version: 7.7.1(vue@3.3.8)
       '@vueuse/nuxt':
         specifier: ^10.6.1
         version: 10.6.1(nuxt@3.8.1)(vue@3.3.8)
@@ -3675,6 +3678,22 @@ packages:
       - vue
     dev: true
 
+  /@vueuse/core@7.7.1(vue@3.3.8):
+    resolution: {integrity: sha512-PRRgbATMpoeUmkCEBtUeJgOwtew8s+4UsEd+Pm7MhkjL2ihCNrSqxNVtM6NFE4uP2sWnkGcZpCjPuNSxowJ1Ow==}
+    peerDependencies:
+      '@vue/composition-api': ^1.1.0
+      vue: ^2.6.0 || ^3.2.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      vue:
+        optional: true
+    dependencies:
+      '@vueuse/shared': 7.7.1(vue@3.3.8)
+      vue: 3.3.8(typescript@4.6.4)
+      vue-demi: 0.14.6(vue@3.3.8)
+    dev: true
+
   /@vueuse/metadata@10.6.1:
     resolution: {integrity: sha512-qhdwPI65Bgcj23e5lpGfQsxcy0bMjCAsUGoXkJ7DsoeDUdasbZ2DBa4dinFCOER3lF4gwUv+UD2AlA11zdzMFw==}
     dev: true
@@ -3704,6 +3723,21 @@ packages:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
+    dev: true
+
+  /@vueuse/shared@7.7.1(vue@3.3.8):
+    resolution: {integrity: sha512-rN2qd22AUl7VdBxihagWyhUNHCyVk9IpvBTTfHoLH9G7rGE552X1f+zeCfehuno0zXif13jPw+icW/wn2a0rnQ==}
+    peerDependencies:
+      '@vue/composition-api': ^1.1.0
+      vue: ^2.6.0 || ^3.2.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      vue:
+        optional: true
+    dependencies:
+      vue: 3.3.8(typescript@4.6.4)
+      vue-demi: 0.14.6(vue@3.3.8)
     dev: true
 
   /@webassemblyjs/ast@1.11.6:
