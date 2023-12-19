@@ -13,7 +13,6 @@
     "Config": "config",
     "Database": "database",
     "Contracts": "contracts",
-    "rss": "rss"
   },
   "preloads": [
     "./start/routes",
