@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const hasAvatar = ref(true);
+const hasAvatar = ref(true)
 </script>
 
 <template>
@@ -13,7 +13,7 @@ const hasAvatar = ref(true);
         src="https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/655.jpg"
         alt="User dropdown"
         class="rounded-full"
-      />
+      >
     </template>
     <template v-else>
       <div>Par défaut</div>
@@ -25,7 +25,9 @@ const hasAvatar = ref(true);
   >
     <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
       <div>Bonnie Green</div>
-      <div class="font-medium truncate">name@flowbite.com</div>
+      <div class="font-medium truncate">
+        name@flowbite.com
+      </div>
     </div>
     <ProfileNavigation>
       <ProfileItem to="/" label="Home" />

@@ -1,9 +1,9 @@
 import { test } from '@japa/runner'
-import {CryptoEngineAdapter} from '../../app/Synchronization/Generic/CryptoEngineAdapter'
-import NoProviderException from '../../app/Exceptions/Synchronization/NoProviderException'
-import {CoinGeckoProvider} from '../../app/Synchronization/CoinGeckoProvider'
-import CryptocurrencyData from '../../app/Models/CryptocurrencyData'
 import Database from '@ioc:Adonis/Lucid/Database'
+import { CryptoEngineAdapter } from '../../app/Synchronization/Generic/CryptoEngineAdapter'
+import NoProviderException from '../../app/Exceptions/Synchronization/NoProviderException'
+import { CoinGeckoProvider } from '../../app/Synchronization/CoinGeckoProvider'
+import CryptocurrencyData from '../../app/Models/CryptocurrencyData'
 
 test.group('Synchronisation', async (group): Promise<void> => {
   group.each.setup(async (): Promise<(() => Promise<void>)> => {
@@ -22,7 +22,8 @@ test.group('Synchronisation', async (group): Promise<void> => {
 
     try {
       await cea.synchronize()
-    } catch (e) {
+    }
+    catch (e) {
       assert.instanceOf(e, NoProviderException)
     }
   })

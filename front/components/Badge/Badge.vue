@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   color?: string
 }>()
 </script>
@@ -9,5 +9,3 @@ const props = defineProps<{
     <slot />
   </div>
 </template>
-
-

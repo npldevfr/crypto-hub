@@ -1,36 +1,36 @@
-import {CryptoProvider} from './Generic/CryptoProvider'
-import Cryptocurrency from 'App/Models/Cryptocurrency'
+import type Cryptocurrency from 'App/Models/Cryptocurrency'
 import CryptocurrencyData from 'App/Models/CryptocurrencyData'
-import {DateTime} from 'luxon'
+import { DateTime } from 'luxon'
 import ProviderFetchException from '../Exceptions/Synchronization/ProviderFetchException'
+import { CryptoProvider } from './Generic/CryptoProvider'
 
 interface CoinGeckoProviderInterface {
-  id: string;
-  symbol: string;
-  name: string;
-  image: string;
-  current_price: number;
-  market_cap: number;
-  market_cap_rank: number;
-  fully_diluted_valuation: number;
-  total_volume: number;
-  high_24h: number;
-  low_24h: number;
-  price_change_24h: number;
-  price_change_percentage_24h: number;
-  market_cap_change_24h: number;
-  market_cap_change_percentage_24h: number;
-  circulating_supply: number;
-  total_supply: number;
-  max_supply: number | null;
-  ath: number;
-  ath_change_percentage: number;
-  ath_date: string;
-  atl: number;
-  atl_change_percentage: number;
-  atl_date: string;
-  roi: number | null;
-  last_updated: string;
+  id: string
+  symbol: string
+  name: string
+  image: string
+  current_price: number
+  market_cap: number
+  market_cap_rank: number
+  fully_diluted_valuation: number
+  total_volume: number
+  high_24h: number
+  low_24h: number
+  price_change_24h: number
+  price_change_percentage_24h: number
+  market_cap_change_24h: number
+  market_cap_change_percentage_24h: number
+  circulating_supply: number
+  total_supply: number
+  max_supply: number | null
+  ath: number
+  ath_change_percentage: number
+  ath_date: string
+  atl: number
+  atl_change_percentage: number
+  atl_date: string
+  roi: number | null
+  last_updated: string
 }
 
 /**
@@ -38,7 +38,7 @@ interface CoinGeckoProviderInterface {
  * Has rate limit of 30 calls/minute (every 2 seconds)
  */
 export class CoinGeckoProvider extends CryptoProvider {
-  constructor () {
+  constructor() {
     super({
       name: 'CoinGecko',
       frequency: 3000, // Every 3 seconds (We want to be safe)
@@ -46,14 +46,14 @@ export class CoinGeckoProvider extends CryptoProvider {
     })
   }
 
-  public async getData (): Promise<void> {
+  public async getData(): Promise<void> {
     try {
       // Get all cryptocurrencies from provider
       const data: Response = await fetch(this.getProviderURL())
       const result: CoinGeckoProviderInterface[] = await data.json() as CoinGeckoProviderInterface[]
 
-      const { cryptocurrencies, filteredResults } =
-        await CryptoProvider.getUtils<CoinGeckoProviderInterface>(result)
+      const { cryptocurrencies, filteredResults }
+        = await CryptoProvider.getUtils<CoinGeckoProviderInterface>(result)
 
       // Save data to database
       await CryptocurrencyData.createMany(filteredResults
@@ -80,7 +80,8 @@ export class CoinGeckoProvider extends CryptoProvider {
           }
         }
       }
-    } catch (error) {
+    }
+    catch (error) {
       throw new ProviderFetchException(this.getName(), error)
     }
   }

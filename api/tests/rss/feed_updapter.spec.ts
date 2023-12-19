@@ -1,8 +1,8 @@
 import { test } from '@japa/runner'
 import Database from '@ioc:Adonis/Lucid/Database'
+import RssFeedUpdater from 'Rss/rssFeedUpdater'
 import ArticleSource from '../../app/Models/ArticleSource'
 import Article from '../../app/Models/Article'
-import RssFeedUpdater from '../../rss/RssFeedUpdater'
 
 test.group('Feed updapter', async (group) => {
   group.each.setup(async () => {
@@ -10,7 +10,7 @@ test.group('Feed updapter', async (group) => {
     return () => Database.rollbackGlobalTransaction()
   })
 
-  test('should insert articles from active sources', async ({assert}) => {
+  test('should insert articles from active sources', async ({ assert }) => {
     // Setup
     const source = new ArticleSource()
     source.name = 'Coinacademy'
@@ -26,7 +26,7 @@ test.group('Feed updapter', async (group) => {
     assert.equal(articles.length > 0, true)
   })
 
-  test('should not insert articles from inactive sources', async ({assert}) => {
+  test('should not insert articles from inactive sources', async ({ assert }) => {
     // Setup
     const source = new ArticleSource()
     source.name = 'Coinacademy'

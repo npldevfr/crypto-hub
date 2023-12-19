@@ -12,12 +12,13 @@
 |
 */
 
-process.env.NODE_ENV = 'test'
-
 import 'reflect-metadata'
 import sourceMapSupport from 'source-map-support'
 import { Ignitor } from '@adonisjs/core/build/standalone'
-import { configure, processCliArgs, run, RunnerHooksHandler } from '@japa/runner'
+import type { RunnerHooksHandler } from '@japa/runner'
+import { configure, processCliArgs, run } from '@japa/runner'
+
+process.env.NODE_ENV = 'test'
 
 sourceMapSupport.install({ handleUncaughtExceptions: false })
 
@@ -34,7 +35,7 @@ kernel
       ...processCliArgs(process.argv.slice(2)),
       ...config,
       ...{
-        importer: (filePath) => import(filePath),
+        importer: filePath => import(filePath),
         setup: app.concat(runnerHooks.setup),
         teardown: runnerHooks.teardown,
       },

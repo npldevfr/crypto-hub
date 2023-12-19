@@ -13,7 +13,7 @@ import { Exception } from '@adonisjs/core/build/standalone'
 |
 */
 export default class NonConformingException extends Exception {
-  constructor () {
+  constructor() {
     super('Rss feed format not correct', 500, 'E_RUNTIME_EXCEPTION')
   }
 }

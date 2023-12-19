@@ -1,12 +1,12 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
+import Hash from '@ioc:Adonis/Core/Hash'
+import { v4 as uuid } from 'uuid'
 import UserFactory from '../factories/UserFactory'
 import User from '../../app/Models/User'
-import Hash from '@ioc:Adonis/Core/Hash'
 import Role from '../../app/Models/Role'
-import { v4 as uuid } from 'uuid'
 
 export default class extends BaseSeeder {
-  public async run (): Promise<void> {
+  public async run(): Promise<void> {
     // Create admin user
     await User.create({
       id: uuid(),
@@ -22,6 +22,6 @@ export default class extends BaseSeeder {
     await user.related('roles').attach([adminRole.id])
 
     // Create 10 users
-    await UserFactory.createMany(60)
+    await UserFactory.createMany(10)
   }
 }

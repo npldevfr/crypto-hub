@@ -1,7 +1,6 @@
-export default defineNuxtRouteMiddleware((to, from) => {
-    const { hasRoles } = useHasRoles()
+export default defineNuxtRouteMiddleware(() => {
+  const { hasRoles } = useHasRoles()
 
-    if (!hasRoles(['moderator'])) {
-        return navigateTo('/')
-    }
+  if (!hasRoles(['moderator']))
+    return navigateTo('/')
 })

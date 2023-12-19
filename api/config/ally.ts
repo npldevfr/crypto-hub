@@ -6,7 +6,7 @@
  */
 
 import Env from '@ioc:Adonis/Core/Env'
-import { AllyConfig } from '@ioc:Adonis/Addons/Ally'
+import type { AllyConfig } from '@ioc:Adonis/Addons/Ally'
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +18,11 @@ import { AllyConfig } from '@ioc:Adonis/Addons/Ally'
 |
 */
 const allyConfig: AllyConfig = {
-  /*
-	|--------------------------------------------------------------------------
-	| Google driver
-	|--------------------------------------------------------------------------
-	*/
+  /**
+   *  |--------------------------------------------------------------------------
+   *  | Google driver
+   *  |--------------------------------------------------------------------------
+   */
   google: {
     driver: 'google',
     clientId: Env.get('GOOGLE_CLIENT_ID'),
@@ -30,11 +30,11 @@ const allyConfig: AllyConfig = {
     callbackUrl: 'http://localhost:3333/oauth/google/callback',
     scopes: ['profile', 'email'],
   },
-  /*
-	|--------------------------------------------------------------------------
-	| Twitter driver
-	|--------------------------------------------------------------------------
-	*/
+  /**
+   *  |--------------------------------------------------------------------------
+   *  | Twitter driver
+   *  |--------------------------------------------------------------------------
+   */
   twitter: {
     driver: 'twitter',
     clientId: Env.get('TWITTER_CLIENT_ID'),

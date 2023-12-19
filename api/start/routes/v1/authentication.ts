@@ -20,4 +20,4 @@ Route.group((): void => {
     .as('login')
   Route.post('/register', 'AuthenticationController.register')
     .as('register')
-}).prefix('/api')
+}).prefix('/api/users')

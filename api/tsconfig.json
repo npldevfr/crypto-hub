@@ -1,16 +1,8 @@
 {
   "extends": "adonis-preset-ts/tsconfig.json",
-  "include": [
-    "**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "build"
-  ],
   "compilerOptions": {
-    "outDir": "build",
+    "baseUrl": "./",
     "rootDir": "./",
-    "sourceMap": true,
     "paths": {
       "App/*": [
         "./app/*"
@@ -23,7 +15,10 @@
       ],
       "Database/*": [
         "./database/*"
-      ]
+      ],
+      "Rss/*": [
+        "./rss/*"
+      ],
     },
     "types": [
       "@adonisjs/core",
@@ -33,6 +28,15 @@
       "@adonisjs/auth",
       "@adonisjs/bouncer",
       "@adonisjs/ally"
-    ]
-  }
+    ],
+    "outDir": "build",
+    "sourceMap": true
+  },
+  "include": [
+    "**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build"
+  ]
 }

@@ -1,32 +1,32 @@
 <script setup lang="ts">
-const { login } = useAuth();
+const { login } = useAuth()
 definePageMeta({
-  middleware: "not-autenticathed",
-});
+  middleware: 'not-autenticathed',
+})
 
-const route = useRoute();
-const router = useRouter();
-const { setUser } = useAuth();
+const route = useRoute()
+const router = useRouter()
+const { setUser } = useAuth()
 
 onMounted(async () => {
   if (route.query.token) {
-    await setUser(route.query.token as string);
-    router.push("/");
+    await setUser(route.query.token as string)
+    await router.push('/')
   }
-});
-const { post, errorMessage, isFetching } = login();
+})
+const { post, errorMessage, isFetching } = login()
 
 const loginForm = ref({
-  email: "admin@gmail.com",
-  password: "admin",
-});
+  email: 'admin@gmail.com',
+  password: 'admin',
+})
 
-const attemptLogin = async () => {
+async function attemptLogin() {
   await post({
     email: loginForm.value.email,
     password: loginForm.value.password,
-  }).execute();
-};
+  }).execute()
+}
 </script>
 
 <template>
@@ -39,7 +39,7 @@ const attemptLogin = async () => {
         title="Connexion"
         subtitle="Connectez-vous à votre compte CryptoHUB"
       >
-        <br />
+        <br>
 
         <SocialList>
           <SocialProvider provider-name="google" icon="i-logos-google-icon" />

@@ -54,21 +54,21 @@ const avatar = tv({
 <template>
   <AvatarRoot :class="avatar({ size, interactive })">
     <AvatarImage
-        class=":uno: h-full w-full rounded-[inherit] object-cover"
-        :src="src"
-        :alt="alt"
+      class=":uno: h-full w-full rounded-[inherit] object-cover"
+      :src="src"
+      :alt="alt"
     />
     <AvatarFallback
-        :class=" avatar({ size })"
-        class=":uno: h-full w-full flex items-center justify-center bg-primary font-medium text-white"
-        :delay-ms="delayMs"
+      :class=" avatar({ size })"
+      class=":uno: h-full w-full flex items-center justify-center bg-primary font-medium text-white"
+      :delay-ms="delayMs"
     >
       {{ getAvatarLetters }}
     </AvatarFallback>
 
     <div
-        v-if="$slots.default"
-        class=":uno: absolute flex flex-row rounded-full bg-stone-900 p-1 text-[10px] text-primary -bottom-1 -right-2 blue:bg-slate-700 dark:bg-zinc-800"
+      v-if="$slots.default"
+      class=":uno: absolute flex flex-row rounded-full bg-stone-900 p-1 text-[10px] text-primary -bottom-1 -right-2 blue:bg-slate-700 dark:bg-zinc-800"
     >
       <slot />
     </div>

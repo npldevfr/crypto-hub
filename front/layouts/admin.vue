@@ -4,9 +4,9 @@
 
 <template>
   <div class="flex flex-col h-[100vh]">
-    <AdminHeaderBar/>
+    <AdminHeaderBar />
     <div class="w-full h-full flex justify-center items-center">
-        <slot/>
+      <slot />
     </div>
   </div>
 </template>

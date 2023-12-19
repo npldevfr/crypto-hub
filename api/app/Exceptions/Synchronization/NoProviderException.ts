@@ -13,7 +13,7 @@ import { Exception } from '@adonisjs/core/build/standalone'
 |
 */
 export default class NoProviderException extends Exception {
-  constructor () {
+  constructor() {
     super('You must provide at least one provider', 500, 'E_RUNTIME_EXCEPTION')
   }
 }

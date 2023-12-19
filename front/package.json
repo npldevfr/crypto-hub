@@ -1,7 +1,7 @@
 {
   "name": "nuxt-app",
-  "private": true,
   "type": "module",
+  "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -10,6 +10,10 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@unocss/reset": "^0.57.4",
+    "radix-vue": "^1.2.4"
   },
   "devDependencies": {
     "@formkit/i18n": "^1.4.0",
@@ -26,9 +30,5 @@
     "tailwind-variants": "0.1.18",
     "vue": "^3.3.8",
     "vue-router": "^4.2.5"
-  },
-  "dependencies": {
-    "@unocss/reset": "^0.57.4",
-    "radix-vue": "^1.2.4"
   }
 }

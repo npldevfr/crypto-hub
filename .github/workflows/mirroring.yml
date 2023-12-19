@@ -7,14 +7,14 @@ on:
     branches: [main]
 
 jobs:
-    mirror:
-      name: Push content of the current repo on mirror
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-          with:
-            fetch-depth: 0
-        - uses: pixta-dev/repository-mirroring-action@v1
-          with:
-            target_repo_url: git@github.com:EpitechMscProPromo2025/T-WEB-700-NAN_3.git
-            ssh_private_key: ${{ secrets.SSH_KEY }}
+  mirror:
+    name: Push content of the current repo on mirror
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: pixta-dev/repository-mirroring-action@v1
+        with:
+          target_repo_url: git@github.com:EpitechMscProPromo2025/T-WEB-700-NAN_3.git
+          ssh_private_key: ${{ secrets.SSH_KEY }}

@@ -1,15 +1,15 @@
-import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import UsersAuthProvider from '../../Models/UsersAuthProvider'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { DateTime } from 'luxon'
-import User from '../../Models/User'
 import Env from '@ioc:Adonis/Core/Env'
+import UsersAuthProvider from '../../Models/UsersAuthProvider'
+import User from '../../Models/User'
 
 export default class UsersAuthProvidersController {
-  private getAllowedProviders (): string[] {
+  private getAllowedProviders(): string[] {
     return ['google', 'twitter']
   }
 
-  public redirect ({ ally, params, response }: HttpContextContract) {
+  public redirect({ ally, params, response }: HttpContextContract) {
     if (!this.getAllowedProviders().includes(params.provider)) {
       return response.notFound({
         error: `Provider ${params.provider} is not supported`,
@@ -18,14 +18,11 @@ export default class UsersAuthProvidersController {
     return ally.use(params.provider).stateless().redirect()
   }
 
-  public async callback ({ ally, params, auth, response }: HttpContextContract) {
+  public async callback({ ally, params, auth, response }: HttpContextContract) {
     const statelessConnection = await ally.use(params.provider).stateless()
     const socialUser = JSON.parse(
-      JSON.stringify(await statelessConnection.user())
+      JSON.stringify(await statelessConnection.user()),
     )
-
-    console.log('Provider:', params.provider)
-    console.log('Provider_id:', socialUser.id)
 
     let userAuthProvider = await UsersAuthProvider.query()
       .preload('user')
@@ -39,6 +36,7 @@ export default class UsersAuthProvidersController {
     if (!userAuthProvider) {
       await User.create({
         email: socialUser.email,
+        avatar: socialUser.avatarUrl,
         username: socialUser.name,
         password: '',
       })
@@ -62,6 +60,6 @@ export default class UsersAuthProvidersController {
 
     return response
       .redirect()
-      .toPath(Env.get('FRONT_URL').concat('/login?token=' + token))
+      .toPath(Env.get('FRONT_URL').concat(`/login?token=${token}`))
   }
 }
