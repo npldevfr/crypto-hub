@@ -42,6 +42,14 @@ Route.group((): void => {
   Route.post('/add-rss-source/', 'ArticleSourcesController.addRssSource')
 }).prefix('/api/article-sources')
 
+Route.group((): void => {
+  // Route.post('/create/', 'CryptocurrenciesController.newCryptocurrency')
+  // Route.delete('/delete/', 'CryptocurrenciesController.deleteCryptocurrency')
+  Route.put('/update/', 'CryptocurrenciesController.updateCryptocurrency')
+  Route.get('/list/', 'CryptocurrenciesController.listCryptocurrencies')
+
+}).prefix('/api/cryptocurrencies')
+
 Route.get('/', async () => {
   return { hi: 'coucou from API !' }
 })
