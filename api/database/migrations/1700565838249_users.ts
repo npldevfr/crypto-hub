@@ -11,8 +11,8 @@ export default class extends BaseSchema {
         .defaultTo(this.db.rawQuery('uuid_generate_v4()').knexQuery)
 
       table.string('username').notNullable()
-      table.string('email').notNullable().unique()
-      table.string('password').notNullable()
+      table.string('email').notNullable()
+      table.string('password').nullable()
       table.string('avatar').nullable()
       table.boolean('is_blocked').defaultTo(false)
       table.string('remember_me_token').nullable()

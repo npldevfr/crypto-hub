@@ -30,3 +30,7 @@ Route.get('/', async () => {
 
 Route.get('/api/header-data', 'HeadersController.index')
 Route.get('/cryptocurrency-data', 'CryptocurrencyDataController.index')
+
+Route.get('oauth/:provider/redirect', 'UsersAuthProvidersController.redirect')
+
+Route.get('oauth/:provider/callback', 'UsersAuthProvidersController.callback')

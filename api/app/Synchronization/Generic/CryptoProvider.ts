@@ -1,9 +1,9 @@
 import Env from '@ioc:Adonis/Core/Env'
+import {DateTime} from 'luxon'
+import ProviderKeyNotFoundException from '../../Exceptions/Synchronization/ProviderKeyNotFoundException'
 import Synchronization from 'App/Models/Synchronization'
 import Cryptocurrency from 'App/Models/Cryptocurrency'
 import CryptocurrencyData from 'App/Models/CryptocurrencyData'
-import {DateTime} from 'luxon'
-import ProviderKeyNotFoundException from 'App/Exceptions/Synchronization/ProviderKeyNotFoundException'
 
 interface CryptoProviderInterface {
 
@@ -153,7 +153,6 @@ export class CryptoProvider implements CryptoProviderInterface {
 
   /**
    * Collection of utilities for providers
-   * @param {T[]} datas
    */
   public static async getUtils<T extends { symbol: string }>(datas: T[] = []) {
     // Get all cryptocurrencies from database
