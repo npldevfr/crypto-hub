@@ -41,17 +41,6 @@ const allyConfig: AllyConfig = {
     clientSecret: Env.get("TWITTER_CLIENT_SECRET"),
     callbackUrl: "http://localhost:3333/oauth/twitter/callback",
   },
-  /*
-  |--------------------------------------------------------------------------
-  | Facebook driver
-  |--------------------------------------------------------------------------
-  */
-  facebook: {
-    driver: "facebook",
-    clientId: Env.get("FACEBOOK_CLIENT_ID"),
-    clientSecret: Env.get("FACEBOOK_CLIENT_SECRET"),
-    callbackUrl: "http://localhost:3333/facebook/callback",
-  },
 };
 
 export default allyConfig;

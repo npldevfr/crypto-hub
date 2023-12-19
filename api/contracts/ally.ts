@@ -5,19 +5,15 @@
  * file.
  */
 
-declare module '@ioc:Adonis/Addons/Ally' {
-	interface SocialProviders {
+declare module "@ioc:Adonis/Addons/Ally" {
+  interface SocialProviders {
     google: {
-      config: GoogleDriverConfig
-      implementation: GoogleDriverContract
-    }
-		twitter: {
-			config: TwitterDriverConfig
-			implementation: TwitterDriverContract
-		}
-    facebook: {
-      config: FacebookDriverConfig
-      implementation: FacebookDriverContract
-    }
-	}
+      config: GoogleDriverConfig;
+      implementation: GoogleDriverContract;
+    };
+    twitter: {
+      config: TwitterDriverConfig;
+      implementation: TwitterDriverContract;
+    };
+  }
 }
