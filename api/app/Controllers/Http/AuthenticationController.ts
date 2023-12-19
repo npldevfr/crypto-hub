@@ -3,7 +3,7 @@ import User from '../../Models/User'
 import {schema, rules, validator} from '@ioc:Adonis/Core/Validator'
 import {HttpContextContract} from '@ioc:Adonis/Core/HttpContext'
 
-export default class UsersController {
+export default class AuthenticationController {
   public async profile ({ auth }: HttpContextContract): Promise<User> {
     return await User
       .query()
@@ -57,7 +57,7 @@ export default class UsersController {
     })
 
     // Create new user
-    const user = await User.create({
+    const user: User = await User.create({
       username,
       email,
       password: await Hash.make(password),

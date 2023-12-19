@@ -15,6 +15,9 @@ export default class Cryptocurrency extends BaseModel {
   public name: string
 
   @column()
+  public sequence: number
+
+  @column()
   public logo: string
 
   @column.dateTime({ autoCreate: true, serializeAs: null })

@@ -6,12 +6,13 @@ import { $fetch } from "~/composables/use-fetch";
 import type { AfterFetchContext, OnFetchErrorContext } from "@vueuse/core";
 
 export interface User {
-  id: string;
-  email: string;
-  username: string;
-  avatar: string;
-  created_at: string;
-  roles: Role[];
+    id: string
+    email: string
+    username: string
+    avatar: string
+    created_at: string
+    roles: Role[]
+    is_blocked: boolean
 }
 
 export interface Role {
@@ -27,28 +28,22 @@ export function useAuth() {
   const login = () => {
     const errorMessage: Ref<string> = ref<string>("");
 
-    const { data, statusCode, isFetching, post } = $fetch(
-      "users/login",
-      {
-        method: "POST",
-      },
-      {
-        immediate: false,
-        onFetchError: ({ data }: OnFetchErrorContext<any>): any => {
-          errorMessage.value = data?.message || "Une erreur est survenue";
-        },
-        async afterFetch({
-          data,
-        }: AfterFetchContext<{ token: string; user: User }>): Promise<any> {
-          if (data?.token) {
-            errorMessage.value = "";
-            user.value = data.user;
-            token.value = data.token;
-            await router.push({ name: "index" });
-          }
-        },
-      }
-    ).json();
+        const { data, statusCode, isFetching, post } = $fetch('login', {
+            method: 'POST',
+        }, {
+            immediate: false,
+            onFetchError: ({ data }: OnFetchErrorContext<any>): any => {
+                errorMessage.value = data?.message || 'Une erreur est survenue'
+            },
+            async afterFetch({ data }: AfterFetchContext<{ token: string, user: User}>): Promise<any> {
+                if (data?.token) {
+                    errorMessage.value = ''
+                    user.value = data.user
+                    token.value = data.token
+                    await router.push({ name: 'index' })
+                }
+            },
+        }).json()
 
     return { data, isFetching, statusCode, post, errorMessage };
   };
@@ -56,36 +51,30 @@ export function useAuth() {
   const register = () => {
     const errorMessage: Ref<string> = ref<string>("");
 
-    const { post, isFetching } = $fetch(
-      "users/register",
-      {
-        method: "POST",
-      },
-      {
-        immediate: false,
-        onFetchError: ({ data }: OnFetchErrorContext<any>): any => {
-          errorMessage.value = data?.message || "Une erreur est survenue";
-        },
-        async afterFetch({
-          data,
-        }: AfterFetchContext<{ token: string; user: User }>): Promise<any> {
-          if (data?.token) {
-            errorMessage.value = "";
-            user.value = data.user;
-            token.value = data.token;
-            await router.push({ name: "index" });
-          }
-        },
-      }
-    ).json();
+        const { post, isFetching } = $fetch('register', {
+            method: 'POST',
+        }, {
+            immediate: false,
+            onFetchError: ({ data }: OnFetchErrorContext<any>): any => {
+                errorMessage.value = data?.message || 'Une erreur est survenue'
+            },
+            async afterFetch({ data }: AfterFetchContext<{ token: string, user: User}>): Promise<any> {
+                if (data?.token) {
+                    errorMessage.value = ''
+                    user.value = data.user
+                    token.value = data.token
+                    await router.push({ name: 'index' })
+                }
+            },
+        }).json()
 
     return { errorMessage, post, isFetching };
   };
 
-  const logout = async (): Promise<void> => {
-    await $fetch("users/logout", {
-      method: "POST",
-    });
+    const logout = async (): Promise<void> => {
+        await $fetch('logout', {
+            method: 'POST',
+        })
 
     user.value = null;
     token.value = null;
@@ -94,20 +83,16 @@ export function useAuth() {
   const whoami = async (): Promise<void> => {
     if (!token.value) return;
 
-    await $fetch<User>(
-      "users/profile",
-      {
-        method: "GET",
-      },
-      {
-        afterFetch({ data }: AfterFetchContext<User>): any {
-          if (data) {
-            user.value = data;
-          }
-        },
-      }
-    ).json();
-  };
+        await $fetch<User>('profile', {
+            method: 'GET',
+        }, {
+            afterFetch({ data }: AfterFetchContext<User>): any {
+                if (data) {
+                    user.value = data
+                }
+            }
+        }).json()
+    }
 
   const setUser = async (tokenFromString: string): Promise<void> => {
     token.value = tokenFromString;

@@ -9,7 +9,7 @@ const {title} = defineProps<{ title: string }>();
   <NavigationMenuItem>
     <template v-if="$slots.default">
       <NavigationMenuTrigger
-          class="text-stone-800 hover:bg-stone-200/40 group flex select-none items-center justify-between gap-[2px] rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none outline-none focus:shadow-[0_0_0_2px]"
+          class="text-stone-800 hover:bg-stone-200/40 group flex select-none items-center justify-between gap-[2px] rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none outline-none"
       >
         {{ title }}
         <div
@@ -23,7 +23,7 @@ const {title} = defineProps<{ title: string }>();
     </template>
     <template v-else>
       <div
-          class="cursor-pointer text-stone-800 hover:bg-stone-200/40 group flex select-none items-center justify-between gap-[2px] rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none outline-none focus:shadow-[0_0_0_2px]"
+          class="cursor-pointer text-stone-800 hover:bg-stone-200/40 group flex select-none items-center justify-between gap-[2px] rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none outline-none"
       >
         {{ title }}
       </div>

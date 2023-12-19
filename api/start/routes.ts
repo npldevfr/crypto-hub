@@ -17,21 +17,13 @@
 | import './routes/customer'
 |
 */
-
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.group((): void => {
-  // Authenticated routes (require a valid token)
-  Route.group((): void => {
-    Route.get('/profile', 'UsersController.profile')
-    Route.put('/profile', 'UsersController.update')
-    Route.post('/logout', 'UsersController.logout')
-  }).middleware('auth:api')
+import './routes/v1/users'
+import './routes/v1/article-source'
+import './routes/v1/authentication'
 
-  Route.post('/login', 'UsersController.login')
-  Route.post('/register', 'UsersController.register')
-}).prefix('/api/users')
-
+// TODO : remove theses routes under
 Route.get('/', async () => {
   return { hi: 'coucou from API !' }
 })
