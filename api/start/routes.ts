@@ -2,6 +2,7 @@ import Route from '@ioc:Adonis/Core/Route'
 
 import './routes/v1/authentication'
 import './routes/v1/users'
+import './routes/v1/cryptocurrencies'
 import './routes/v1/article-source'
 
 // TODO : remove theses routes under
