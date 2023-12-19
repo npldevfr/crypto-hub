@@ -38,7 +38,6 @@ test.group('User', async (): Promise<void> => {
       email: '',
       avatar: null,
       is_blocked: false,
-      remember_me_token: null,
       created_at: new Date(),
       roles:'',
     }
