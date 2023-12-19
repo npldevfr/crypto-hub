@@ -1,7 +1,7 @@
 import Parser from 'rss-parser'
 import Article from 'App/Models/Article'
 import ArticleSource from 'App/Models/ArticleSource'
-import NoTitleException from 'App/Exceptions/Rss/NoTilteExeptionException'
+import NoTitleException from '../app/Exceptions/Rss/NoTilteExeptionException'
 import { JSDOM } from 'jsdom'
 
 export default class RssFeedUpdater {

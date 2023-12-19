@@ -15,8 +15,12 @@ export default class extends BaseSchema {
       table.string('email').notNullable()
       table.string('username').notNullable()
       table.string('provider').notNullable()
-
-      table.uuid('user_id').references('id').inTable('users').onDelete('CASCADE')
+      table.string('provider_id').notNullable()
+      table
+        .uuid('user_id')
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

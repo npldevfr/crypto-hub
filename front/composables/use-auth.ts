@@ -1,9 +1,9 @@
-import type { ComputedRef, Ref } from 'vue'
-import { computed, ref } from 'vue'
-import type { Router } from 'vue-router'
-import { useRouter } from 'vue-router'
+import type { ComputedRef, Ref } from "vue";
+import { computed, ref } from "vue";
+import type { Router } from "vue-router";
+import { useRouter } from "vue-router";
 import { $fetch } from "~/composables/use-fetch";
-import type { AfterFetchContext, OnFetchErrorContext } from '@vueuse/core'
+import type { AfterFetchContext, OnFetchErrorContext } from "@vueuse/core";
 
 export interface User {
     id: string
@@ -16,14 +16,14 @@ export interface User {
 }
 
 export interface Role {
-    name: string
-    key: string
+  name: string;
+  key: string;
 }
 
 export function useAuth() {
-    const router: Router = useRouter()
-    const token = useCookie('crypto-token')
-    const user = useState<User | null>('user')
+  const router: Router = useRouter();
+  const token = useCookie("crypto-token");
+  const user = useState<User | null>("user");
 
     const authPrefix: string = '/users/'
 
@@ -47,11 +47,11 @@ export function useAuth() {
             },
         }).json()
 
-        return { data,isFetching, statusCode, post, errorMessage }
-    }
+    return { data, isFetching, statusCode, post, errorMessage };
+  };
 
-    const register = () => {
-        const errorMessage: Ref<string> = ref<string>('')
+  const register = () => {
+    const errorMessage: Ref<string> = ref<string>("");
 
         const { post, isFetching } = $fetch(authPrefix + 'register', {
             method: 'POST',
@@ -70,21 +70,20 @@ export function useAuth() {
             },
         }).json()
 
-        return { errorMessage, post, isFetching}
-    }
+    return { errorMessage, post, isFetching };
+  };
 
     const logout = async (): Promise<void> => {
         await $fetch(authPrefix + 'logout', {
             method: 'POST',
         })
 
-        user.value = null
-        token.value = null
-    }
+    user.value = null;
+    token.value = null;
+  };
 
-    const whoami = async (): Promise<void> => {
-        if (!token.value)
-            return
+  const whoami = async (): Promise<void> => {
+    if (!token.value) return;
 
         await $fetch<User>(authPrefix + 'profile', {
             method: 'GET',
@@ -97,16 +96,24 @@ export function useAuth() {
         }).json()
     }
 
-    const isLogged: ComputedRef<boolean> = computed(() => !!user.value)
-    const isUnauthenticated: ComputedRef<boolean> = computed(() => !isLogged.value)
+  const setUser = async (tokenFromString: string): Promise<void> => {
+    token.value = tokenFromString;
+    await whoami();
+  };
 
-    return {
-        user,
-        logout,
-        register,
-        login,
-        isLogged,
-        isUnauthenticated,
-        whoami,
-    }
+  const isLogged: ComputedRef<boolean> = computed(() => !!user.value);
+  const isUnauthenticated: ComputedRef<boolean> = computed(
+    () => !isLogged.value
+  );
+
+  return {
+    user,
+    logout,
+    register,
+    login,
+    isLogged,
+    isUnauthenticated,
+    whoami,
+    setUser,
+  };
 }

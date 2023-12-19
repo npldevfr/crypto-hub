@@ -1,5 +1,10 @@
 import { DateTime } from 'luxon'
-import {BaseModel, hasMany, column, manyToMany, ManyToMany, HasMany} from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel,
+  column,
+  manyToMany,
+  ManyToMany,
+} from '@ioc:Adonis/Lucid/Orm'
 import Role from './Role'
 import UsersAuthProvider from './UsersAuthProvider'
 
@@ -24,7 +29,7 @@ export default class User extends BaseModel {
   @column()
   public is_blocked: boolean
 
-  @column()
+  @column({ serializeAs: null })
   public remember_me_token: string
 
   @column.dateTime({ autoCreate: true })
