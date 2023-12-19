@@ -5,4 +5,6 @@ export default antfu({
     'vue/valid-template-root': 'off',
     'node/prefer-global/process': 'off',
   },
+  typescript: true,
+  vue: true,
 })
