@@ -15,7 +15,10 @@
       ],
       "Database/*": [
         "./database/*"
-      ]
+      ],
+      "Rss/*": [
+        "./rss/*"
+      ],
     },
     "types": [
       "@adonisjs/core",

@@ -1,8 +1,8 @@
 import { test } from '@japa/runner'
 import Database from '@ioc:Adonis/Lucid/Database'
+import RssFeedUpdater from 'Rss/rssFeedUpdater'
 import ArticleSource from '../../app/Models/ArticleSource'
 import Article from '../../app/Models/Article'
-import RssFeedUpdater from '../../rss/RssFeedUpdater'
 
 test.group('Feed updapter', async (group) => {
   group.each.setup(async () => {
