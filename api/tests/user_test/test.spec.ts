@@ -2,7 +2,7 @@ import { test } from '@japa/runner'
 import User from '../../app/Models/User'
 
 test.group('User', async (): Promise<void> => {
-  async function updateUserProfile (client, property: string, value: string, assert) {
+  async function updateUserProfile(client, property: string, value: string, assert) {
     const user = await User.findBy('email', 'admin@gmail.com')
 
     const modificationForm = { [property]: value }
@@ -39,10 +39,10 @@ test.group('User', async (): Promise<void> => {
       avatar: null,
       is_blocked: false,
       created_at: new Date(),
-      roles:'',
+      roles: '',
     }
     response.assertStatus(200)
-    const extraFields = Object.keys(body).filter((field) => !(field in expectedStructure))
+    const extraFields = Object.keys(body).filter(field => !(field in expectedStructure))
     assert.deepEqual(extraFields, [], `Unexpected fields found: ${extraFields.join(', ')}`)
 
     Object.keys(expectedStructure).forEach((field) => {
@@ -56,10 +56,10 @@ test.group('User', async (): Promise<void> => {
 
   test('can a person register', async ({ client, assert }) => {
     const registrationForm = {
-      'username': 'test',
-      'email': 'test@gmail.com',
-      'password': 'password',
-      'password_confirmation': 'password',
+      username: 'test',
+      email: 'test@gmail.com',
+      password: 'password',
+      password_confirmation: 'password',
     }
     const response = await client.post('/api/register').form(registrationForm)
     response.assertStatus(200)

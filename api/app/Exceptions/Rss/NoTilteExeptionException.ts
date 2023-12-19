@@ -13,7 +13,7 @@ import { Exception } from '@adonisjs/core/build/standalone'
 |
 */
 export default class NoTilteExeptionException extends Exception {
-  constructor () {
+  constructor() {
     super('No Title', 500, 'E_RUNTIME_EXCEPTION')
   }
 }

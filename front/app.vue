@@ -1,8 +1,8 @@
 <script setup lang="ts">
 useHead({
   bodyAttrs: {
-    class: 'bg-gray-50 '
-  }
+    class: 'bg-gray-50 ',
+  },
 })
 
 const { user, isLogged } = useAuth()
@@ -13,6 +13,6 @@ const { user, isLogged } = useAuth()
     Vous êtes bloqué
   </div>
   <NuxtLayout v-else>
-    <NuxtPage/>
+    <NuxtPage />
   </NuxtLayout>
 </template>

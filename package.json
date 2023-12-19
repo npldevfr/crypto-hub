@@ -1,22 +1,26 @@
 {
   "name": "crypto-hub",
+  "type": "module",
   "version": "0.5.0",
   "private": true,
   "description": "Manage and track your crypto portfolio",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "release": "bumpp ./package.json --recursive",
     "clean:node": "rimraf 'api/node_modules' 'front/node_modules' 'node_modules'",
     "start:all": "concurrently \"cd ./api && node ace serve --watch\" \"cd front && pnpm run dev\""
   },
-  "devDependencies": {
-    "bumpp": "^9.2.0",
-    "rimraf": "^5.0.5"
-  },
   "dependencies": {
     "concurrently": "^8.2.2",
-    "eslint": "^8.53.0",
     "lint-staged": "^15.2.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.4.6",
+    "bumpp": "^9.2.0",
+    "eslint": "^8.54.0",
+    "rimraf": "^5.0.5"
   },
   "lint-staged": {
     "*.{js,jsx,ts,vue}": [

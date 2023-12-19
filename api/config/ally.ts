@@ -6,7 +6,7 @@
  */
 
 import Env from '@ioc:Adonis/Core/Env'
-import { AllyConfig } from '@ioc:Adonis/Addons/Ally'
+import type { AllyConfig } from '@ioc:Adonis/Addons/Ally'
 
 /*
 |--------------------------------------------------------------------------

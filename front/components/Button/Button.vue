@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {tv} from "tailwind-variants";
+import { tv } from 'tailwind-variants'
 
 export interface ButtonProps {
   hierarchy?: 'primary' | 'secondary' | 'secondary-outline' | 'link'
@@ -9,23 +9,22 @@ export interface ButtonProps {
   danger?: boolean
 }
 
-const props = withDefaults(defineProps<ButtonProps>(),
-    {
-      danger: false,
-      disabled: false,
-      loading: false,
-      hierarchy: 'primary',
-      size: 'md'
+const props = withDefaults(defineProps<ButtonProps>(), {
+  danger: false,
+  disabled: false,
+  loading: false,
+  hierarchy: 'primary',
+  size: 'md',
 })
 
 const buttons = tv({
   base: 'rounded-md transition-[width,_height] duration-300 select-none flex items-center cursor-pointer font-500 justify-center space-x-2 transition duration-200 ease-in-out',
   variants: {
     hierarchy: {
-      primary: 'bg-stone-900 text-white hover:bg-stone-700',
-      secondary: 'bg-stone-500 text-white',
+      'primary': 'bg-stone-900 text-white hover:bg-stone-700',
+      'secondary': 'bg-stone-500 text-white',
       'secondary-outline': 'bg-white text-gray-500 border border-stone-500',
-      link: 'bg-transparent text-stone-900 hover:bg-stone-100',
+      'link': 'bg-transparent text-stone-900 hover:bg-stone-100',
     },
     size: {
       xs: 'text-xs px-2 py-1',
@@ -56,7 +55,7 @@ const buttons = tv({
 <template>
   <button :class="buttons({ danger, hierarchy, size, disabled, loading })">
     <slot name="prefix" />
-    <div class="i-svg-spinners-ring-resize mx-2" v-if="loading" />
+    <div v-if="loading" class="i-svg-spinners-ring-resize mx-2" />
     <slot />
     <slot name="suffix" />
   </button>

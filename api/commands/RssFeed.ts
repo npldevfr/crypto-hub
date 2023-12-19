@@ -27,7 +27,7 @@ export default class RssFeed extends BaseCommand {
     stayAlive: false,
   }
 
-  public async run () {
+  public async run() {
     await RssFeedUpdater.rssFeedPath()
   }
 }

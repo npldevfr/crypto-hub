@@ -1,26 +1,26 @@
 <script setup lang="ts">
-const { register } = useAuth();
+const { register } = useAuth()
 definePageMeta({
-  middleware: "not-autenticathed",
-});
+  middleware: 'not-autenticathed',
+})
 
-const { post, errorMessage, isFetching } = register();
+const { post, errorMessage, isFetching } = register()
 
 const registerForm = ref({
-  username: "test",
-  email: "test@gmail.com",
-  password: "test",
-  password_confirmation: "test",
-});
+  username: 'test',
+  email: 'test@gmail.com',
+  password: 'test',
+  password_confirmation: 'test',
+})
 
-const attemptRegister = async () => {
+async function attemptRegister() {
   await post({
     username: registerForm.value.username,
     email: registerForm.value.email,
     password: registerForm.value.password,
     password_confirmation: registerForm.value.password_confirmation,
-  }).execute();
-};
+  }).execute()
+}
 </script>
 
 <template>
@@ -30,7 +30,7 @@ const attemptRegister = async () => {
   <div class="flex flex-col items-center pt-10 justify-center">
     <div class="w-1/2">
       <Section title="Inscription" subtitle="Créez votre compte CryptoHUB">
-        <br />
+        <br>
 
         <SocialList>
           <SocialProvider provider-name="google" icon="i-logos-google-icon" />

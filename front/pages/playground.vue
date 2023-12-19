@@ -8,23 +8,26 @@ const loginForm = ref({
   password: 'admin',
 })
 
-const attemptLogin = async () => {
+async function attemptLogin() {
   await post({
     email: loginForm.value.email,
     password: loginForm.value.password,
   }).execute()
 }
-
 </script>
 
 <template>
   <div v-if="isUnauthenticated">
-    <div class="bg-red-200" @click="attemptLogin">Login</div>
-    <input v-model="loginForm.email" placeholder="email" />
-    <input v-model="loginForm.password" type="password" placeholder="password" />
+    <div class="bg-red-200" @click="attemptLogin">
+      Login
+    </div>
+    <input v-model="loginForm.email" placeholder="email">
+    <input v-model="loginForm.password" type="password" placeholder="password">
   </div>
   <div v-else>
-    <div class="bg-green-200" @click="logout">Logout</div>
+    <div class="bg-green-200" @click="logout">
+      Logout
+    </div>
     <pre>{{ user }}</pre>
   </div>
 </template>

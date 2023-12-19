@@ -1,4 +1,4 @@
-import { test} from '@japa/runner'
+import { test } from '@japa/runner'
 import User from '../../app/Models/User'
 
 test.group('User Controller', async () => {
@@ -12,7 +12,7 @@ test.group('User Controller', async () => {
 
   test('paginated index ')
     .with([guest])
-    .run(async ({ client, assert, route}, user) => {
+    .run(async ({ client, assert, route }, user) => {
       console.log(user)
       const response = await client.get(route('users.index')).loginAs(user)
 

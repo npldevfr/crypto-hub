@@ -3,7 +3,7 @@
 ## Documentation
 > [Official documentation](https://nuxt.com/)
 
-## Directories & Files 
+## Directories & Files
 - `nuxt.config.ts` - Nuxt configuration file
 - `components/` - Components
 - `layouts/` - Layouts

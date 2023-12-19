@@ -33,7 +33,7 @@ jobs:
 
       - uses: KengoTODA/actions-setup-docker-compose@v1
         with:
-          version: '2.14.2'
+          version: 2.14.2
 
       - name: Set up PostgreSQL with Docker Compose
         run: |

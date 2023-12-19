@@ -2,12 +2,10 @@
 import { PaginationEllipsis, PaginationFirst, PaginationLast, PaginationList, PaginationListItem, PaginationNext, PaginationPrev, PaginationRoot } from 'radix-vue'
 import type { PaginationRootProps } from 'radix-vue'
 
-
-const page = defineModel<number>('page', {
-  default: 1
-})
 const props = defineProps<PaginationRootProps>()
-
+const page = defineModel<number>('page', {
+  default: 1,
+})
 </script>
 
 <template>

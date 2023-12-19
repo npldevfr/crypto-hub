@@ -28,7 +28,8 @@ test.group('Native methods', async (): Promise<void> => {
   test('checks if getApiKey() returns an error', async ({ assert }): Promise<void> => {
     try {
       cryptoProvider.getApiKey()
-    } catch (e) {
+    }
+    catch (e) {
       assert.instanceOf(e, ProviderKeyNotFoundException)
     }
   })

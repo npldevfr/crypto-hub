@@ -41,6 +41,6 @@ Server.middleware.register([
 |
 */
 Server.middleware.registerNamed({
-  // @ts-ignore
+  // @ts-expect-error
   auth: () => import('App/Middleware/Auth'),
 })

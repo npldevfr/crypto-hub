@@ -1,8 +1,7 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-    const { isLogged } = useAuth()
-    const router = useRouter()
+  const { isLogged } = useAuth()
+  const router = useRouter()
 
-    if (isLogged.value) {
-        return router.push({name: 'index'})
-    }
+  if (isLogged.value)
+    return router.push({ name: 'index' })
 })

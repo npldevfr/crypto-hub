@@ -1,9 +1,9 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-import {ModelPaginatorContract} from '@ioc:Adonis/Lucid/Orm'
+import type { ModelPaginatorContract } from '@ioc:Adonis/Lucid/Orm'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { rules, schema, validator } from '@ioc:Adonis/Core/Validator'
 import User from '../../Models/User'
-import {HttpContextContract} from '@ioc:Adonis/Core/HttpContext'
-import {rules, schema, validator} from '@ioc:Adonis/Core/Validator'
 
 export default class UserController {
   /**
@@ -14,7 +14,7 @@ export default class UserController {
    * - perPage: number
    * @returns {Promise<ModelPaginatorContract<User>>}
    */
-  public async index ({ request }: HttpContextContract): Promise<ModelPaginatorContract<User>> {
+  public async index({ request }: HttpContextContract): Promise<ModelPaginatorContract<User>> {
     const { page, perPage, sortBy, sortDirection, query } = request.qs()
 
     let usersQuery = User.query().preload('roles')
@@ -22,7 +22,7 @@ export default class UserController {
     // If search query is present and has more than 2 characters, apply search filter
     if (query && query.length > 2) {
       usersQuery = usersQuery
-        .whereILike('email',`%${query}%`)
+        .whereILike('email', `%${query}%`)
         .orWhereILike('username', `%${query}%`)
         .orWhereHas('roles', (builder) => {
           builder.whereILike('name', `%${query}%`)
@@ -36,7 +36,7 @@ export default class UserController {
   /**
    * Get user by id
    */
-  public async show ({ params }: HttpContextContract): Promise<User> {
+  public async show({ params }: HttpContextContract): Promise<User> {
     return await User
       .query()
       .preload('roles')
@@ -48,7 +48,7 @@ export default class UserController {
   /**
    * Get user by id and delete it
    */
-  public async destroy ({ params, response }: HttpContextContract): Promise<void> {
+  public async destroy({ params, response }: HttpContextContract): Promise<void> {
     const user: User = await User
       .query()
       .where('id', params.id)
@@ -63,7 +63,7 @@ export default class UserController {
   /**
    * Update user details (email, username) by id
    */
-  public async update ({ params, request, response }: HttpContextContract): Promise<void> {
+  public async update({ params, request, response }: HttpContextContract): Promise<void> {
     const updateValidation = schema.create({
       username: schema.string(),
       email: schema.string({}, [
@@ -71,7 +71,7 @@ export default class UserController {
       ]),
     })
 
-    const { email, username} = await validator.validate({
+    const { email, username } = await validator.validate({
       schema: updateValidation,
       data: request.all(),
     })
@@ -94,7 +94,7 @@ export default class UserController {
   /**
    * Toggle user block status
    */
-  public async toggleBlock ({ params, response }: HttpContextContract): Promise<void> {
+  public async toggleBlock({ params, response }: HttpContextContract): Promise<void> {
     const user: User = await User
       .query()
       .where('id', params.id)
@@ -112,7 +112,7 @@ export default class UserController {
   /**
    * Login as user
    */
-  public async loginAs ({ params, response, auth}: HttpContextContract): Promise<void> {
+  public async loginAs({ params, response, auth }: HttpContextContract): Promise<void> {
     const user: User = await User
       .query()
       .preload('roles')

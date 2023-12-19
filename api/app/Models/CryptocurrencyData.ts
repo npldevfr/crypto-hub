@@ -1,5 +1,6 @@
-import { DateTime } from 'luxon'
-import {BaseModel, column, BelongsTo,belongsTo} from '@ioc:Adonis/Lucid/Orm'
+import type { DateTime } from 'luxon'
+import type { BelongsTo } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import Cryptocurrency from 'App/Models/Cryptocurrency'
 
 export default class CryptocurrencyData extends BaseModel {
@@ -21,7 +22,7 @@ export default class CryptocurrencyData extends BaseModel {
   @column()
   public lastOriginUpdate: DateTime
 
-  @column({ serializeAs: null})
+  @column({ serializeAs: null })
   public cryptocurrencyId: string
 
   @column.dateTime({ autoCreate: true, serializeAs: null })

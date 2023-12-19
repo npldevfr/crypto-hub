@@ -13,7 +13,7 @@ import { Exception } from '@adonisjs/core/build/standalone'
 |
 */
 export default class ProviderKeyNotFoundException extends Exception {
-  constructor (providerName: string) {
+  constructor(providerName: string) {
     super(`API key for provider ${providerName} not found. Please set CRYPTO_PROVIDER_${providerName.toUpperCase()}_API_KEY in your .env file`, 500, 'E_RUNTIME_EXCEPTION')
   }
 }

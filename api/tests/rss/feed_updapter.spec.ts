@@ -10,7 +10,7 @@ test.group('Feed updapter', async (group) => {
     return () => Database.rollbackGlobalTransaction()
   })
 
-  test('should insert articles from active sources', async ({assert}) => {
+  test('should insert articles from active sources', async ({ assert }) => {
     // Setup
     const source = new ArticleSource()
     source.name = 'Coinacademy'
@@ -26,7 +26,7 @@ test.group('Feed updapter', async (group) => {
     assert.equal(articles.length > 0, true)
   })
 
-  test('should not insert articles from inactive sources', async ({assert}) => {
+  test('should not insert articles from inactive sources', async ({ assert }) => {
     // Setup
     const source = new ArticleSource()
     source.name = 'Coinacademy'

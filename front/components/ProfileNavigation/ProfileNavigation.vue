@@ -2,6 +2,6 @@
 
 <template>
   <nav>
-    <slot></slot>
+    <slot />
   </nav>
 </template>

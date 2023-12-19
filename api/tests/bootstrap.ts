@@ -7,7 +7,7 @@
 
 import type { Config } from '@japa/runner'
 import TestUtils from '@ioc:Adonis/Core/TestUtils'
-import { assert, runFailedTests, specReporter, apiClient } from '@japa/preset-adonis'
+import { apiClient, assert, runFailedTests, specReporter } from '@japa/preset-adonis'
 
 /*
 |--------------------------------------------------------------------------
@@ -67,8 +67,7 @@ export const runnerHooks: Pick<Required<Config>, 'setup' | 'teardown'> = {
 | the HTTP server when it is a functional suite.
 */
 export const configureSuite: Required<Config>['configureSuite'] = (suite) => {
-  const testsuites= ['functional','user_test']
-  if (testsuites.includes(suite.name)) {
+  const testsuites = ['functional', 'user_test']
+  if (testsuites.includes(suite.name))
     suite.setup(() => TestUtils.httpServer().start())
-  }
 }

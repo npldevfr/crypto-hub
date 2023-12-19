@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type {User} from "~/composables/use-auth";
+import type { User } from '~/composables/use-auth'
 
 const props = defineProps<{
   user: User
@@ -8,7 +8,6 @@ const props = defineProps<{
 const emits = defineEmits<{
   (e: 'close'): void
 }>()
-
 </script>
 
 <template>
@@ -22,22 +21,21 @@ const emits = defineEmits<{
           {{ user.email }}
         </p>
       </div>
-      <div @click="emits('close')" class="w-6 h-6 cursor-pointer flex items-center justify-center rounded-full bg-stone-200 hover:bg-stone-900 hover:text-white transition">
-        <div class="i-mdi-close"/>
+      <div class="w-6 h-6 cursor-pointer flex items-center justify-center rounded-full bg-stone-200 hover:bg-stone-900 hover:text-white transition" @click="emits('close')">
+        <div class="i-mdi-close" />
       </div>
     </div>
 
-    <ButtonGroup size="sm" :buttons="[
-       {
-         label: 'Supprimer l\'utilisateur',
-         danger: true,
-         handle: () => {
+    <ButtonGroup
+      size="sm" :buttons="[
+        {
+          label: 'Supprimer l\'utilisateur',
+          danger: true,
+          handle: () => {
             console.log('delete')
-         }
-       }
-    ]" />
-
+          },
+        },
+      ]"
+    />
   </div>
 </template>
-
-

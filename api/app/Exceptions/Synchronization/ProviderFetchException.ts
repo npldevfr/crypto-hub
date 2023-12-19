@@ -13,7 +13,7 @@ import { Exception } from '@adonisjs/core/build/standalone'
 |
 */
 export default class ProviderFetchException extends Exception {
-  constructor (provider: string, message: string) {
+  constructor(provider: string, message: string) {
     super(`An error occured while fetching data from ${provider}: ${message}`, 500, 'E_RUNTIME_EXCEPTION')
   }
 }

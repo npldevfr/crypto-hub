@@ -1,10 +1,10 @@
 import Hash from '@ioc:Adonis/Core/Hash'
+import { rules, schema, validator } from '@ioc:Adonis/Core/Validator'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from '../../Models/User'
-import {schema, rules, validator} from '@ioc:Adonis/Core/Validator'
-import {HttpContextContract} from '@ioc:Adonis/Core/HttpContext'
 
 export default class AuthenticationController {
-  public async profile ({ auth }: HttpContextContract): Promise<User> {
+  public async profile({ auth }: HttpContextContract): Promise<User> {
     return await User
       .query()
       .preload('roles')
@@ -12,7 +12,7 @@ export default class AuthenticationController {
       .firstOrFail()
   }
 
-  public async login ({ auth, request }: HttpContextContract): Promise<{ token: string, user: User }> {
+  public async login({ auth, request }: HttpContextContract): Promise<{ token: string, user: User }> {
     // Get user input
     const credentialsValidation = schema.create({
       email: schema.string(),
@@ -33,12 +33,12 @@ export default class AuthenticationController {
     return { token, user }
   }
 
-  public async logout ({ auth, response}: HttpContextContract): Promise<void> {
+  public async logout({ auth, response }: HttpContextContract): Promise<void> {
     await auth.use('api').revoke()
     return response.noContent()
   }
 
-  public async register ({ request, auth }: HttpContextContract) {
+  public async register({ request, auth }: HttpContextContract) {
     // Get user input for registration
     const registerValidation = schema.create({
       username: schema.string(),
@@ -51,7 +51,7 @@ export default class AuthenticationController {
     })
 
     // Validate user input and throw validation error if validation fails
-    const { email, password, username} = await validator.validate({
+    const { email, password, username } = await validator.validate({
       schema: registerValidation,
       data: request.all(),
     })
@@ -71,7 +71,7 @@ export default class AuthenticationController {
     }
   }
 
-  public async update ({ auth, request }: HttpContextContract){
+  public async update({ auth, request }: HttpContextContract) {
     await auth.use('api').authenticate()
 
     try {
@@ -81,13 +81,14 @@ export default class AuthenticationController {
 
       const newPassword = request.input('password')
 
-      if (newPassword) {
+      if (newPassword)
         user.password = await Hash.make(newPassword)
-      }
+
       await user?.save()
 
       return { message: 'Profile updated successfully', user }
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Profile update error:', error.message)
       return { message: 'Profile update failed' }
     }
