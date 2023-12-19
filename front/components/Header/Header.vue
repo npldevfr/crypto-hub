@@ -43,7 +43,7 @@ const dropdownItems: DropdownItemProps[] = [
         <NavigationLink title="Convertisseur"/>
       </Navigation>
     </div>
-    <div class="flex flex-row justify-end items-center space-x-10 ">
+    <div class="flex flex-row w-full justify-end items-center space-x-10 ">
       <div class="flex items-center gap-2" v-if="isLogged">
         <div class="flex flex-col justify-center leading-5 items-end">
           {{ user?.username }}

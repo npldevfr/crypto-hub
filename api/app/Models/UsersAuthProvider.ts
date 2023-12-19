@@ -22,10 +22,10 @@ export default class UsersAuthProvider extends BaseModel {
   @column()
   public provider: string
 
-  @column()
-  public provider_id: string
   @column({ serializeAs: null })
+  public provider_id: string
 
+  @column({ serializeAs: null })
   public userId: string
 
   @column.dateTime({ autoCreate: true })
@@ -36,4 +36,7 @@ export default class UsersAuthProvider extends BaseModel {
 
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>
+
+  @belongsTo(() => User)
+  public user_id: BelongsTo<typeof User>
 }

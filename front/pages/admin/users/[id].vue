@@ -43,6 +43,10 @@ const { post: loginAsUser } = loginAs(user_id)
   <Avatar
       :src="user?.avatar" :alt="user?.username" size="profile" />
 
+  Connecté avec {{ user?.providers.map((provider) => {
+     return provider.provider
+  }).join(',') }}
+
   <FormKit v-if="user"
       type="form"
            :disabled="isProcessing"

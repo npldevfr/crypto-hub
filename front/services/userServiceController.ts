@@ -56,18 +56,14 @@ export function userServiceController() {
 
     const loginAs = (user_id: Pick<User, 'id'>['id']) => {
 
-        const { user } = useAuth()
-        const router = useRouter()
-        const token = useCookie('token')
+        const { setUser } = useAuth()
 
         return $fetch(`/users/${user_id}/login-as`, {
             immediate: false,
-            async afterFetch({ data }: AfterFetchContext<{ token: string, user: User}>): Promise<any> {
-                if (data?.token) {
-                    user.value = data.user
-                    token.value = data.token
-                    await router.push({ name: 'index' })
-                }
+            async afterFetch({ data }: AfterFetchContext<{ token: string }>): Promise<any> {
+                if (data?.token)
+                    await setUser(data?.token)
+
             },
         }).json<User>()
     }

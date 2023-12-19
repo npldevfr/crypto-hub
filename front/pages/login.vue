@@ -11,7 +11,7 @@ const { setUser } = useAuth();
 onMounted(async () => {
   if (route.query.token) {
     await setUser(route.query.token as string);
-    router.push("/");
+    await router.push("/");
   }
 });
 const { post, errorMessage, isFetching } = login();

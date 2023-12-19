@@ -2,6 +2,8 @@ import { DateTime } from 'luxon'
 import {
   BaseModel,
   column,
+  HasMany,
+  hasMany,
   manyToMany,
   ManyToMany,
 } from '@ioc:Adonis/Lucid/Orm'
@@ -42,7 +44,7 @@ export default class User extends BaseModel {
   public roles: ManyToMany<typeof Role>
 
   @hasMany(() => UsersAuthProvider)
-  public authProviders: HasMany<typeof UsersAuthProvider>
+  public providers: HasMany<typeof UsersAuthProvider>
 
   public hasPowerMoreThan (power: number): boolean {
     return this.roles.reduce((hasPower: boolean, role: Role) => {

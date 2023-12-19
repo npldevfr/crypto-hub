@@ -24,9 +24,6 @@ export default class UsersAuthProvidersController {
       JSON.stringify(await statelessConnection.user())
     )
 
-    console.log('Provider:', params.provider)
-    console.log('Provider_id:', socialUser.id)
-
     let userAuthProvider = await UsersAuthProvider.query()
       .preload('user')
       .where('provider_id', socialUser.id)
@@ -39,6 +36,7 @@ export default class UsersAuthProvidersController {
     if (!userAuthProvider) {
       await User.create({
         email: socialUser.email,
+        avatar: socialUser.avatarUrl,
         username: socialUser.name,
         password: '',
       })

@@ -40,6 +40,7 @@ export default class UserController {
     return await User
       .query()
       .preload('roles')
+      .preload('providers')
       .where('id', params.id)
       .firstOrFail()
   }
