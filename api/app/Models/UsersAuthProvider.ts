@@ -4,6 +4,32 @@ import { BaseModel, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 
 import User from './User'
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    UsersAuthProvider:
+ *      type: object
+ *      properties:
+ *        id:
+ *          type: string
+ *          format: uuid
+ *        refreshToken:
+ *          type: string
+ *        expiration:
+ *          type: string
+ *          format: date-time
+ *        email:
+ *          type: string
+ *        username:
+ *          type: string
+ *        provider:
+ *          type: string
+ *        provider_id:
+ *          type: string
+ *        userId:
+ *          type: string
+ */
 export default class UsersAuthProvider extends BaseModel {
   @column({ isPrimary: true })
   public id: string

@@ -16,6 +16,37 @@ import UsersAuthProvider from './UsersAuthProvider'
 
 type UserQuery = ModelQueryBuilderContract<typeof User>
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           format: uuid
+ *         username:
+ *           type: string
+ *         email:
+ *           type: string
+ *         password:
+ *           type: string
+ *         avatar:
+ *           type: string
+ *         is_blocked:
+ *           type: boolean
+ *         remember_me_token:
+ *           type: string
+ *         roles:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/Role'
+ *         providers:
+ *          type: array
+ *          items:
+ *          $ref: '#/components/schemas/UsersAuthProvider'
+ */
 export default class User extends BaseModel {
   public static selfAssignPrimaryKey = true
 
