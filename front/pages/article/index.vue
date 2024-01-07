@@ -17,7 +17,7 @@ const { data: articles } = index();
         image-url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQARfTOMEBVV1_3fc3Ga_9E_UZ1pBnSGRHCG-qkB-3czg&s"
         additional-info="Information supplémentaire"
         avatar-url="https://exemple.com/avatar.jpg"
-        :tags="['#Crypto', '#News', '#winter']"
+        :tags="['#Crypto', '#News']"
         :date="article.created_at.split('T')[0]"
       />
     </NuxtLink>
@@ -32,12 +32,10 @@ const { data: articles } = index();
       <CardNews
         vertical-layout
         card-height="medium"
-        image-url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQARfTOMEBVV1_3fc3Ga_9E_UZ1pBnSGRHCG-qkB-3czg&s"
         :title="article.name"
         description="Description ici..."
-        author-name="Nom de l'Auteur"
         additional-info="Informations supplémentaires"
-        :tags="['Tag1', 'Tag2']"
+        :tags="['Actu', 'Tag2']"
         :date="article.created_at.split('T')[0]"
       />
       <br />

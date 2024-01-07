@@ -9,6 +9,8 @@ const { data: articlesAll } = index();
 
 <template>
   <div v-if="articles" class="px-20 py-15">
+    <h2 class="text-center my-5">Les Actualités Crypto Récentes</h2>
+
     <NuxtLink
       v-for="(article, index) in articles"
       :key="index"
@@ -24,6 +26,7 @@ const { data: articlesAll } = index();
       />
     </NuxtLink>
   </div>
+  <h2 class="text-center my-5">Retrouvez toute l'actualité ici</h2>
 
   <swiper
     :slides-per-view="3"
