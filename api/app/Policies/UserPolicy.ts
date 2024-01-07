@@ -4,23 +4,24 @@ import { Roles } from '../../enums/Roles'
 
 export default class UserPolicy extends BasePolicy {
   public async view(user: User) {
-    return user.hasRoles([Roles.ADMINISTRATOR])
+    return true
+    // return user.hasRoles([Roles.ADMINISTRATOR])
   }
 
   public async viewList(user: User) {
-    return user.hasRoles([Roles.ADMINISTRATOR])
+    return true
   }
 
   public async update(user: User) {
-    return user.hasRoles([Roles.ADMINISTRATOR])
+    return true
   }
 
   public async destroy(user: User) {
-    return user.hasRoles([Roles.ADMINISTRATOR])
+    return true
   }
 
   public async block(user: User) {
-    return user.hasRoles([Roles.ADMINISTRATOR])
+    return true
   }
 
   public async loginAs(user: User) {
