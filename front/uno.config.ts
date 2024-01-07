@@ -4,9 +4,16 @@ export default defineConfig({
   presets: [
     presetMini(),
     presetUno(),
-    presetWebFonts(),
     presetWind(),
     presetIcons(),
+    presetWebFonts({
+      provider: 'google',
+      fonts: {
+        inter: 'Inter:300,400,500,600,700',
+        old: 'DM Serif Text:300,400,500,600,700',
+        lexend: 'Lexend Deca:300,400,500,600,700',
+      },
+    }),
   ],
   theme: {
     animation: {
