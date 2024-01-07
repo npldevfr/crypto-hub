@@ -46,12 +46,11 @@ export function useAuth() {
       onFetchError: ({ data }: OnFetchErrorContext<any>): any => {
         errorMessage.value = data?.message || 'Une erreur est survenue'
       },
-      async afterFetch(afterFetchContext: AfterFetchContext<{ token: string, user: User }>): Promise<any> {
-        if (afterFetchContext.data?.token) {
-          token.value = null
+      async afterFetch({ data }: AfterFetchContext<{ token: string, user: User }>): Promise<any> {
+        if (data?.token) {
           errorMessage.value = ''
-          token.value = afterFetchContext.data.token
-          user.value = afterFetchContext.data.user
+          user.value = data.user
+          token.value = data.token
           await router.push({ name: 'index' })
         }
       },
