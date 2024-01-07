@@ -5,6 +5,7 @@ Route.group((): void => {
    * Manage RSS sources
    */
   Route.resource('article-sources', 'ArticleSourcesController')
+    .paramFor('article-sources', 'slug')
     .only(['index', 'show', 'destroy'])
 
   Route.group((): void => {
