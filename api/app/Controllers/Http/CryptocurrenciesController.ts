@@ -3,18 +3,64 @@ import { schema, validator } from '@ioc:Adonis/Core/Validator'
 import Cryptocurrency from '../../Models/Cryptocurrency'
 
 export default class CryptocurrenciesController {
-  // crud de la base de donnée des cryptocurrencies
-  // list of Cryptocurrencies
-  public async listCryptocurrencies() {
-    return await Cryptocurrency.all()
-  }
+    // crud de la base de donnée des cryptocurrencies
 
-    //List of Cryptocurrencies
+    /**
+   * @swagger
+   * /api/cryptocurrencies:
+   *   get:
+   *     tags:
+   *       - Cryptocurrencies
+   *     description: Get all Cryptocurrencies
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Success
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: array
+   *               items:
+   *                 $ref: '#/components/schemas/Cryptocurrency'
+   */
     public async index() {
         return await Cryptocurrency.all()
     }
 
-    //Return one Cryptocurrency
+    /**
+   * @swagger
+   * /api/cryptocurrencies/{slug}:
+   *   get:
+   *     tags:
+   *       - Cryptocurrencies
+   *     description: Get details of a specific cryptocurrency
+   *     parameters:
+   *       - name: slug
+   *         slug: path
+   *         required: true
+   *         schema:
+   *           type: string
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Success
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Cryptocurrency'
+   *       404:
+   *         description: Not Found
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 error:
+   *                   type: string
+   *                   example: 'This slug is not affected to a Cryptocurrency'
+   */
     public async show({ response, request }: HttpContextContract) {
         try {
             return await Cryptocurrency.findByOrFail('slug', request.param('slug'));
@@ -24,7 +70,39 @@ export default class CryptocurrenciesController {
         }
     }
 
-    //Add a new Cryptocurrency
+    /**
+   * @swagger
+   * /api/cryptocurrencies/create:
+   *   post:
+   *     tags:
+   *       - Cryptocurrencies
+   *     description: Create a cryptocurrency
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *               $ref: '#/components/schemas/Cryptocurrency'
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Success
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Cryptocurrency'
+   *       406:
+   *         description: Not Acceptable
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 error:
+   *                   type: string
+   *                   example: 'A Cryptocurrency already exist with this slug'
+   */
     public async create({ request, response }: HttpContextContract) {
         try {
             const registerValidation = schema.create({
@@ -52,8 +130,35 @@ export default class CryptocurrenciesController {
             })
         }
     }
-
-    //Delete One Cryptocurrency
+    /**
+   * @swagger
+   * /api/cryptocurrencies/{slug}:
+   *   delete:
+   *     tags:
+   *       - Cryptocurrencies
+   *     description: Delete a specific cryptocurrency
+   *     parameters:
+   *       - name: slug
+   *         slug: path
+   *         required: true
+   *         schema:
+   *           type: string
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Success
+   *       406:
+   *         description: Not Acceptable
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 error:
+   *                   type: string
+   *                   example: 'Cryptocurrency deletion failed'
+   */
     public async destroy({ request, response }: HttpContextContract) {
         try {
             const cryptoToDelete = await Cryptocurrency.findByOrFail('slug', request.param('slug'))
@@ -66,11 +171,40 @@ export default class CryptocurrenciesController {
             return null
         }
     }
-    else {
-      return { message: 'Profile deletion failed' }
-    }
-  }
 
+    /**
+   * @swagger
+   * /api/cryptocurrencies/{slug}:
+   *   put:
+   *     tags:
+   *       - Cryptocurrencies
+   *     description: Create a cryptocurrency
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *               $ref: '#/components/schemas/Cryptocurrency'
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Success
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Cryptocurrency'
+   *       404:
+   *         description: Not Modified
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 error:
+   *                   type: string
+   *                   example: 'Cryptocurrency updating failed'
+   */
     //Update one Cryptocurrency
     public async update({ request, response }: HttpContextContract) {
         try {
@@ -85,13 +219,9 @@ export default class CryptocurrenciesController {
             return { message: 'Profile updated successfully', cryptocurrency }
 
         } catch (e) {
-            response.notModified({ error: 'Cryptocurrency deletion failed' })
+            response.notModified({ error: 'Cryptocurrency updating failed' })
             return null
         }
 
     }
-    else {
-      return { message: 'No profile find with this slug' }
-    }
-  }
 }
