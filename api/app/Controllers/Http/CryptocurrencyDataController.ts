@@ -6,6 +6,37 @@ import { format, subMonths } from 'date-fns'
 import Cryptocurrency from 'App/Models/Cryptocurrency'
 
 export default class CryptocurrencyDataController {
+  /**
+   * @swagger
+   * /api/cryptocurrencies-data/{slug}:
+   *   get:
+   *     tags:
+   *       - Cryptocurrencies
+   *     description: Get data of a specific cryptocurrency
+   *     parameters:
+   *       - name: slug
+   *         slug: path
+   *         required: true
+   *         schema:
+   *           type: string
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Success
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Cryptocurrency'
+   *       404:
+   *         description: Not Found
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 error:
+   */
   public async show({ params, request }: HttpContextContract) {
     const cachedDateFormat = 'yyyy-MM-dd HH'
 

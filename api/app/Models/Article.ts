@@ -1,6 +1,27 @@
 import type { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Article:
+ *      type: object
+ *      properties:
+ *        id:
+ *          type: string
+ *          format: uuid
+ *        slug:
+ *          type: string
+ *        name:
+ *          type: string
+ *        content:
+ *          type: string
+ *        image_url:
+ *          type: string
+ *        article_source_id:
+ *          type: string
+ */
 export default class Article extends BaseModel {
   @column({ isPrimary: true })
   public id: string

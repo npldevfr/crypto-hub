@@ -7,12 +7,25 @@ import User from '../../Models/User'
 
 export default class UserController {
   /**
-   * Get all users
-   * @param {HttpContextContract} ctx
-   * In the body, you can pass the following parameters:
-   * - page: number
-   * - perPage: number
-   * @returns {Promise<ModelPaginatorContract<User>>} Users paginated list
+   * @swagger
+   * /api/users:
+   *  get:
+   *    tags:
+   *      - Users
+   *    description: Get all users
+   *    produces:
+   *      - application/json
+   *    responses:
+   *      200:
+   *         description: Success
+   *         content:
+   *          application/json:
+   *            schema:
+   *              type: array
+   *              items:
+   *                $ref: '#/components/schemas/User'
+   * @param request
+   * @param bouncer
    */
   public async index({ request, bouncer }: HttpContextContract): Promise<ModelPaginatorContract<User>> {
     await bouncer.with('UserPolicy').authorize('viewList')
@@ -35,7 +48,31 @@ export default class UserController {
   }
 
   /**
-   * Get user by id
+   * @swagger
+   * /api/users/{id}:
+   *   get:
+   *     tags:
+   *       - Users
+   *     description: Get details of a specific user
+   *     parameters:
+   *       - name: id
+   *         in: path
+   *         required: true
+   *         schema:
+   *           type: string
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Success
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/User'
+   *       406:
+   *         description: Not Acceptable
+   * @param params
+   * @param bouncer
    */
   public async show({ params, bouncer }: HttpContextContract): Promise<User> {
     await bouncer.with('UserPolicy').authorize('view')
@@ -49,7 +86,33 @@ export default class UserController {
   }
 
   /**
-   * Get user by id and delete it
+   * @swagger
+   * /api/users:
+   *   post:
+   *     tags:
+   *       - Users
+   *     description: Create a new user
+   *     produces:
+   *       - application/json
+   *     requestBody:
+   *       description: User object
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/User'
+   *     responses:
+   *       201:
+   *         description: Success
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/User'
+   *       406:
+   *         description: Not Acceptable
+   * @param request
+   * @param response
+   * @param bouncer
    */
   public async destroy({ params, response, bouncer }: HttpContextContract): Promise<void> {
     await bouncer.with('UserPolicy').authorize('destroy')
@@ -66,7 +129,34 @@ export default class UserController {
   }
 
   /**
-   * Update user details (email, username) by id
+   * @swagger
+   * /api/users/{id}:
+   *   put:
+   *     tags:
+   *       - Users
+   *     description: Update a user
+   *     produces:
+   *       - application/json
+   *     requestBody:
+   *       description: User object
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/User'
+   *     responses:
+   *       200:
+   *         description: Success
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/User'
+   *       406:
+   *         description: Not Acceptable
+   * @param params
+   * @param request
+   * @param response
+   * @param bouncer
    */
   public async update({ params, request, response, bouncer }: HttpContextContract): Promise<void> {
     await bouncer.with('UserPolicy').authorize('update')
@@ -99,7 +189,26 @@ export default class UserController {
   }
 
   /**
-   * Toggle user block status
+   * @swagger
+   * /api/users/{id}/toggle-block:
+   *   post:
+   *     tags:
+   *       - Users
+   *     description: Toggle block status of a user
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Success
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/User'
+   *       406:
+   *         description: Not Acceptable
+   * @param params
+   * @param response
+   * @param bouncer
    */
   public async toggleBlock({ params, response, bouncer }: HttpContextContract): Promise<void> {
     await bouncer.with('UserPolicy').authorize('block')
@@ -119,7 +228,36 @@ export default class UserController {
   }
 
   /**
-   * Login as user
+   * @swagger
+   * /api/users/{id}/login-as:
+   *   post:
+   *     tags:
+   *       - Users
+   *     description: Login as a specific user
+   *     produces:
+   *       - application/json
+   *     responses:
+   *       200:
+   *         description: Success
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 message:
+   *                   type: string
+   *                   example: 'User logged in successfully'
+   *                 token:
+   *                   type: string
+   *                   example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+   *                 user:
+   *                   $ref: '#/components/schemas/User'
+   *       406:
+   *         description: Not Acceptable
+   * @param params
+   * @param response
+   * @param auth
+   * @param bouncer
    */
   public async loginAs({ params, response, auth, bouncer }: HttpContextContract): Promise<void> {
     await bouncer.with('UserPolicy').authorize('loginAs')
