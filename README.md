@@ -17,7 +17,7 @@ cd ./api && cp .env.example .env && cd ..
 // in the root folder
 pnpm install
 
-// in /api folder
+cd api
 node ace migration:fresh --seed
 node ace rss:feed
 ```
