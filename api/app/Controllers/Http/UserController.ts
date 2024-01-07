@@ -14,7 +14,8 @@ export default class UserController {
    * - perPage: number
    * @returns {Promise<ModelPaginatorContract<User>>} Users paginated list
    */
-  public async index({ request }: HttpContextContract): Promise<ModelPaginatorContract<User>> {
+  public async index({ request, bouncer }: HttpContextContract): Promise<ModelPaginatorContract<User>> {
+    await bouncer.with('UserPolicy').authorize('viewList')
     const { page, perPage, sortBy, sortDirection, query } = request.qs()
 
     let usersQuery = User.query().preload('roles')
@@ -36,7 +37,9 @@ export default class UserController {
   /**
    * Get user by id
    */
-  public async show({ params }: HttpContextContract): Promise<User> {
+  public async show({ params, bouncer }: HttpContextContract): Promise<User> {
+    await bouncer.with('UserPolicy').authorize('view')
+
     return await User
       .query()
       .preload('roles')
@@ -48,7 +51,9 @@ export default class UserController {
   /**
    * Get user by id and delete it
    */
-  public async destroy({ params, response }: HttpContextContract): Promise<void> {
+  public async destroy({ params, response, bouncer }: HttpContextContract): Promise<void> {
+    await bouncer.with('UserPolicy').authorize('destroy')
+
     const user: User = await User
       .query()
       .where('id', params.id)
@@ -63,7 +68,9 @@ export default class UserController {
   /**
    * Update user details (email, username) by id
    */
-  public async update({ params, request, response }: HttpContextContract): Promise<void> {
+  public async update({ params, request, response, bouncer }: HttpContextContract): Promise<void> {
+    await bouncer.with('UserPolicy').authorize('update')
+
     const updateValidation = schema.create({
       username: schema.string(),
       email: schema.string({}, [
@@ -94,7 +101,9 @@ export default class UserController {
   /**
    * Toggle user block status
    */
-  public async toggleBlock({ params, response }: HttpContextContract): Promise<void> {
+  public async toggleBlock({ params, response, bouncer }: HttpContextContract): Promise<void> {
+    await bouncer.with('UserPolicy').authorize('block')
+
     const user: User = await User
       .query()
       .where('id', params.id)
@@ -112,7 +121,9 @@ export default class UserController {
   /**
    * Login as user
    */
-  public async loginAs({ params, response, auth }: HttpContextContract): Promise<void> {
+  public async loginAs({ params, response, auth, bouncer }: HttpContextContract): Promise<void> {
+    await bouncer.with('UserPolicy').authorize('loginAs')
+
     const user: User = await User
       .query()
       .preload('roles')
