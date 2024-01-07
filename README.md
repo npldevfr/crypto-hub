@@ -2,7 +2,7 @@
 
 <a name="readme-top"></a>
 
-A complete web platform about crypto-currencies.
+A complete web platform about crypto-currencies!
 
 <br />
 
