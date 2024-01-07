@@ -127,9 +127,15 @@ importers:
       apexcharts:
         specifier: ^3.45.1
         version: 3.45.1
+      nuxt-swiper:
+        specifier: ^1.2.2
+        version: 1.2.2
       radix-vue:
         specifier: ^1.2.4
         version: 1.2.4(vue@3.3.8)
+      swiper:
+        specifier: ^11.0.5
+        version: 11.0.5
       vue3-apexcharts:
         specifier: ^1.4.4
         version: 1.4.4(apexcharts@3.45.1)(vue@3.3.8)
