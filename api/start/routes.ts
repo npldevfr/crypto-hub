@@ -6,7 +6,6 @@ import './routes/v1/cryptocurrencies'
 import './routes/v1/cryptocurrencies-data'
 import './routes/v1/article-source'
 
-// TODO : remove theses routes under
 Route.get('/', async () => {
   return { hi: 'coucou from API !' }
 })
@@ -16,7 +15,6 @@ Route.get('/api/header-data', 'HeadersController.index')
 Route.get('/api/articles-home', 'ArticlesController.home')
 Route.get('/api/article/:slug', 'ArticlesController.show')
 Route.get('/api/articles/', 'ArticlesController.index')
-
 
 Route.get('oauth/:provider/redirect', 'UsersAuthProvidersController.redirect')
 

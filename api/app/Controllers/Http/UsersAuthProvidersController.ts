@@ -9,6 +9,29 @@ export default class UsersAuthProvidersController {
     return ['google', 'twitter']
   }
 
+  /**
+   * @swagger
+   * /api/oauth/{provider}/redirect:
+   *  get:
+   *    tags:
+   *      - Authentication
+   *    description: Redirect to OAuth provider
+   *    produces:
+   *      - application/json
+   *    responses:
+   *      200:
+   *        description: Success
+   *        content:
+   *          application/json:
+   *            schema:
+   *            type: array
+   *            items:
+   *              $ref: '#/components/schemas/User'
+   *
+   * @param ally
+   * @param params
+   * @param response
+   */
   public redirect({ ally, params, response }: HttpContextContract) {
     if (!this.getAllowedProviders().includes(params.provider)) {
       return response.notFound({
@@ -18,6 +41,30 @@ export default class UsersAuthProvidersController {
     return ally.use(params.provider).stateless().redirect()
   }
 
+  /**
+   * @swagger
+   * /api/oauth/{provider}/callback:
+   *  get:
+   *    tags:
+   *      - Authentication
+   *    description: Callback from OAuth provider
+   *    produces:
+   *      - application/json
+   *    responses:
+   *      200:
+   *        description: Success
+   *        content:
+   *          application/json:
+   *            schema:
+   *            type: array
+   *            items:
+   *              $ref: '#/components/schemas/User'
+   *
+   * @param ally
+   * @param params
+   * @param auth
+   * @param response
+   */
   public async callback({ ally, params, auth, response }: HttpContextContract) {
     const statelessConnection = await ally.use(params.provider).stateless()
     const socialUser = JSON.parse(
