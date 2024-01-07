@@ -194,7 +194,7 @@ export default class CryptocurrenciesController {
    *           application/json:
    *             schema:
    *               $ref: '#/components/schemas/Cryptocurrency'
-   *       404:
+   *       304:
    *         description: Not Modified
    *         content:
    *           application/json:
