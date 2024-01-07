@@ -1,46 +1,55 @@
 <script setup lang="ts">
 import { articleServiceController } from "~/services/articleServiceController";
 
-const { show } = articleServiceController();
-const { data: articles } = show();
+const { home } = articleServiceController();
+const { data: articles } = home();
+const { index } = articleServiceController();
+const { data: articlesAll } = index();
 </script>
 
 <template>
-  <pre>{{ articles }}</pre>
   <div v-if="articles" class="px-20 py-15">
-    <CardNews
+    <NuxtLink
       v-for="(article, index) in articles"
       :key="index"
-      :title="article.name"
-      :vertical-layout="false"
-      image-url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQARfTOMEBVV1_3fc3Ga_9E_UZ1pBnSGRHCG-qkB-3czg&s"
-      additional-info="Information supplémentaire"
-      avatar-url="https://exemple.com/avatar.jpg"
-      author-name="Nom de l'auteur"
-      :tags="['#photography', '#travel', '#winter']"
-    />
+      :to="`/article/${article.slug}`"
+      ><CardNews
+        :title="article.name"
+        :vertical-layout="false"
+        image-url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQARfTOMEBVV1_3fc3Ga_9E_UZ1pBnSGRHCG-qkB-3czg&s"
+        additional-info="Information supplémentaire"
+        avatar-url="https://exemple.com/avatar.jpg"
+        :tags="['#Crypto', '#News', '#winter']"
+        :date="article.created_at.split('T')[0]"
+      />
+    </NuxtLink>
   </div>
 
-  <!--   <div class="flex flex-row space-x-10 px-20 py-10">
-    <CardNews
-      vertical-layout
-      card-height="medium"
-      image-url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQARfTOMEBVV1_3fc3Ga_9E_UZ1pBnSGRHCG-qkB-3czg&s"
-      title="Titre de la Carte"
-      description="Description ici..."
-      author-name="Nom de l'Auteur"
-      additional-info="Informations supplémentaires"
-      :tags="['Tag1', 'Tag2']"
-    />
-    <CardNews
-      vertical-layout
-      card-height="s"
-      image-url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQARfTOMEBVV1_3fc3Ga_9E_UZ1pBnSGRHCG-qkB-3czg&s"
-      title="Titre de la Carte"
-      description="Description ici..."
-      author-name="Nom de l'Auteur"
-      additional-info="Informations supplémentaires"
-      :tags="['Tag1', 'Tag2']"
-    />
-  </div> -->
+  <swiper
+    :slides-per-view="3"
+    :effect="'creative'"
+    :modules="[SwiperAutoplay]"
+    :autoplay="{
+      delay: 4000,
+      disableOnInteraction: true,
+    }"
+  >
+    <SwiperSlide v-for="(article, index) in articlesAll" :key="index">
+      <div class="px-2">
+        <NuxtLink :key="index" :to="`/article/${article.slug}`"
+          ><CardNews
+            vertical-layout
+            card-height="medium"
+            image-url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQARfTOMEBVV1_3fc3Ga_9E_UZ1pBnSGRHCG-qkB-3czg&s"
+            :title="article.name"
+            description="Description ici..."
+            author-name="Nom de l'Auteur"
+            additional-info="Informations supplémentaires"
+            :tags="['Tag1', 'Tag2']"
+            :date="article.created_at.split('T')[0]"
+          />
+        </NuxtLink>
+      </div>
+    </SwiperSlide>
+  </swiper>
 </template>

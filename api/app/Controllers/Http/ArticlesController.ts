@@ -8,5 +8,17 @@ export default class ArticlesController {
     return articles
     
   }
+  public async show({ params, bouncer }: HttpContextContract): Promise<Article> {
     
+    const article: Article = await Article.findByOrFail('slug', params.slug)
+  
+    return article
+    
+  }
+
+   public async index(): Promise<Article[]> {
+    const articles: Article[] = await Article.all()
+    
+    return articles
+  }
 }

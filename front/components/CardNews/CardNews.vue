@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import { format } from 'date-fns'
+import { format } from "date-fns";
 
 withDefaults(
   defineProps<{
-    verticalLayout: boolean
-    imageUrl: string
-    title: string
-    description: string
-    tags?: string[]
-    additionalInfo?: string
-    avatarUrl?: string
-    authorName?: string
-    date?: Date | string
+    verticalLayout: boolean;
+    imageUrl: string;
+    title: string;
+    description: string;
+    tags?: string[];
+    additionalInfo?: string;
+    avatarUrl?: string;
+    authorName?: string;
+    date?: Date | string;
   }>(),
   {
     verticalLayout: true,
-    additionalInfo: '',
-    avatarUrl: '',
-    authorName: '',
-    date: format(new Date(), 'yyy-MM-dd'),
-  },
-)
+    additionalInfo: "",
+    avatarUrl: "",
+    authorName: "",
+    date: format(new Date(), "yyy-MM-dd"),
+  }
+);
 </script>
 
 <template>
@@ -28,7 +28,7 @@ withDefaults(
     v-if="verticalLayout"
     class="max-w-xs rounded overflow-hidden w-full shadow-lg"
   >
-    <img class="w-full" :src="imageUrl" alt="Image de la carte">
+    <img class="w-full" :src="imageUrl" alt="Image de la carte" />
     <div class="px-6 py-4">
       <div class="font-bold text-xl mb-2">
         {{ title }}
@@ -51,7 +51,7 @@ withDefaults(
       <Tag v-for="tag in tags" :key="tag" :text="tag" />
     </div>
   </div>
-  <div v-else class="max-w-sm w-full lg:max-w-full lg:flex">
+  <div v-else class="max-w-sm w-full lg:max-w-full lg:flex py-4">
     <div
       class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-l text-center overflow-hidden"
       :style="`background-image: url('${imageUrl}')`"

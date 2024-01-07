@@ -11,7 +11,10 @@ Route.get('/', async () => {
 })
 
 Route.get('/api/header-data', 'HeadersController.index')
+
 Route.get('/api/articles-home', 'ArticlesController.home')
+Route.get('/api/article/:slug', 'ArticlesController.show')
+Route.get('/api/articles/', 'ArticlesController.index')
 
 Route.get('/cryptocurrency-data', 'CryptocurrencyDataController.index')
 

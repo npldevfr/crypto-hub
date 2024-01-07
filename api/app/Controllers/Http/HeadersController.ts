@@ -9,7 +9,7 @@ export default class HeadersController {
   public async index() {
     const cryptos: Cryptocurrency[] = await Cryptocurrency.query().orderBy('sequence', 'asc').limit(6)
     const articles: Article[] = await Article.query().orderBy('created_at', 'desc').limit(4)
-
+    
     return {
       cryptocurrencies: cryptos,
       articles,
