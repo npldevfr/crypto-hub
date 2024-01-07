@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     propsDestructure: true,
     defineModel: true,
   },
-  modules: ['@vueuse/nuxt', '@unocss/nuxt', '@formkit/nuxt'],
+  modules: ['@vueuse/nuxt', '@unocss/nuxt', '@formkit/nuxt','nuxt-swiper' ],
   css: [
     '@unocss/reset/tailwind.css',
   ],

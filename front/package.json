@@ -13,9 +13,11 @@
   },
   "dependencies": {
     "@unocss/reset": "^0.57.4",
+    "apexcharts": "^3.45.1",
+    "nuxt-swiper": "^1.2.2",
     "radix-vue": "^1.2.4",
-    "vue3-apexcharts": "^1.4.4",
-    "apexcharts": "^3.45.1"
+    "swiper": "^11.0.5",
+    "vue3-apexcharts": "^1.4.4"
   },
   "devDependencies": {
     "@formkit/i18n": "^1.4.0",
@@ -25,6 +27,7 @@
     "@iconify/json": "^2.2.156",
     "@nuxt/devtools": "latest",
     "@unocss/nuxt": "^0.57.4",
+    "@vueuse/core": "^7.3.0",
     "@vueuse/nuxt": "^10.6.1",
     "@vueuse/core": "^7.3.0",
     "date-fns": "^2.30.0",
