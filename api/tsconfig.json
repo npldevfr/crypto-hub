@@ -18,7 +18,7 @@
       ],
       "Rss/*": [
         "./rss/*"
-      ],
+      ]
     },
     "types": [
       "@adonisjs/core",
@@ -27,7 +27,8 @@
       "@adonisjs/lucid",
       "@adonisjs/auth",
       "@adonisjs/bouncer",
-      "@adonisjs/ally"
+      "@adonisjs/ally",
+      "adonis5-swagger"
     ],
     "outDir": "build",
     "sourceMap": true
