@@ -21,12 +21,15 @@ const { data: articlesAll } = index();
         image-url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQARfTOMEBVV1_3fc3Ga_9E_UZ1pBnSGRHCG-qkB-3czg&s"
         additional-info="Information supplémentaire"
         avatar-url="https://exemple.com/avatar.jpg"
-        :tags="['#Crypto', '#News', '#winter']"
+        :tags="['#Crypto', '#News']"
         :date="article.created_at.split('T')[0]"
       />
     </NuxtLink>
   </div>
-  <h2 class="text-center my-5">Retrouvez toute l'actualité ici</h2>
+
+  <NuxtLink :to="`/article/`">
+    <h1 class="text-center my-5"><u>Retrouvez toute l'actualité ici</u></h1>
+  </NuxtLink>
 
   <swiper
     :slides-per-view="3"
@@ -45,10 +48,7 @@ const { data: articlesAll } = index();
             card-height="medium"
             image-url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQARfTOMEBVV1_3fc3Ga_9E_UZ1pBnSGRHCG-qkB-3czg&s"
             :title="article.name"
-            description="Description ici..."
-            author-name="Nom de l'Auteur"
-            additional-info="Informations supplémentaires"
-            :tags="['Tag1', 'Tag2']"
+            :tags="['All News', 'Crypto']"
             :date="article.created_at.split('T')[0]"
           />
         </NuxtLink>
