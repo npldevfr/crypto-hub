@@ -1,8 +1,13 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { schema, validator } from '@ioc:Adonis/Core/Validator'
 import Cryptocurrency from '../../Models/Cryptocurrency'
 
-import { schema, validator } from '@ioc:Adonis/Core/Validator'
 export default class CryptocurrenciesController {
+  // crud de la base de donnée des cryptocurrencies
+  // list of Cryptocurrencies
+  public async listCryptocurrencies() {
+    return await Cryptocurrency.all()
+  }
 
     //List of Cryptocurrencies
     public async index() {
@@ -61,6 +66,10 @@ export default class CryptocurrenciesController {
             return null
         }
     }
+    else {
+      return { message: 'Profile deletion failed' }
+    }
+  }
 
     //Update one Cryptocurrency
     public async update({ request, response }: HttpContextContract) {
@@ -81,5 +90,8 @@ export default class CryptocurrenciesController {
         }
 
     }
-
+    else {
+      return { message: 'No profile find with this slug' }
+    }
+  }
 }

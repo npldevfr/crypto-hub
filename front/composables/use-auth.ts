@@ -36,6 +36,25 @@ export function useAuth() {
 
   const authPrefix: string = '/users/'
 
+  const whoami = async (): Promise<void> => {
+    if (!token.value)
+      return
+
+    $fetch<User>(`${authPrefix}profile`, {
+      method: 'GET',
+    }, {
+      async afterFetch({ data }: AfterFetchContext<User>): Promise<any> {
+        if (data)
+          user.value = data
+      },
+    }).json()
+  }
+
+  const setUser = async (tokenFromString: string): Promise<void> => {
+    token.value = tokenFromString
+    await whoami()
+  }
+
   const login = () => {
     const errorMessage: Ref<string> = ref<string>('')
 
@@ -48,10 +67,8 @@ export function useAuth() {
       },
       async afterFetch({ data }: AfterFetchContext<{ token: string, user: User }>): Promise<any> {
         if (data?.token) {
-          token.value = null
           errorMessage.value = ''
-          useCookie('crypto-token', { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365) }).value = data.token
-          user.value = data.user
+          await setUser(data.token)
           await router.push({ name: 'index' })
         }
       },
@@ -90,25 +107,6 @@ export function useAuth() {
 
     user.value = null
     token.value = null
-  }
-
-  const whoami = async (): Promise<void> => {
-    if (!token.value)
-      return
-
-    await $fetch<User>(`${authPrefix}profile`, {
-      method: 'GET',
-    }, {
-      async afterFetch({ data }: AfterFetchContext<User>): Promise<any> {
-        if (data)
-          user.value = data
-      },
-    }).json()
-  }
-
-  const setUser = async (tokenFromString: string): Promise<void> => {
-    token.value = tokenFromString
-    await whoami()
   }
 
   const isLogged: ComputedRef<boolean> = computed(() => !!user.value)

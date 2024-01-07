@@ -1,5 +1,5 @@
 import { test } from '@japa/runner'
-import { CryptoProvider } from '../../app/Synchronization/Generic/CryptoProvider'
+import { CryptoProvider } from 'App/Synchronization/Generic/CryptoProvider'
 import ProviderKeyNotFoundException from '../../app/Exceptions/Synchronization/ProviderKeyNotFoundException'
 
 test.group('Native methods', async (): Promise<void> => {

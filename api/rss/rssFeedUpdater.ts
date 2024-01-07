@@ -4,7 +4,7 @@ import ArticleSource from 'App/Models/ArticleSource'
 import { JSDOM } from 'jsdom'
 import NoTitleException from '../app/Exceptions/Rss/NoTilteExeptionException'
 
-export default class RssFeedUpdater {
+export class RssFeedUpdater {
   // function that get all rss feed path in database and call insertArticle function
   public static async rssFeedPath() {
     const sources = await ArticleSource.query().where('is_active', true)

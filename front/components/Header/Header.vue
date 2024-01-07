@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { headerService } from '~/services/header.service'
+import { headerServiceController } from '~/services/headerServiceController'
 import type { DropdownItemProps } from '~/components/Dropdown/Item.vue'
 
 const router = useRouter()
 const { logout } = useAuth()
-const { getHeaderData } = headerService()
+const { getHeaderData } = headerServiceController()
 const { data: headerData } = getHeaderData()
 const { isLogged, user } = useAuth()
 
@@ -39,8 +39,6 @@ const dropdownItems: DropdownItemProps[] = [
         <NavigationLink title="Marché">
           <NavigationTabsCryptocurrenciesList />
         </NavigationLink>
-        <NavigationLink title="NFT" />
-        <NavigationLink title="Convertisseur" />
       </Navigation>
     </div>
     <div class="flex flex-row w-full justify-end items-center space-x-10 ">

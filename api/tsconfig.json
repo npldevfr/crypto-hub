@@ -15,9 +15,6 @@
       ],
       "Database/*": [
         "./database/*"
-      ],
-      "Rss/*": [
-        "./rss/*"
       ]
     },
     "types": [
@@ -28,7 +25,8 @@
       "@adonisjs/auth",
       "@adonisjs/bouncer",
       "@adonisjs/ally",
-      "adonis5-swagger"
+      "adonis5-swagger",
+      "adonis5-cache"
     ],
     "outDir": "build",
     "sourceMap": true

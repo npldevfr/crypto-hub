@@ -13,8 +13,7 @@
     "App": "app",
     "Config": "config",
     "Database": "database",
-    "Contracts": "contracts",
-    "rss": "rss"
+    "Contracts": "contracts"
   },
   "preloads": [
     "./start/routes",
@@ -28,7 +27,8 @@
     "@adonisjs/auth",
     "@adonisjs/bouncer",
     "@adonisjs/ally",
-    "adonis5-swagger"
+    "adonis5-swagger",
+    "adonis5-cache"
   ],
   "aceProviders": [
     "@adonisjs/repl"
