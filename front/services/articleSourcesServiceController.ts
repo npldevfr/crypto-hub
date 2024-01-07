@@ -5,7 +5,7 @@ import type { ArticleSource } from '~/types/articleSource'
 export function articleSourcesServiceController() {
   const index = () => {
     const page: Ref<number> = ref<number>(1)
-    const computedPage: ComputedRef<string> = computed(() => `/article-sources`)
+    const computedPage: ComputedRef<string> = computed(() => `/article-sources?page=${page.value}`)
 
     const { get, data } = $fetch(computedPage, {
       immediate: true,
@@ -19,36 +19,33 @@ export function articleSourcesServiceController() {
     }
   }
 
-  const show = (id: number) => {
-    return $fetch(`/article-sources/${id}`).json<ArticleSource>()
+  const show = (articleSource_id: Pick<ArticleSource, 'id'>['id']) => {
+    return $fetch(`/article-sources/${articleSource_id}`).json<ArticleSource>()
   }
 
-  const toggleActiveStatus = (id: number) => {
-    return $fetch(`/article-sources/change-active-status/${id}`, {
-      immediate: false,
+  const toggleActiveStatus = (articleSource_id: Pick<ArticleSource, 'id'>['id']) => {
+    return $fetch(`/article-sources/change-active-status/${articleSource_id}`, {
+      method: 'PATCH',
     }).json<ArticleSource>()
   }
 
-  const destroy = (id: number) => {
-    return $fetch(`/article-sources/${id}`, {
+  const destroy = (articleSource_id: Pick<ArticleSource, 'id'>['id']) => {
+    return $fetch(`/article-sources/${articleSource_id}`, {
       method: 'DELETE',
-      immediate: false,
-    }).json<void>()
-  }
-
-  const addRssSource = (rssUrl: string) => {
-    return $fetch('/article-sources/add-rss-source', {
-      method: 'POST',
-      body: { rssUrl },
-      immediate: false,
     }).json<ArticleSource>()
   }
 
-  const verifyRssSource = (rssUrl: string) => {
-    return $fetch('/article-sources/verify-rss-source', {
+  const addRssSource = (rssUrl: Pick<ArticleSource, 'url'>['url']) => {
+    return $fetch(`/article-sources/add-rss-source/`, {
       method: 'POST',
-      body: { rssUrl },
-      immediate: false,
+      body: JSON.stringify({ rssUrl }),
+    }).json<ArticleSource>()
+  }
+
+  const verifyRssSource = (rssUrl: Pick<ArticleSource, 'url'>['url']) => {
+    return $fetch(`/article-sources/verify-rss-source/`, {
+      method: 'POST',
+      body: JSON.stringify({ rssUrl }),
     }).json<boolean>()
   }
 
