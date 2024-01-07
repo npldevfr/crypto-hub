@@ -5,5 +5,4 @@ Route.group((): void => {
     .paramFor('cryptocurrencies', 'slug')
     .only(['index', 'show', 'destroy', 'update'])
   Route.post('/cryptocurrencies/create', 'CryptocurrenciesController.create')
-
 }).prefix('/api')

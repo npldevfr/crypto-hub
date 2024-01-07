@@ -3,12 +3,21 @@ const { title, subtitle } = defineProps<{
   title?: string
   subtitle?: string
   bottomSeparator?: boolean
+  logo?: string
 }>()
 </script>
 
 <template>
   <div class="col-span-full w-full flex flex-col gap-2">
-    <div class="flex justify-between">
+    <div class="flex gap-2 my-2">
+      <div class="flex flex-row items-center gap-2">
+        <img
+          v-if="logo"
+          :src="logo"
+          class="w-[32px] h-[32px] rounded-full"
+        >
+        <slot name="logo" />
+      </div>
       <div class="flex flex-col gap-0">
         <h1
           v-if="title"

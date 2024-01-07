@@ -29,6 +29,7 @@
     "@unocss/nuxt": "^0.57.4",
     "@vueuse/core": "^7.3.0",
     "@vueuse/nuxt": "^10.6.1",
+    "@vueuse/core": "^7.3.0",
     "date-fns": "^2.30.0",
     "nuxt": "^3.8.1",
     "pinia": "^2.1.7",

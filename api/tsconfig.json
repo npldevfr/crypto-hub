@@ -15,7 +15,7 @@
       ],
       "Database/*": [
         "./database/*"
-      ],
+      ]
     },
     "types": [
       "@adonisjs/core",
@@ -25,7 +25,8 @@
       "@adonisjs/auth",
       "@adonisjs/bouncer",
       "@adonisjs/ally",
-      "adonis5-swagger"
+      "adonis5-swagger",
+      "adonis5-cache"
     ],
     "outDir": "build",
     "sourceMap": true
