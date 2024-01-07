@@ -1,13 +1,19 @@
 <script setup lang="ts">
+import { articleServiceController } from "~/services/articleServiceController";
+
+const { show } = articleServiceController();
+const { data: articles } = show();
 </script>
 
 <template>
-  <div class="px-20 py-15">
+  <pre>{{ articles }}</pre>
+  <div v-if="articles" class="px-20 py-15">
     <CardNews
+      v-for="(article, index) in articles"
+      :key="index"
+      :title="article.name"
       :vertical-layout="false"
       image-url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQARfTOMEBVV1_3fc3Ga_9E_UZ1pBnSGRHCG-qkB-3czg&s"
-      title="Titre de la carte horizontale"
-      description="Description de la carte horizontale"
       additional-info="Information supplémentaire"
       avatar-url="https://exemple.com/avatar.jpg"
       author-name="Nom de l'auteur"
@@ -15,7 +21,7 @@
     />
   </div>
 
-  <div class="flex flex-row space-x-10 px-20 py-10">
+  <!--   <div class="flex flex-row space-x-10 px-20 py-10">
     <CardNews
       vertical-layout
       card-height="medium"
@@ -36,5 +42,5 @@
       additional-info="Informations supplémentaires"
       :tags="['Tag1', 'Tag2']"
     />
-  </div>
+  </div> -->
 </template>

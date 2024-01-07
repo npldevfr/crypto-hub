@@ -11,6 +11,8 @@ Route.get('/', async () => {
 })
 
 Route.get('/api/header-data', 'HeadersController.index')
+Route.get('/api/articles-home', 'ArticlesController.home')
+
 Route.get('/cryptocurrency-data', 'CryptocurrencyDataController.index')
 
 Route.get('oauth/:provider/redirect', 'UsersAuthProvidersController.redirect')
