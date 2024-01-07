@@ -50,7 +50,9 @@ export function useAuth() {
         if (afterFetchContext.data?.token) {
           token.value = null
           errorMessage.value = ''
-          useCookie('crypto-token', { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365) }).value = afterFetchContext.data.token
+          const cookie = useCookie('crypto-token', { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365) })
+          cookie.value = afterFetchContext.data.token
+          console.log(cookie.value)
           user.value = afterFetchContext.data.user
           await router.push({ name: 'index' })
         }
