@@ -178,7 +178,7 @@ export default class CryptocurrenciesController {
    *   put:
    *     tags:
    *       - Cryptocurrencies
-   *     description: Create a cryptocurrency
+   *     description: Update a cryptocurrency
    *     requestBody:
    *       required: true
    *       content:
