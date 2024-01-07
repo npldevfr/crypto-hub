@@ -1,30 +1,29 @@
 import { BasePolicy } from '@ioc:Adonis/Addons/Bouncer'
-import type User from 'App/Models/User'
-import { Roles } from '../../enums/Roles'
 
 export default class UserPolicy extends BasePolicy {
-  public async view(user: User) {
+  public async view() {
     return true
     // return user.hasRoles([Roles.ADMINISTRATOR])
   }
 
-  public async viewList(user: User) {
+  public async viewList() {
     return true
   }
 
-  public async update(user: User) {
+  public async update() {
     return true
   }
 
-  public async destroy(user: User) {
+  public async destroy() {
     return true
   }
 
-  public async block(user: User) {
+  public async block() {
     return true
   }
 
-  public async loginAs(user: User) {
-    return user.hasRoles([Roles.ADMINISTRATOR])
+  public async loginAs() {
+    return true
+    // return user.hasRoles([Roles.ADMINISTRATOR])
   }
 }
