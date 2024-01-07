@@ -1,6 +1,26 @@
 import type { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
-
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Cryptocurrency:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           format: uuid
+ *         slug:
+ *           type: string
+ *         symbol:
+ *           type: string
+ *         name:
+ *           type: string
+ *         sequence: 
+ *           type: number
+ *         logo:
+ *           type: string
+ */
 export default class Cryptocurrency extends BaseModel {
   @column({ isPrimary: true, serializeAs: null })
   public id: string
