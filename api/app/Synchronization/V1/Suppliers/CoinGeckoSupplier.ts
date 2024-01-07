@@ -19,7 +19,7 @@ export class CoinGeckoSupplier extends GenericSupplier {
   }
 
   public async getCoins(): Promise<any> {
-    const dd = await fetch(`${this.getProviderURL()}/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
-    return dd.json()
+    const res = await fetch(`${this.getProviderURL()}/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
+    return res.json()
   }
 }
