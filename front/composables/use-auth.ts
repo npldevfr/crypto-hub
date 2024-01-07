@@ -96,7 +96,7 @@ export function useAuth() {
     if (!token.value)
       return
 
-    await $fetch<User>(`${authPrefix}profile`, {
+    $fetch<User>(`${authPrefix}profile`, {
       method: 'GET',
     }, {
       async afterFetch({ data }: AfterFetchContext<User>): Promise<any> {

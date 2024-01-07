@@ -1,28 +1,32 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { schema, validator } from '@ioc:Adonis/Core/Validator'
 import Cryptocurrency from '../../Models/Cryptocurrency'
 
-import { schema, validator } from '@ioc:Adonis/Core/Validator'
 export default class CryptocurrenciesController {
+  // crud de la base de donnée des cryptocurrencies
+  // list of Cryptocurrencies
+  public async listCryptocurrencies() {
+    return await Cryptocurrency.all()
+  }
 
-    //crud de la base de donnée des cryptocurrencies
-    // list of Cryptocurrencies
-    public async listCryptocurrencies() {
+    //List of Cryptocurrencies
+    public async index() {
         return await Cryptocurrency.all()
     }
-    // return one Cryptocurrency
-    public async oneCryptocurrencyBySlug({ params,response }: HttpContextContract) {
-        // const cryptocurrency = await Cryptocurrency.findBy('slug', params.slug)
+
+    //Return one Cryptocurrency
+    public async show({ response, request }: HttpContextContract) {
         try {
-            return await Cryptocurrency.findByOrFail('slug', params.slug)
-          } catch (e){
-            response.notAcceptable({error: 'This slug is not affected to a Cryptocurrency'})
+            return await Cryptocurrency.findByOrFail('slug', request.param('slug'));
+        } catch (e) {
+            response.notFound({ error: 'This slug is not affected to a Cryptocurrency' })
             return null
-          }
+        }
     }
-    // Add a new Cryptocurrency
-    public async newCryptocurrency({ request, response }: HttpContextContract): Promise<void> {
-        const existingCryptoVersion = await Cryptocurrency.findBy('slug', request.input('slug'))
-        if (!existingCryptoVersion) {
+
+    //Add a new Cryptocurrency
+    public async create({ request, response }: HttpContextContract) {
+        try {
             const registerValidation = schema.create({
                 slug: schema.string(),
                 symbol: schema.string(),
@@ -42,51 +46,52 @@ export default class CryptocurrenciesController {
                 crypto,
             })
         }
-        else {
-            return response.ok({
+        catch (e) {
+            return response.notAcceptable({
                 message: 'A Cryptocurrency already exist with this slug'
             })
-
         }
     }
+
     //Delete One Cryptocurrency
-
-    public async deleteCryptocurrency({ request }: HttpContextContract) {
-
-        const cryptoToDelete = await Cryptocurrency.findBy('slug', request.input('slug'))
-        if (cryptoToDelete) {
+    public async destroy({ request, response }: HttpContextContract) {
+        try {
+            const cryptoToDelete = await Cryptocurrency.findByOrFail('slug', request.param('slug'))
             await cryptoToDelete.delete()
-            return { message: 'Profile successfully deleted' }
-        }
-        else {
-            return { message: 'Profile deletion failed' }
+            return response.ok({
+                message: 'Cryptocurrency successfully deleted'
+            })
+        } catch (e) {
+            response.notAcceptable({ error: 'Cryptocurrency deletion failed' })
+            return null
         }
     }
+    else {
+      return { message: 'Profile deletion failed' }
+    }
+  }
 
     //Update one Cryptocurrency
-    public async updateCryptocurrency({ request }: HttpContextContract) {
-        const cryptocurrency = await Cryptocurrency.findBy('slug', request.input('slug'))
-        if (cryptocurrency) {
+    public async update({ request, response }: HttpContextContract) {
+        try {
+            const cryptocurrency = await Cryptocurrency.findByOrFail('slug', request.param('slug'))
+            cryptocurrency.slug = request.input('slug') ?? cryptocurrency.slug
+            cryptocurrency.symbol = request.input('symbol') ?? cryptocurrency.symbol
+            cryptocurrency.name = request.input('name') ?? cryptocurrency.name
+            cryptocurrency.sequence = request.input('sequence') ?? cryptocurrency.sequence
+            cryptocurrency.logo = request.input('logo') ?? cryptocurrency.logo
+            cryptocurrency.updatedAt = Date.now()
+            await cryptocurrency.save()
+            return { message: 'Profile updated successfully', cryptocurrency }
 
-            try {
-                cryptocurrency.slug = request.input('newSlug') ?? cryptocurrency.slug
-                cryptocurrency.symbol = request.input('symbol') ?? cryptocurrency.symbol
-                cryptocurrency.name = request.input('name') ?? cryptocurrency.name
-                cryptocurrency.sequence = request.input('sequence') ?? cryptocurrency.sequence
-                cryptocurrency.logo = request.input('logo') ?? cryptocurrency.logo
-                cryptocurrency.updatedAt = Date.now()
-
-                await cryptocurrency?.save()
-                return { message: 'Profile updated successfully', cryptocurrency }
-            } catch (error) {
-                console.error('Profile update error:', error.message)
-                return { message: 'Profile update failed' }
-            }
-        }
-        else {
-            return { message: 'No profile find with this slug' }
+        } catch (e) {
+            response.notModified({ error: 'Cryptocurrency deletion failed' })
+            return null
         }
 
     }
-
+    else {
+      return { message: 'No profile find with this slug' }
+    }
+  }
 }

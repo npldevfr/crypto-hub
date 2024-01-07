@@ -2,9 +2,11 @@ import type { DateTime } from 'luxon'
 import type {
   HasMany,
   ManyToMany,
+  ModelQueryBuilderContract,
 } from '@ioc:Adonis/Lucid/Orm'
 import {
   BaseModel,
+  beforeFind,
   column,
   hasMany,
   manyToMany,
@@ -12,8 +14,15 @@ import {
 import Role from './Role'
 import UsersAuthProvider from './UsersAuthProvider'
 
+type UserQuery = ModelQueryBuilderContract<typeof User>
+
 export default class User extends BaseModel {
   public static selfAssignPrimaryKey = true
+
+  @beforeFind()
+  public static async beforeFind(query: UserQuery) {
+    query.preload('roles')
+  }
 
   @column({ isPrimary: true })
   public id: string
@@ -48,9 +57,11 @@ export default class User extends BaseModel {
   @hasMany(() => UsersAuthProvider)
   public providers: HasMany<typeof UsersAuthProvider>
 
-  public hasPowerMoreThan(power: number): boolean {
-    return this.roles.reduce((hasPower: boolean, role: Role) => {
-      return hasPower || role.power > power
-    }, false)
+  public hasRoles(roles: string[]): boolean {
+    return this.roles.some((role: Role) => roles.includes(role.name))
+  }
+
+  public hasPower(power: number): boolean {
+    return this.roles.some((role: Role) => role.power > power)
   }
 }
