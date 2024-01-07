@@ -28,7 +28,7 @@ test.group('User', async (): Promise<void> => {
   })
 
   test('get the profile of the connected users with the good structure', async ({ client, assert }) => {
-    const user = await User.findBy('email', 'admin@gmail.com')
+    const user = await User.findByOrFail('email', 'admin@gmail.com')
     const response = await client.get('/api/profile').loginAs(user)
     const body = await response.body()
 
@@ -50,7 +50,7 @@ test.group('User', async (): Promise<void> => {
     })
   })
   test('can the user logout', async ({ client }) => {
-    const user = await User.findBy('email', 'admin@gmail.com')
+    const user = await User.findByOrFail('email', 'admin@gmail.com')
     await client.post('/api/logout').loginAs(user)
   })
 
