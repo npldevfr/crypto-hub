@@ -1,5 +1,5 @@
 import { BaseCommand } from '@adonisjs/core/build/standalone'
-import RssFeedUpdater from '../rss/rssFeedUpdater'
+import { RssFeedUpdater } from '../rss/rssFeedUpdater'
 export default class RssFeed extends BaseCommand {
   /**
    * Command name is used to run the command
