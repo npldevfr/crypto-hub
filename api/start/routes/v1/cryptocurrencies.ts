@@ -1,9 +1,9 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.group((): void => {
-  Route.post('/create', 'CryptocurrenciesController.newCryptocurrency')
-  Route.delete('/delete', 'CryptocurrenciesController.deleteCryptocurrency')
-  Route.put('/update', 'CryptocurrenciesController.updateCryptocurrency')
-  Route.get('/list', 'CryptocurrenciesController.listCryptocurrencies')
-  Route.get('/:slug', 'CryptocurrenciesController.oneCryptocurrencyBySlug')
-}).prefix('/api/cryptocurrencies')
+  Route.resource('cryptocurrencies', 'CryptocurrenciesController')
+    .paramFor('cryptocurrencies', 'slug')
+    .only(['index', 'show', 'destroy', 'update'])
+  Route.post('/cryptocurrencies/create', 'CryptocurrenciesController.create')
+
+}).prefix('/api')
